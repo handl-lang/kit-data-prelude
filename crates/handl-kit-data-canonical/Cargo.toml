@@ -6,20 +6,23 @@ description = "The **data-driven canonical kit** — the ADR-0044 §6 end state.
 license.workspace = true
 repository.workspace = true
 
+# ADR-0128 Phase 11: this crate moved out of the platform workspace; its
+# platform dependencies are git deps (see the workspace root for the
+# sibling-checkout `[patch]` override used for local development).
 [dependencies]
-handl-language = { path = "../handl-language" }
-handl-plugin-engine-transform = { path = "../plugin-engine-transform" }
-handl-plugin-ext-diag = { path = "../plugin-ext-diag" }
-handl-emitters = { path = "../handl-emitters" }
-handl-kit-data = { path = "../handl-kit-data" }
-handl-runtime = { path = "../handl-runtime" }
+handl-language = { git = "https://github.com/handl-lang/platform" }
+handl-plugin-engine-transform = { git = "https://github.com/handl-lang/platform" }
+handl-plugin-ext-diag = { git = "https://github.com/handl-lang/platform" }
+handl-emitters = { git = "https://github.com/handl-lang/platform" }
+handl-kit-data = { git = "https://github.com/handl-lang/platform" }
+handl-runtime = { git = "https://github.com/handl-lang/platform" }
 serde_yaml = "0.9"
 
 [dev-dependencies]
-serde_json = { workspace = true }
-handl-plugin-engine-lex-pattern = { path = "../plugin-engine-lex-pattern" }
-handl-plugin-engine-parse-pratt = { path = "../plugin-engine-parse-pratt" }
-handl-plugin-engine-exec-tree-walk = { path = "../plugin-engine-exec-tree-walk" }
-handl-plugin-engine-exec-bytecode = { path = "../plugin-engine-exec-bytecode" }
-handl-plugin-engine-exec-cranelift = { path = "../plugin-engine-exec-cranelift" }
-handl-plugin-engine-transform-rewrite = { path = "../plugin-engine-transform-rewrite" }
+serde_json = "1"
+handl-plugin-engine-lex-pattern = { git = "https://github.com/handl-lang/platform" }
+handl-plugin-engine-parse-pratt = { git = "https://github.com/handl-lang/platform" }
+handl-plugin-engine-exec-tree-walk = { git = "https://github.com/handl-lang/platform" }
+handl-plugin-engine-exec-bytecode = { git = "https://github.com/handl-lang/platform" }
+handl-plugin-engine-exec-cranelift = { git = "https://github.com/handl-lang/platform" }
+handl-plugin-engine-transform-rewrite = { git = "https://github.com/handl-lang/platform" }

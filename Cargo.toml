@@ -1,0 +1,33 @@
+[workspace]
+resolver = "3"
+members = ["crates/handl-kit-data-canonical"]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2024"
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/handl-lang/lang"
+
+# ADR-0128 §Resolution: local development resolves the platform crates from
+# the sibling `../platform` checkout; without the checkout (or this block),
+# the git source is used. The git source must still resolve — before the
+# remote exists, point it at the local clone:
+#
+#   CARGO_NET_GIT_FETCH_WITH_CLI=true \
+#   GIT_CONFIG_COUNT=1 \
+#   GIT_CONFIG_KEY_0="url.file:///home/luis/GitHub/handl-lang/platform.insteadOf" \
+#   GIT_CONFIG_VALUE_0="https://github.com/handl-lang/platform" \
+#   cargo check --workspace
+[patch."https://github.com/handl-lang/platform"]
+handl-emitters = { path = "../platform/crates/handl-emitters" }
+handl-kit-data = { path = "../platform/crates/handl-kit-data" }
+handl-language = { path = "../platform/crates/handl-language" }
+handl-runtime = { path = "../platform/crates/handl-runtime" }
+handl-plugin-engine-transform = { path = "../platform/crates/plugin-engine-transform" }
+handl-plugin-ext-diag = { path = "../platform/crates/plugin-ext-diag" }
+handl-plugin-engine-lex-pattern = { path = "../platform/crates/plugin-engine-lex-pattern" }
+handl-plugin-engine-parse-pratt = { path = "../platform/crates/plugin-engine-parse-pratt" }
+handl-plugin-engine-exec-tree-walk = { path = "../platform/crates/plugin-engine-exec-tree-walk" }
+handl-plugin-engine-exec-bytecode = { path = "../platform/crates/plugin-engine-exec-bytecode" }
+handl-plugin-engine-exec-cranelift = { path = "../platform/crates/plugin-engine-exec-cranelift" }
+handl-plugin-engine-transform-rewrite = { path = "../platform/crates/plugin-engine-transform-rewrite" }
