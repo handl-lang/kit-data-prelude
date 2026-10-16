@@ -310,19 +310,7 @@ dependencies = [
 [[package]]
 name = "handl-platform"
 version = "0.1.0"
-source = "git+https://github.com/handl-lang/platform?rev=9d34281cc717e007588e31a0f908ef55c81e7deb#9d34281cc717e007588e31a0f908ef55c81e7deb"
-dependencies = [
- "semver",
- "serde",
- "serde_json",
- "thiserror",
- "toml",
-]
-
-[[package]]
-name = "handl-platform"
-version = "0.1.0"
-source = "git+https://github.com/handl-lang/platform?rev=b3f5eeb87c7303483bce4f3a5ce2a85ec804b1c0#b3f5eeb87c7303483bce4f3a5ce2a85ec804b1c0"
+source = "git+https://github.com/handl-lang/platform?branch=main#dff54bd7751da32f36a5cc39bf76a5fc7e0aedff"
 dependencies = [
  "semver",
  "serde",
@@ -345,11 +333,11 @@ dependencies = [
 [[package]]
 name = "handl-plugin-engine-exec"
 version = "0.1.0"
-source = "git+https://github.com/handl-lang/platform?rev=9d34281cc717e007588e31a0f908ef55c81e7deb#9d34281cc717e007588e31a0f908ef55c81e7deb"
+source = "git+https://github.com/handl-lang/platform?branch=main#dff54bd7751da32f36a5cc39bf76a5fc7e0aedff"
 dependencies = [
  "handl-language",
- "handl-platform 0.1.0 (git+https://github.com/handl-lang/platform?rev=9d34281cc717e007588e31a0f908ef55c81e7deb)",
- "handl-value 0.1.0 (git+https://github.com/handl-lang/platform?rev=9d34281cc717e007588e31a0f908ef55c81e7deb)",
+ "handl-platform 0.1.0 (git+https://github.com/handl-lang/platform?branch=main)",
+ "handl-value 0.1.0 (git+https://github.com/handl-lang/platform?branch=main)",
  "rustc-hash",
  "serde_json",
 ]
@@ -380,13 +368,13 @@ dependencies = [
  "cranelift-module",
  "cranelift-object",
  "handl-language",
- "handl-platform 0.1.0 (git+https://github.com/handl-lang/platform?rev=9d34281cc717e007588e31a0f908ef55c81e7deb)",
- "handl-plugin-engine-exec 0.1.0 (git+https://github.com/handl-lang/platform?rev=9d34281cc717e007588e31a0f908ef55c81e7deb)",
+ "handl-platform 0.1.0 (git+https://github.com/handl-lang/platform?branch=main)",
+ "handl-plugin-engine-exec 0.1.0 (git+https://github.com/handl-lang/platform?branch=main)",
  "handl-plugin-engine-exec-tree-walk",
  "handl-plugin-ffi",
  "handl-runtime",
- "handl-value 0.1.0 (git+https://github.com/handl-lang/platform?rev=9d34281cc717e007588e31a0f908ef55c81e7deb)",
- "plugin-engine 0.1.0 (git+https://github.com/handl-lang/platform?rev=9d34281cc717e007588e31a0f908ef55c81e7deb)",
+ "handl-value 0.1.0 (git+https://github.com/handl-lang/platform?branch=main)",
+ "plugin-engine 0.1.0 (git+https://github.com/handl-lang/platform?branch=main)",
  "rustc-hash",
  "serde_json",
 ]
@@ -482,13 +470,13 @@ dependencies = [
 [[package]]
 name = "handl-plugin-ffi"
 version = "0.1.0"
-source = "git+https://github.com/handl-lang/ffi?rev=8ac212d1f047c3b368b244c7d505d45b06d30aec#8ac212d1f047c3b368b244c7d505d45b06d30aec"
+source = "git+https://github.com/handl-lang/ffi?branch=main#d960033d7da9478dbf46954b08a3b6660494754e"
 dependencies = [
  "cranelift",
  "cranelift-jit",
  "cranelift-module",
- "handl-platform 0.1.0 (git+https://github.com/handl-lang/platform?rev=b3f5eeb87c7303483bce4f3a5ce2a85ec804b1c0)",
- "handl-value 0.1.0 (git+https://github.com/handl-lang/platform?rev=b3f5eeb87c7303483bce4f3a5ce2a85ec804b1c0)",
+ "handl-platform 0.1.0 (git+https://github.com/handl-lang/platform?branch=main)",
+ "handl-value 0.1.0 (git+https://github.com/handl-lang/platform?branch=main)",
  "libloading",
  "serde_json",
 ]
@@ -523,16 +511,7 @@ dependencies = [
 [[package]]
 name = "handl-value"
 version = "0.1.0"
-source = "git+https://github.com/handl-lang/platform?rev=9d34281cc717e007588e31a0f908ef55c81e7deb#9d34281cc717e007588e31a0f908ef55c81e7deb"
-dependencies = [
- "rustc-hash",
- "serde_json",
-]
-
-[[package]]
-name = "handl-value"
-version = "0.1.0"
-source = "git+https://github.com/handl-lang/platform?rev=b3f5eeb87c7303483bce4f3a5ce2a85ec804b1c0#b3f5eeb87c7303483bce4f3a5ce2a85ec804b1c0"
+source = "git+https://github.com/handl-lang/platform?branch=main#dff54bd7751da32f36a5cc39bf76a5fc7e0aedff"
 dependencies = [
  "rustc-hash",
  "serde_json",
@@ -636,9 +615,9 @@ dependencies = [
 [[package]]
 name = "plugin-engine"
 version = "0.1.0"
-source = "git+https://github.com/handl-lang/platform?rev=9d34281cc717e007588e31a0f908ef55c81e7deb#9d34281cc717e007588e31a0f908ef55c81e7deb"
+source = "git+https://github.com/handl-lang/platform?branch=main#dff54bd7751da32f36a5cc39bf76a5fc7e0aedff"
 dependencies = [
- "handl-value 0.1.0 (git+https://github.com/handl-lang/platform?rev=9d34281cc717e007588e31a0f908ef55c81e7deb)",
+ "handl-value 0.1.0 (git+https://github.com/handl-lang/platform?branch=main)",
  "serde",
  "serde_json",
 ]
