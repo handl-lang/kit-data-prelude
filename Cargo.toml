@@ -31,3 +31,6 @@ handl-plugin-engine-exec-tree-walk = { path = "../platform/crates/plugin-engine-
 handl-plugin-engine-exec-bytecode = { path = "../platform/crates/plugin-engine-exec-bytecode" }
 handl-plugin-engine-exec-cranelift = { path = "../platform/crates/plugin-engine-exec-cranelift" }
 handl-plugin-engine-transform-rewrite = { path = "../platform/crates/plugin-engine-transform-rewrite" }
+
+[profile.dev]
+opt-level = 1
