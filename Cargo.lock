@@ -243,7 +243,7 @@ name = "handl-emitters"
 version = "0.1.0"
 dependencies = [
  "handl-language",
- "plugin-engine",
+ "plugin-engine 0.1.0",
 ]
 
 [[package]]
@@ -260,7 +260,7 @@ version = "0.1.0"
 dependencies = [
  "handl-emitters",
  "handl-language",
- "handl-platform",
+ "handl-platform 0.1.0",
  "handl-runtime",
  "serde",
  "serde_json",
@@ -290,7 +290,7 @@ dependencies = [
 name = "handl-language"
 version = "0.1.0"
 dependencies = [
- "plugin-engine",
+ "plugin-engine 0.1.0",
  "serde",
  "serde_json",
  "thiserror",
@@ -308,12 +308,48 @@ dependencies = [
 ]
 
 [[package]]
+name = "handl-platform"
+version = "0.1.0"
+source = "git+https://github.com/handl-lang/platform?rev=9d34281cc717e007588e31a0f908ef55c81e7deb#9d34281cc717e007588e31a0f908ef55c81e7deb"
+dependencies = [
+ "semver",
+ "serde",
+ "serde_json",
+ "thiserror",
+ "toml",
+]
+
+[[package]]
+name = "handl-platform"
+version = "0.1.0"
+source = "git+https://github.com/handl-lang/platform?rev=b3f5eeb87c7303483bce4f3a5ce2a85ec804b1c0#b3f5eeb87c7303483bce4f3a5ce2a85ec804b1c0"
+dependencies = [
+ "semver",
+ "serde",
+ "serde_json",
+ "thiserror",
+ "toml",
+]
+
+[[package]]
 name = "handl-plugin-engine-exec"
 version = "0.1.0"
 dependencies = [
  "handl-language",
- "handl-platform",
- "handl-value",
+ "handl-platform 0.1.0",
+ "handl-value 0.1.0",
+ "rustc-hash",
+ "serde_json",
+]
+
+[[package]]
+name = "handl-plugin-engine-exec"
+version = "0.1.0"
+source = "git+https://github.com/handl-lang/platform?rev=9d34281cc717e007588e31a0f908ef55c81e7deb#9d34281cc717e007588e31a0f908ef55c81e7deb"
+dependencies = [
+ "handl-language",
+ "handl-platform 0.1.0 (git+https://github.com/handl-lang/platform?rev=9d34281cc717e007588e31a0f908ef55c81e7deb)",
+ "handl-value 0.1.0 (git+https://github.com/handl-lang/platform?rev=9d34281cc717e007588e31a0f908ef55c81e7deb)",
  "rustc-hash",
  "serde_json",
 ]
@@ -323,14 +359,14 @@ name = "handl-plugin-engine-exec-bytecode"
 version = "0.1.0"
 dependencies = [
  "handl-language",
- "handl-platform",
- "handl-plugin-engine-exec",
+ "handl-platform 0.1.0",
+ "handl-plugin-engine-exec 0.1.0",
  "handl-plugin-engine-exec-tree-walk",
  "handl-plugin-engine-transform",
  "handl-plugin-engine-transform-rewrite",
  "handl-runtime",
- "handl-value",
- "plugin-engine",
+ "handl-value 0.1.0",
+ "plugin-engine 0.1.0",
  "rustc-hash",
  "serde_json",
 ]
@@ -344,13 +380,13 @@ dependencies = [
  "cranelift-module",
  "cranelift-object",
  "handl-language",
- "handl-platform",
- "handl-plugin-engine-exec",
+ "handl-platform 0.1.0 (git+https://github.com/handl-lang/platform?rev=9d34281cc717e007588e31a0f908ef55c81e7deb)",
+ "handl-plugin-engine-exec 0.1.0 (git+https://github.com/handl-lang/platform?rev=9d34281cc717e007588e31a0f908ef55c81e7deb)",
  "handl-plugin-engine-exec-tree-walk",
  "handl-plugin-ffi",
  "handl-runtime",
- "handl-value",
- "plugin-engine",
+ "handl-value 0.1.0 (git+https://github.com/handl-lang/platform?rev=9d34281cc717e007588e31a0f908ef55c81e7deb)",
+ "plugin-engine 0.1.0 (git+https://github.com/handl-lang/platform?rev=9d34281cc717e007588e31a0f908ef55c81e7deb)",
  "rustc-hash",
  "serde_json",
 ]
@@ -360,10 +396,10 @@ name = "handl-plugin-engine-exec-tree-walk"
 version = "0.1.0"
 dependencies = [
  "handl-language",
- "handl-platform",
- "handl-plugin-engine-exec",
- "handl-value",
- "plugin-engine",
+ "handl-platform 0.1.0",
+ "handl-plugin-engine-exec 0.1.0",
+ "handl-value 0.1.0",
+ "plugin-engine 0.1.0",
  "rustc-hash",
  "serde_json",
 ]
@@ -424,7 +460,7 @@ name = "handl-plugin-engine-typecheck"
 version = "0.1.0"
 dependencies = [
  "handl-language",
- "handl-platform",
+ "handl-platform 0.1.0",
  "handl-plugin-engine-lex-pattern",
  "handl-plugin-engine-parse",
  "handl-plugin-engine-parse-pratt",
@@ -437,7 +473,7 @@ name = "handl-plugin-ext-diag"
 version = "0.1.0"
 dependencies = [
  "handl-language",
- "handl-platform",
+ "handl-platform 0.1.0",
  "serde",
  "serde_json",
  "thiserror",
@@ -446,12 +482,13 @@ dependencies = [
 [[package]]
 name = "handl-plugin-ffi"
 version = "0.1.0"
+source = "git+https://github.com/handl-lang/ffi?rev=8ac212d1f047c3b368b244c7d505d45b06d30aec#8ac212d1f047c3b368b244c7d505d45b06d30aec"
 dependencies = [
  "cranelift",
  "cranelift-jit",
  "cranelift-module",
- "handl-platform",
- "handl-value",
+ "handl-platform 0.1.0 (git+https://github.com/handl-lang/platform?rev=b3f5eeb87c7303483bce4f3a5ce2a85ec804b1c0)",
+ "handl-value 0.1.0 (git+https://github.com/handl-lang/platform?rev=b3f5eeb87c7303483bce4f3a5ce2a85ec804b1c0)",
  "libloading",
  "serde_json",
 ]
@@ -462,14 +499,14 @@ version = "0.1.0"
 dependencies = [
  "handl-kit-arrow-lower",
  "handl-language",
- "handl-platform",
- "handl-plugin-engine-exec",
+ "handl-platform 0.1.0",
+ "handl-plugin-engine-exec 0.1.0",
  "handl-plugin-engine-lex",
  "handl-plugin-engine-parse",
  "handl-plugin-engine-transform-rewrite",
  "handl-plugin-engine-typecheck",
- "handl-value",
- "plugin-engine",
+ "handl-value 0.1.0",
+ "plugin-engine 0.1.0",
  "rustc-hash",
  "serde",
  "serde_json",
@@ -478,6 +515,24 @@ dependencies = [
 [[package]]
 name = "handl-value"
 version = "0.1.0"
+dependencies = [
+ "rustc-hash",
+ "serde_json",
+]
+
+[[package]]
+name = "handl-value"
+version = "0.1.0"
+source = "git+https://github.com/handl-lang/platform?rev=9d34281cc717e007588e31a0f908ef55c81e7deb#9d34281cc717e007588e31a0f908ef55c81e7deb"
+dependencies = [
+ "rustc-hash",
+ "serde_json",
+]
+
+[[package]]
+name = "handl-value"
+version = "0.1.0"
+source = "git+https://github.com/handl-lang/platform?rev=b3f5eeb87c7303483bce4f3a5ce2a85ec804b1c0#b3f5eeb87c7303483bce4f3a5ce2a85ec804b1c0"
 dependencies = [
  "rustc-hash",
  "serde_json",
@@ -573,7 +628,17 @@ dependencies = [
 name = "plugin-engine"
 version = "0.1.0"
 dependencies = [
- "handl-value",
+ "handl-value 0.1.0",
+ "serde",
+ "serde_json",
+]
+
+[[package]]
+name = "plugin-engine"
+version = "0.1.0"
+source = "git+https://github.com/handl-lang/platform?rev=9d34281cc717e007588e31a0f908ef55c81e7deb#9d34281cc717e007588e31a0f908ef55c81e7deb"
+dependencies = [
+ "handl-value 0.1.0 (git+https://github.com/handl-lang/platform?rev=9d34281cc717e007588e31a0f908ef55c81e7deb)",
  "serde",
  "serde_json",
 ]

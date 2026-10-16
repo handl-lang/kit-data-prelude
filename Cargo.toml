@@ -29,8 +29,10 @@ handl-plugin-engine-lex-pattern = { path = "../platform/crates/plugin-engine-lex
 handl-plugin-engine-parse-pratt = { path = "../platform/crates/plugin-engine-parse-pratt" }
 handl-plugin-engine-exec-tree-walk = { path = "../platform/crates/plugin-engine-exec-tree-walk" }
 handl-plugin-engine-exec-bytecode = { path = "../platform/crates/plugin-engine-exec-bytecode" }
-handl-plugin-engine-exec-cranelift = { path = "../platform/crates/plugin-engine-exec-cranelift" }
 handl-plugin-engine-transform-rewrite = { path = "../platform/crates/plugin-engine-transform-rewrite" }
+
+[patch."https://github.com/handl-lang/native"]
+handl-plugin-engine-exec-cranelift = { path = "../native/modules/exec-cranelift" }
 
 [profile.dev]
 opt-level = 1
