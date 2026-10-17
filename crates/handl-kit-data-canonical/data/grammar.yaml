@@ -92,6 +92,7 @@
 - id: grammar.field-access.postfix
   token: token.dot
   position: Infix
+  same_line: true
   binding_power:
     - 90
     - 91
@@ -243,6 +244,7 @@
 - id: grammar.opt-chain.postfix
   token: token.opt_chain
   position: Infix
+  same_line: true
   binding_power:
     - 45
     - 46
@@ -779,6 +781,7 @@
 - id: grammar.index.postfix
   token: token.lbracket
   position: Infix
+  same_line: true
   binding_power:
     - 90
     - 91
@@ -852,6 +855,7 @@
 - id: grammar.call.infix
   token: token.lparen
   position: Infix
+  same_line: true
   binding_power:
     - 90
     - 91
