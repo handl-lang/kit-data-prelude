@@ -108,11 +108,22 @@ fn merge_globals(lang: &mut Language, globals_yaml: &str) -> Result<(), LangErro
 /// deserialized and merged into a single [`Language`]. `eval.yaml` holds the
 /// arrow-calculus `Term` definitions (ADR-0052 kernel).
 ///
+/// The full parse is cached on disk: the merged `Language` is serialized to
+/// `~/.cache/handl-lang/language-<key>.bin`, keyed by a content hash of every
+/// embedded fragment plus the package version. Reading the snapshot is ~100×
+/// faster than re-parsing ~10k lines of YAML, which matters under runners
+/// that spawn a process per test (nextest) — every test paid the parse.
+/// A corrupt or stale snapshot simply falls back to parsing.
+///
 /// # Errors
 ///
 /// Returns [`LangError`] if any YAML file fails to deserialize or a merge
 /// fails (should not happen — the files are pre-resolved).
 pub fn language_from_yaml() -> Result<Language, LangError> {
+    let key = snapshot_key();
+    if let Some(lang) = load_snapshot(key) {
+        return Ok(lang);
+    }
     let mut lang = merge_fragments(
         TOKENS_YAML,
         GRAMMAR_YAML,
@@ -127,7 +138,66 @@ pub fn language_from_yaml() -> Result<Language, LangError> {
         LSP_YAML,
     )?;
     merge_globals(&mut lang, GLOBALS_YAML)?;
+    store_snapshot(key, &lang);
     Ok(lang)
+}
+
+/// Content hash of every embedded fragment plus the package version — any
+/// data or layout change produces a new snapshot file instead of a stale hit.
+fn snapshot_key() -> u64 {
+    use std::hash::{Hash, Hasher};
+    let mut h = std::collections::hash_map::DefaultHasher::new();
+    env!("CARGO_PKG_VERSION").hash(&mut h);
+    for frag in [
+        TOKENS_YAML,
+        GRAMMAR_YAML,
+        EVAL_YAML,
+        TYPES_YAML,
+        AST_YAML,
+        CAPS_YAML,
+        OPTIONS_YAML,
+        LEXER_RULES_YAML,
+        TRANSFORMS_YAML,
+        LINTS_YAML,
+        LSP_YAML,
+        GLOBALS_YAML,
+    ] {
+        frag.hash(&mut h);
+    }
+    h.finish()
+}
+
+fn snapshot_path(key: u64) -> Option<std::path::PathBuf> {
+    let base = std::env::var_os("HOME")
+        .map(|h| std::path::PathBuf::from(h).join(".cache"))
+        .unwrap_or_else(std::env::temp_dir);
+    Some(base.join("handl-lang").join(format!("language-{key:016x}.bin")))
+}
+
+fn load_snapshot(key: u64) -> Option<Language> {
+    let path = snapshot_path(key)?;
+    let bytes = std::fs::read(&path).ok()?;
+    serde_json::from_slice(&bytes).ok()
+}
+
+/// Write via tmp-file + rename so a concurrent reader never sees a torn
+/// snapshot (nextest spawns test processes in parallel). Best-effort: a
+/// failed store just means the next caller parses YAML again.
+fn store_snapshot(key: u64, lang: &Language) {
+    let Some(path) = snapshot_path(key) else { return };
+    let Some(dir) = path.parent() else { return };
+    if std::fs::create_dir_all(dir).is_err() {
+        return;
+    }
+    let Ok(bytes) = serde_json::to_vec(lang) else {
+        return;
+    };
+    let tmp = path.with_extension(format!("tmp-{}", std::process::id()));
+    if std::fs::write(&tmp, &bytes).is_ok() {
+        let _ = std::fs::rename(&tmp, &path);
+    } else {
+        let _ = std::fs::remove_file(&tmp);
+    }
 }
 
 /// Merge the ten YAML fragment strings into a single [`Language`].
