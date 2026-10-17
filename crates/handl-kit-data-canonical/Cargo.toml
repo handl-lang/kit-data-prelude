@@ -13,7 +13,6 @@ repository.workspace = true
 handl-language = { git = "https://github.com/handl-lang/kernel", branch = "main" }
 handl-plugin-engine-transform = { git = "https://github.com/handl-lang/platform", branch = "main" }
 handl-plugin-ext-diag = { git = "https://github.com/handl-lang/platform", branch = "main" }
-handl-emitters = { git = "https://github.com/handl-lang/platform", branch = "main" }
 handl-kit-data = { git = "https://github.com/handl-lang/platform", branch = "main" }
 handl-runtime = { git = "https://github.com/handl-lang/platform", branch = "main" }
 serde_yaml = "0.9"

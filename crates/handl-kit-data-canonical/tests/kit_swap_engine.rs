@@ -7,7 +7,7 @@
 //! `eval = "tree-walk"`, binds the bytecode engine and produces a working
 //! runtime.
 
-use handl_kit_data::{DataKit, DataKitManifest, FragmentSourceEntry};
+use handl_kit_data::{DataKit, DataKitManifest};
 use handl_kit_data_canonical;
 use handl_language::LangError;
 use handl_plugin_engine_exec_bytecode::BytecodeEngine;
@@ -26,12 +26,13 @@ fn test_registry() -> Rc<EngineRegistry> {
     Rc::new(reg)
 }
 
+/// The canonical language, passed to `DataKit::assemble` as `base_language`.
+fn canonical_lang() -> handl_language::Language {
+    handl_kit_data_canonical::language_from_yaml().expect("canonical language")
+}
+
 fn manifest_with_eval(eval: &str) -> DataKitManifest {
     DataKitManifest::new()
-        .with_fragment(FragmentSourceEntry::emitter(
-            "canonical-yaml",
-            "canonical-yaml",
-        ))
         .with_runtime(RuntimeConfig::new().with_parse("pratt").with_eval(eval))
 }
 
@@ -40,7 +41,7 @@ fn swap_eval_to_bytecode_succeeds() {
     let reg = handl_kit_data_canonical::registry();
     let registry = test_registry();
     let manifest = manifest_with_eval("bytecode");
-    let kit = DataKit::assemble(&manifest, &reg).expect("assembly should succeed");
+    let kit = DataKit::assemble(&manifest, &reg, canonical_lang()).expect("assembly should succeed");
     // Assembly succeeds — the Language is built regardless of engine choice.
     assert!(kit.lang().tokens.len() > 0);
     // Building the runtime succeeds: bytecode is now available.
@@ -58,7 +59,7 @@ fn swap_eval_to_tree_walk_succeeds() {
     let reg = handl_kit_data_canonical::registry();
     let registry = test_registry();
     let manifest = manifest_with_eval("tree-walk");
-    let kit = DataKit::assemble(&manifest, &reg).unwrap();
+    let kit = DataKit::assemble(&manifest, &reg, canonical_lang()).unwrap();
     let rt = kit
         .into_runtime(&registry, None)
         .expect("tree-walk should bind");
@@ -69,17 +70,12 @@ fn swap_eval_to_tree_walk_succeeds() {
 fn swap_parse_to_chumsky_errors_clearly() {
     let reg = handl_kit_data_canonical::registry();
     let registry = test_registry();
-    let manifest = DataKitManifest::new()
-        .with_fragment(FragmentSourceEntry::emitter(
-            "canonical-yaml",
-            "canonical-yaml",
-        ))
-        .with_runtime(
-            RuntimeConfig::new()
-                .with_parse("chumsky")
-                .with_eval("tree-walk"),
-        );
-    let kit = DataKit::assemble(&manifest, &reg).unwrap();
+    let manifest = DataKitManifest::new().with_runtime(
+        RuntimeConfig::new()
+            .with_parse("chumsky")
+            .with_eval("tree-walk"),
+    );
+    let kit = DataKit::assemble(&manifest, &reg, canonical_lang()).unwrap();
     let err = kit.into_runtime(&registry, None).unwrap_err();
     assert_eq!(err, LangError::engine("unknown parse engine: chumsky"));
 }
@@ -90,13 +86,9 @@ fn no_eval_engine_leaves_eval_unbound() {
     // builds but eval dispatch returns NotImplemented (no eval engine bound).
     let reg = handl_kit_data_canonical::registry();
     let registry = test_registry();
-    let manifest = DataKitManifest::new()
-        .with_fragment(FragmentSourceEntry::emitter(
-            "canonical-yaml",
-            "canonical-yaml",
-        ))
-        .with_runtime(RuntimeConfig::new().with_parse("pratt"));
-    let kit = DataKit::assemble(&manifest, &reg).unwrap();
+    let manifest =
+        DataKitManifest::new().with_runtime(RuntimeConfig::new().with_parse("pratt"));
+    let kit = DataKit::assemble(&manifest, &reg, canonical_lang()).unwrap();
     let rt = kit
         .into_runtime(&registry, None)
         .expect("runtime with no eval should build");

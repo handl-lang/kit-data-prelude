@@ -20,10 +20,13 @@ repository = "https://github.com/handl-lang/lang"
 #   cargo check --workspace
 [patch."https://github.com/handl-lang/kernel"]
 handl-language = { path = "../kernel/crates/handl-language" }
+handl-value = { path = "../kernel/crates/handl-value" }
+plugin-engine = { path = "../kernel/crates/plugin-engine" }
 
 [patch."https://github.com/handl-lang/platform"]
-handl-emitters = { path = "../platform/crates/handl-emitters" }
 handl-kit-data = { path = "../platform/crates/handl-kit-data" }
+handl-platform = { path = "../platform/crates/platform" }
+handl-plugin-engine-exec = { path = "../platform/crates/plugin-engine-exec" }
 handl-runtime = { path = "../platform/crates/handl-runtime" }
 handl-plugin-engine-transform = { path = "../platform/crates/plugin-engine-transform" }
 handl-plugin-ext-diag = { path = "../platform/crates/plugin-ext-diag" }
@@ -32,6 +35,9 @@ handl-plugin-engine-parse-pratt = { path = "../platform/crates/plugin-engine-par
 handl-plugin-engine-exec-tree-walk = { path = "../platform/crates/plugin-engine-exec-tree-walk" }
 handl-plugin-engine-exec-bytecode = { path = "../platform/crates/plugin-engine-exec-bytecode" }
 handl-plugin-engine-transform-rewrite = { path = "../platform/crates/plugin-engine-transform-rewrite" }
+
+[patch."https://github.com/handl-lang/ffi"]
+handl-plugin-ffi = { path = "../ffi/modules/ffi" }
 
 [patch."https://github.com/handl-lang/native"]
 handl-plugin-engine-exec-cranelift = { path = "../native/modules/exec-cranelift" }

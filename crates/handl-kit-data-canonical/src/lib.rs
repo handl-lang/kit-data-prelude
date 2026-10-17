@@ -43,8 +43,7 @@
 
 use std::path::Path;
 
-use handl_emitters::Emitter;
-use handl_kit_data::{DataKit, DataKitManifest, EmitterRegistry};
+use handl_kit_data::{DataKit, DataKitManifest, KitRegistry};
 use handl_language::{
     AstShapeDef, CapabilityDecl, EvalSchemeDef, GrammarRow, LangError, Language, LexerRuleDef,
     LintRuleDef, LspDef, OptionSchema, TokenKindDef, TransformDef, TypeRuleDef,
@@ -428,50 +427,26 @@ pub fn language_from_dir(dir: &Path) -> Result<Language, LangError> {
 }
 
 // ---------------------------------------------------------------------------
-// Emitter wrapper (for the extends-chain assembly path)
-// ---------------------------------------------------------------------------
-
-/// An emitter that loads the embedded YAML data files.
-///
-/// This wraps [`language_from_yaml`] in the [`Emitter`] trait so the
-/// `EmitterRegistry` / `DataKit::assemble` path works transparently for child
-/// kits that `extends` this kit.
-#[derive(Debug, Default, Clone, Copy)]
-pub struct YamlDataEmitter;
-
-impl YamlDataEmitter {
-    /// Create a new YAML data emitter.
-    pub fn new() -> Self {
-        Self
-    }
-}
-
-impl Emitter for YamlDataEmitter {
-    fn emit(&self) -> Result<Language, LangError> {
-        language_from_yaml()
-    }
-}
-
-// ---------------------------------------------------------------------------
 // Kit manifest + registry
 // ---------------------------------------------------------------------------
 
 /// Build the [`DataKitManifest`] for the data-driven canonical kit.
 ///
-/// The manifest references a single `canonical-yaml` fragment source (the
-/// embedded YAML files) and runtime engine selection.
+/// The manifest declares no fragment sources — the canonical [`Language`]
+/// enters assembly directly as the `base_language` argument to
+/// [`DataKit::assemble`] (see [`assemble`]). It carries only the runtime
+/// engine selection.
 ///
 /// The `runtime.typecheck` field selects the `nbe` engine registered by the host.
 pub fn manifest() -> DataKitManifest {
     load_kit("canonical").unwrap_or_else(|e| panic!("failed to load canonical manifest: {}", e))
 }
 
-/// Build an [`EmitterRegistry`] pre-populated with the canonical YAML data
-/// emitter and all embedded `data/kits/*.yaml` manifests registered under
-/// their kit names (so `extends: canonical` resolves for child kits).
-pub fn registry() -> EmitterRegistry {
-    let mut reg = EmitterRegistry::new();
-    reg.register_emitter("canonical-yaml", || Box::new(YamlDataEmitter::new()));
+/// Build a [`KitRegistry`] with all embedded `data/kits/*.yaml` manifests
+/// registered under their kit names (so `extends: canonical` resolves for
+/// child kits).
+pub fn registry() -> KitRegistry {
+    let mut reg = KitRegistry::new();
     for (name, _) in KIT_MANIFESTS {
         let m = load_kit(name)
             .unwrap_or_else(|e| panic!("failed to load manifest for {}: {}", name, e));
@@ -502,8 +477,8 @@ const KIT_MANIFESTS: &[(&str, &str)] = &[
 /// Load a kit manifest by name from the embedded `data/kits/` files.
 ///
 /// The returned [`DataKitManifest`] carries the kit's `modules` list (and, for
-/// `canonical`, the fragment sources and runtime selection mirroring
-/// [`manifest`]). Unknown names surface as [`LangError::Engine`].
+/// `canonical`, the runtime selection mirroring [`manifest`]). Unknown names
+/// surface as [`LangError::Engine`].
 ///
 /// # Errors
 ///
@@ -542,13 +517,16 @@ pub fn kit_module_names(name: &str) -> Result<Vec<String>, LangError> {
 /// Assemble the data-driven canonical kit: load the YAML data files, build a
 /// [`DataKit`] with the Pratt + tree-walk runtime config.
 ///
+/// The canonical language enters [`DataKit::assemble`] directly as
+/// `base_language` — no fragment source indirection.
+///
 /// # Errors
 ///
 /// Returns [`LangError`] if any YAML deserialization or fragment merge fails
 /// (should not happen — the files are pre-resolved).
 pub fn assemble() -> Result<DataKit, LangError> {
     let reg = registry();
-    DataKit::assemble(&manifest(), &reg)
+    DataKit::assemble(&manifest(), &reg, language_from_yaml()?)
 }
 
 #[cfg(test)]
@@ -557,10 +535,11 @@ mod tests {
     use handl_kit_data::DataKit;
 
     #[test]
-    fn manifest_has_single_yaml_source() {
+    fn manifest_has_no_fragment_sources() {
+        // The canonical `Language` enters assembly as `base_language`, not as
+        // a manifest fragment source.
         let m = manifest();
-        assert_eq!(m.fragments.len(), 1);
-        assert_eq!(m.fragments[0].name, "canonical-yaml");
+        assert!(m.fragments.is_empty());
         assert_eq!(m.extends, None);
         assert_eq!(m.runtime.lex, "data");
         assert_eq!(m.runtime.parse, "pratt");
@@ -588,8 +567,8 @@ mod tests {
     }
 
     #[test]
-    fn yaml_emitter_produces_language() {
-        let lang = YamlDataEmitter::new().emit().unwrap();
+    fn language_from_yaml_produces_language() {
+        let lang = language_from_yaml().unwrap();
         assert!(lang.tokens.len() > 0);
         assert!(lang.grammar.len() > 0);
         assert!(lang.eval.len() > 0);
@@ -743,7 +722,7 @@ mod tests {
     #[test]
     fn load_kit_parses_embedded_manifests() {
         let canonical = load_kit("canonical").unwrap();
-        assert_eq!(canonical.fragments.len(), 1);
+        assert!(canonical.fragments.is_empty());
         assert_eq!(canonical.runtime.eval, "tree-walk");
         assert!(canonical.modules.is_empty());
 
@@ -800,7 +779,7 @@ mod tests {
         // selection (its manifest declares no `runtime:`).
         let reg = registry();
         let config = load_kit("config").unwrap();
-        let kit = DataKit::assemble(&config, &reg).unwrap();
+        let kit = DataKit::assemble(&config, &reg, language_from_yaml().unwrap()).unwrap();
         let lang = kit.lang();
         assert!(lang.tokens.len() > 0);
         assert!(lang.grammar.len() > 0);
@@ -892,7 +871,12 @@ mod tests {
 
     #[test]
     fn assemble_config_extends_canonical_caps() {
-        let kit = DataKit::assemble(&load_kit("config").unwrap(), &registry()).unwrap();
+        let kit = DataKit::assemble(
+            &load_kit("config").unwrap(),
+            &registry(),
+            language_from_yaml().unwrap(),
+        )
+        .unwrap();
         let lang = kit.lang();
         // Canonical contributes 3 foundation caps; config adds 14 pure-library caps.
         assert_eq!(lang.caps.len(), 17);
@@ -920,7 +904,12 @@ mod tests {
 
     #[test]
     fn assemble_config_inherits_parent_runtime() {
-        let kit = DataKit::assemble(&load_kit("config").unwrap(), &registry()).unwrap();
+        let kit = DataKit::assemble(
+            &load_kit("config").unwrap(),
+            &registry(),
+            language_from_yaml().unwrap(),
+        )
+        .unwrap();
         assert_eq!(kit.runtime_config().typecheck, "nbe");
         assert_eq!(kit.runtime_config().parse, "pratt");
         assert_eq!(kit.runtime_config().eval, "tree-walk");
