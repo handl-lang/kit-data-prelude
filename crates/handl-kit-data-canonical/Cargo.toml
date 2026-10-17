@@ -10,7 +10,7 @@ repository.workspace = true
 # platform dependencies are git deps (see the workspace root for the
 # sibling-checkout `[patch]` override used for local development).
 [dependencies]
-handl-language = { git = "https://github.com/handl-lang/platform", branch = "main" }
+handl-language = { git = "https://github.com/handl-lang/kernel", branch = "main" }
 handl-plugin-engine-transform = { git = "https://github.com/handl-lang/platform", branch = "main" }
 handl-plugin-ext-diag = { git = "https://github.com/handl-lang/platform", branch = "main" }
 handl-emitters = { git = "https://github.com/handl-lang/platform", branch = "main" }

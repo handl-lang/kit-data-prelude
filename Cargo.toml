@@ -18,10 +18,12 @@ repository = "https://github.com/handl-lang/lang"
 #   GIT_CONFIG_KEY_0="url.file:///home/luis/GitHub/handl-lang/platform.insteadOf" \
 #   GIT_CONFIG_VALUE_0="https://github.com/handl-lang/platform" \
 #   cargo check --workspace
+[patch."https://github.com/handl-lang/kernel"]
+handl-language = { path = "../kernel/crates/handl-language" }
+
 [patch."https://github.com/handl-lang/platform"]
 handl-emitters = { path = "../platform/crates/handl-emitters" }
 handl-kit-data = { path = "../platform/crates/handl-kit-data" }
-handl-language = { path = "../platform/crates/handl-language" }
 handl-runtime = { path = "../platform/crates/handl-runtime" }
 handl-plugin-engine-transform = { path = "../platform/crates/plugin-engine-transform" }
 handl-plugin-ext-diag = { path = "../platform/crates/plugin-ext-diag" }
