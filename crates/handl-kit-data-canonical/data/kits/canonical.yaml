@@ -8,7 +8,7 @@ fragments: []
 runtime:
   lex: data
   parse: pratt
-  eval: tree-walk
+  eval: bytecode
   typecheck: nbe
 modules: []
 
