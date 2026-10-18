@@ -11,3 +11,53 @@ runtime:
   eval: tree-walk
   typecheck: nbe
 modules: []
+
+# The base module set the kit registry builds (module-level names;
+# dispatch kind per name is a substrate concern — table/custom/native).
+base_modules:
+  - bool
+  - math
+  - prim
+  - cmp
+  - mood
+  - bytes
+  - obj
+  - error
+  - typeof
+  - option
+  - result
+  - combinators
+  - parse
+  - encoding
+  - serialize
+  - json
+  - base64
+  - hex
+  - tar
+  - url_rfc
+  - url_whatwg
+  - entropy
+  - crypto
+  - intl_c
+  - unicode_c
+  - str
+  - type
+  - ffi
+  - dedent
+  - perlin
+  - simplex
+  - test
+  - property
+  - benchmark
+  - fuzz
+  - snapshot
+  - assert
+  - rand
+  - char
+  - sym
+  - tag
+  - transform
+  - comb
+  - ip
+  - collections
+
