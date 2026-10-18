@@ -35,15 +35,15 @@ fn parse_package(name: &str, path: &str) {
 
 #[test]
 fn query_package_parses() {
-    parse_package("query", "../../handl-packages/query/index.hnl");
+    parse_package("query", "../../../lib-query/handl-packages/query/index.hnl");
 }
 
 #[test]
 fn command_package_parses() {
-    parse_package("command", "../../handl-packages/command/index.hnl");
+    parse_package("command", "../../../lib-command/handl-packages/command/index.hnl");
 }
 
 #[test]
 fn event_package_parses() {
-    parse_package("event", "../../handl-packages/event/index.hnl");
+    parse_package("event", "../../../lib-event/handl-packages/event/index.hnl");
 }
