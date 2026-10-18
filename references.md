@@ -1,20 +1,20 @@
 # Canonical ADR references
 
 ADRs that define ports, the kernel, or composition stay in
-`handl-lang/platform/project/adrs/`. They are referenced here, never
+`handl-lang/host/project/adrs/`. They are referenced here, never
 copied (ADR-0129 §2/§7).
 
 | ADR | url |
 |---|---|
-| 0044 | https://github.com/handl-lang/platform/blob/main/project/adrs/0044-*.md |
-| 0052 | https://github.com/handl-lang/platform/blob/main/project/adrs/0052-*.md |
-| 0055 | https://github.com/handl-lang/platform/blob/main/project/adrs/0055-*.md |
-| 0074 | https://github.com/handl-lang/platform/blob/main/project/adrs/0074-*.md |
-| 0081 | https://github.com/handl-lang/platform/blob/main/project/adrs/0081-*.md |
-| 0096 | https://github.com/handl-lang/platform/blob/main/project/adrs/0096-*.md |
-| 0106 | https://github.com/handl-lang/platform/blob/main/project/adrs/0106-*.md |
-| 0123 | https://github.com/handl-lang/platform/blob/main/project/adrs/0123-*.md |
-| 0129 | https://github.com/handl-lang/platform/blob/main/project/adrs/0129-*.md |
+| 0044 | https://github.com/handl-lang/host/blob/main/project/adrs/0044-*.md |
+| 0052 | https://github.com/handl-lang/host/blob/main/project/adrs/0052-*.md |
+| 0055 | https://github.com/handl-lang/host/blob/main/project/adrs/0055-*.md |
+| 0074 | https://github.com/handl-lang/host/blob/main/project/adrs/0074-*.md |
+| 0081 | https://github.com/handl-lang/host/blob/main/project/adrs/0081-*.md |
+| 0096 | https://github.com/handl-lang/host/blob/main/project/adrs/0096-*.md |
+| 0106 | https://github.com/handl-lang/host/blob/main/project/adrs/0106-*.md |
+| 0123 | https://github.com/handl-lang/host/blob/main/project/adrs/0123-*.md |
+| 0129 | https://github.com/handl-lang/host/blob/main/project/adrs/0129-*.md |
 
 ## ADRs this repo owns
 
@@ -22,6 +22,6 @@ copied (ADR-0129 §2/§7).
 |---|---|---|
 | 0130 | Language data assembly in the lang repo | `adrs/0130-language-data-assembly.md` |
 
-## Split parents (stay in platform)
+## Split parents (stay in host)
 
 - `0044-language-as-data-and-runtime-split.md`

@@ -26,7 +26,7 @@ dependencies; no engine, runtime, or host code lives here.
 - `plugin-engine-test`, `plugin-ext-lint` and `plugin-ext-typecheck` take the
   `Language` by injection rather than linking this crate (the ADR-0128 §0.8
   seam) — otherwise the dependency cycles.
-- The parent ADR-0044 stays in `platform`: it also decides the runtime split,
+- The parent ADR-0044 stays in `host`: it also decides the runtime split,
   which is platform's.
 
 ## Status

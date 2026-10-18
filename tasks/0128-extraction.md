@@ -6,7 +6,7 @@ this `project` branch; the code lands with the extraction.
 ## Docs owned here
 
 - `adrs/0130-language-data-assembly.md` — Language data assembly in the lang repo
-- split parent `0044-language-as-data-and-runtime-split.md` (canonical half stays in `platform`)
+- split parent `0044-language-as-data-and-runtime-split.md` (canonical half stays in `host`)
 
 ## Extraction
 
