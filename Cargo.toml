@@ -32,7 +32,6 @@ handl-plugin-ext-diag = { path = "../platform/crates/plugin-ext-diag" }
 handl-plugin-ffi = { path = "../ffi/modules/ffi" }
 
 [patch."https://github.com/handl-lang/native"]
-hnl-engine-exec-cranelift = { path = "../native/modules/exec-cranelift" }
 
 [profile.dev]
 opt-level = 1
@@ -60,3 +59,6 @@ hnl-engine-transform = { path = "../engine-transform" }
 
 [patch."https://github.com/handl-lang/engine-transform-rewrite"]
 hnl-engine-transform-rewrite = { path = "../engine-transform-rewrite" }
+
+[patch."https://github.com/handl-lang/engine-exec-cranelift"]
+hnl-engine-exec-cranelift = { path = "../engine-exec-cranelift" }
