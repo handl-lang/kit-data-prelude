@@ -18,20 +18,8 @@ repository = "https://github.com/handl-lang/lang"
 #   GIT_CONFIG_KEY_0="url.file:///home/luis/GitHub/handl-lang/platform.insteadOf" \
 #   GIT_CONFIG_VALUE_0="https://github.com/handl-lang/platform" \
 #   cargo check --workspace
-[patch."https://github.com/handl-lang/kernel"]
-handl-language = { path = "../kernel/crates/handl-language" }
-handl-value = { path = "../kernel/crates/handl-value" }
 
-[patch."https://github.com/handl-lang/platform"]
-handl-kit-data = { path = "../platform/crates/handl-kit-data" }
-handl-platform = { path = "../platform/crates/platform" }
-handl-runtime = { path = "../platform/crates/handl-runtime" }
-handl-plugin-ext-diag = { path = "../platform/crates/plugin-ext-diag" }
 
-[patch."https://github.com/handl-lang/ffi"]
-handl-plugin-ffi = { path = "../ffi/modules/ffi" }
-
-[patch."https://github.com/handl-lang/native"]
 
 [profile.dev]
 opt-level = 1
@@ -44,6 +32,9 @@ hnl-engine-exec = { path = "../engine-exec" }
 
 [patch."https://github.com/handl-lang/engine-exec-bytecode"]
 hnl-engine-exec-bytecode = { path = "../engine-exec-bytecode" }
+
+[patch."https://github.com/handl-lang/engine-exec-cranelift"]
+hnl-engine-exec-cranelift = { path = "../engine-exec-cranelift" }
 
 [patch."https://github.com/handl-lang/engine-exec-tree-walk"]
 hnl-engine-exec-tree-walk = { path = "../engine-exec-tree-walk" }
@@ -60,5 +51,17 @@ hnl-engine-transform = { path = "../engine-transform" }
 [patch."https://github.com/handl-lang/engine-transform-rewrite"]
 hnl-engine-transform-rewrite = { path = "../engine-transform-rewrite" }
 
-[patch."https://github.com/handl-lang/engine-exec-cranelift"]
-hnl-engine-exec-cranelift = { path = "../engine-exec-cranelift" }
+[patch."https://github.com/handl-lang/kernel"]
+handl-language = { path = "../kernel/crates/handl-language" }
+handl-value = { path = "../kernel/crates/handl-value" }
+
+[patch."https://github.com/handl-lang/kit-canonical"]
+handl-plugin-ffi = { path = "../kit-canonical/modules/ffi" }
+
+[patch."https://github.com/handl-lang/native"]
+
+[patch."https://github.com/handl-lang/platform"]
+handl-kit-data = { path = "../platform/crates/handl-kit-data" }
+handl-platform = { path = "../platform/crates/platform" }
+handl-plugin-ext-diag = { path = "../platform/crates/plugin-ext-diag" }
+handl-runtime = { path = "../platform/crates/handl-runtime" }

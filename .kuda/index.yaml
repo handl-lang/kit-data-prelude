@@ -1,0 +1,41 @@
+name: lang
+root: /home/luis/GitHub/handl-lang/lang
+purpose: ''
+modules:
+- handl-kit-data-canonical
+- lang
+commands:
+- cargo check
+- cargo test --workspace
+provenance:
+  files:
+  - Cargo.toml
+  - crates/handl-kit-data-canonical/Cargo.toml
+  - crates/handl-kit-data-canonical/tests/kit_assembly.rs
+  - crates/handl-kit-data-canonical/tests/parse_packages.rs
+  - crates/handl-kit-data-canonical/tests/loop_engines.rs
+  - crates/handl-kit-data-canonical/tests/graded_theory.rs
+  - crates/handl-kit-data-canonical/tests/kit_swap_engine.rs
+  - crates/handl-kit-data-canonical/tests/full_language_parity.rs
+  - crates/handl-kit-data-canonical/tests/catopt_fragments.rs
+  - crates/handl-kit-data-canonical/tests/with_handle.rs
+  - crates/handl-kit-data-canonical/tests/proc_notation.rs
+  - crates/handl-kit-data-canonical/tests/lsp_validation.rs
+  - crates/handl-kit-data-canonical/src/lib.rs
+  hashes:
+  - 6a4c79ad08ab0d967625f73c49684aa2d759627a
+  - 2fd686fdd763eae9ae262abca8c3328f7c4f102c
+  - ff8e3c58f08c7ff147cd83f919840a8099320c09
+  - 88e1e5f8c9626b973ee5ca0c01afa54416334fcb
+  - b24a6766ca433dc730fa5948dc6a5f23878b6345
+  - 839a749a88510899b117b891cfa67ecbae2e26d7
+  - a28ef4930b0e2a465508ca25b4eb0d2b0aa22471
+  - e5c4f081e522c363121578128a18997fd6f8517f
+  - 33ef6b0a455bd45e115caaa6ee75d585b9f6f10d
+  - c4127d3cdf3413813ec92b9b8aaa964a2fc0bc64
+  - a40357af49d40afc62ee758858fa759da39771cf
+  - 4480bd7b9dc8798131774d59295e03632fb7e5ec
+  - fd21a8cca0e29ea6bd89edcd7a612ab01ad2ab52
+  commit_sha: 992fd5c56862bb0f606d0c01eec38d7bfa9bdb0e
+  generated_at: '1792281128'
+  generator: kuda/0.1.0

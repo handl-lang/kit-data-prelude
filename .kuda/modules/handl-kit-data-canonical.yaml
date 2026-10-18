@@ -1,0 +1,1194 @@
+name: handl-kit-data-canonical
+path: crates/handl-kit-data-canonical/Cargo.toml
+purpose: The **data-driven canonical kit** — the ADR-0044 §6 end state.
+api:
+- name: handl-kit-data-canonical
+  kind: module
+  file: crates/handl-kit-data-canonical/Cargo.toml
+  line: 1
+  module: handl-kit-data-canonical
+- name: assemble_canonical_has_expected_fragment_counts
+  kind: function
+  file: crates/handl-kit-data-canonical/tests/kit_assembly.rs
+  line: 8
+  module: handl-kit-data-canonical
+- name: assemble_canonical_runtime_config_is_pratt_tree_walk
+  kind: function
+  file: crates/handl-kit-data-canonical/tests/kit_assembly.rs
+  line: 101
+  module: handl-kit-data-canonical
+- name: assemble_canonical_into_runtime_binds_engines
+  kind: function
+  file: crates/handl-kit-data-canonical/tests/kit_assembly.rs
+  line: 109
+  module: handl-kit-data-canonical
+- name: assemble_canonical_specific_fragments_present
+  kind: function
+  file: crates/handl-kit-data-canonical/tests/kit_assembly.rs
+  line: 133
+  module: handl-kit-data-canonical
+- name: optional_child_roles_resolve_arity_aware
+  kind: function
+  file: crates/handl-kit-data-canonical/tests/kit_assembly.rs
+  line: 253
+  module: handl-kit-data-canonical
+- name: full_runtime
+  kind: function
+  file: crates/handl-kit-data-canonical/tests/parse_packages.rs
+  line: 13
+  module: handl-kit-data-canonical
+- name: parse_package
+  kind: function
+  file: crates/handl-kit-data-canonical/tests/parse_packages.rs
+  line: 25
+  module: handl-kit-data-canonical
+- name: query_package_parses
+  kind: function
+  file: crates/handl-kit-data-canonical/tests/parse_packages.rs
+  line: 37
+  module: handl-kit-data-canonical
+- name: command_package_parses
+  kind: function
+  file: crates/handl-kit-data-canonical/tests/parse_packages.rs
+  line: 42
+  module: handl-kit-data-canonical
+- name: event_package_parses
+  kind: function
+  file: crates/handl-kit-data-canonical/tests/parse_packages.rs
+  line: 47
+  module: handl-kit-data-canonical
+- name: manifest_with_eval
+  kind: function
+  file: crates/handl-kit-data-canonical/tests/loop_engines.rs
+  line: 33
+  module: handl-kit-data-canonical
+- name: runtime_with_eval
+  kind: function
+  file: crates/handl-kit-data-canonical/tests/loop_engines.rs
+  line: 44
+  module: handl-kit-data-canonical
+- name: cases
+  kind: function
+  file: crates/handl-kit-data-canonical/tests/loop_engines.rs
+  line: 64
+  module: handl-kit-data-canonical
+- name: while_step_runs_under_tree_walk
+  kind: function
+  file: crates/handl-kit-data-canonical/tests/loop_engines.rs
+  line: 98
+  module: handl-kit-data-canonical
+- name: while_step_runs_under_bytecode
+  kind: function
+  file: crates/handl-kit-data-canonical/tests/loop_engines.rs
+  line: 110
+  module: handl-kit-data-canonical
+- name: while_step_runs_under_cranelift
+  kind: function
+  file: crates/handl-kit-data-canonical/tests/loop_engines.rs
+  line: 122
+  module: handl-kit-data-canonical
+- name: while_step_engine_parity
+  kind: function
+  file: crates/handl-kit-data-canonical/tests/loop_engines.rs
+  line: 135
+  module: handl-kit-data-canonical
+- name: full_language
+  kind: function
+  file: crates/handl-kit-data-canonical/tests/graded_theory.rs
+  line: 19
+  module: handl-kit-data-canonical
+- name: full_runtime
+  kind: function
+  file: crates/handl-kit-data-canonical/tests/graded_theory.rs
+  line: 25
+  module: handl-kit-data-canonical
+- name: parse
+  kind: function
+  file: crates/handl-kit-data-canonical/tests/graded_theory.rs
+  line: 38
+  module: handl-kit-data-canonical
+- name: root
+  kind: function
+  file: crates/handl-kit-data-canonical/tests/graded_theory.rs
+  line: 44
+  module: handl-kit-data-canonical
+- name: children
+  kind: function
+  file: crates/handl-kit-data-canonical/tests/graded_theory.rs
+  line: 48
+  module: handl-kit-data-canonical
+- name: graded_theory_tokens_exist
+  kind: function
+  file: crates/handl-kit-data-canonical/tests/graded_theory.rs
+  line: 63
+  module: handl-kit-data-canonical
+- name: graded_theory_grammar_rows_exist
+  kind: function
+  file: crates/handl-kit-data-canonical/tests/graded_theory.rs
+  line: 78
+  module: handl-kit-data-canonical
+- name: graded_theory_ast_shapes_exist
+  kind: function
+  file: crates/handl-kit-data-canonical/tests/graded_theory.rs
+  line: 91
+  module: handl-kit-data-canonical
+- name: fat_arrow_lexes_before_bind
+  kind: function
+  file: crates/handl-kit-data-canonical/tests/graded_theory.rs
+  line: 119
+  module: handl-kit-data-canonical
+- name: sort_declaration_parses
+  kind: function
+  file: crates/handl-kit-data-canonical/tests/graded_theory.rs
+  line: 128
+  module: handl-kit-data-canonical
+- name: parameterized_sort_parses
+  kind: function
+  file: crates/handl-kit-data-canonical/tests/graded_theory.rs
+  line: 141
+  module: handl-kit-data-canonical
+- name: bare_sort_parses_without_grades
+  kind: function
+  file: crates/handl-kit-data-canonical/tests/graded_theory.rs
+  line: 154
+  module: handl-kit-data-canonical
+- name: grade_declaration_parses
+  kind: function
+  file: crates/handl-kit-data-canonical/tests/graded_theory.rs
+  line: 162
+  module: handl-kit-data-canonical
+- name: op_declaration_parses
+  kind: function
+  file: crates/handl-kit-data-canonical/tests/graded_theory.rs
+  line: 170
+  module: handl-kit-data-canonical
+- name: op_with_dim_clause_parses
+  kind: function
+  file: crates/handl-kit-data-canonical/tests/graded_theory.rs
+  line: 182
+  module: handl-kit-data-canonical
+- name: dim_arrow_parses
+  kind: function
+  file: crates/handl-kit-data-canonical/tests/graded_theory.rs
+  line: 199
+  module: handl-kit-data-canonical
+- name: dimension_bracket_lowers_to_call_through_real_lexer
+  kind: function
+  file: crates/handl-kit-data-canonical/tests/graded_theory.rs
+  line: 233
+  module: handl-kit-data-canonical
+- name: spaced_angle_bracket_is_a_comparison_through_real_lexer
+  kind: function
+  file: crates/handl-kit-data-canonical/tests/graded_theory.rs
+  line: 248
+  module: handl-kit-data-canonical
+- name: unclosed_angle_bracket_is_a_comparison_through_real_lexer
+  kind: function
+  file: crates/handl-kit-data-canonical/tests/graded_theory.rs
+  line: 259
+  module: handl-kit-data-canonical
+- name: dimension_payload_composition_vs_trailing_flow
+  kind: function
+  file: crates/handl-kit-data-canonical/tests/graded_theory.rs
+  line: 267
+  module: handl-kit-data-canonical
+- name: dimension_bracket_takes_multiple_arguments_through_real_lexer
+  kind: function
+  file: crates/handl-kit-data-canonical/tests/graded_theory.rs
+  line: 291
+  module: handl-kit-data-canonical
+- name: dimension_evaluates_as_application
+  kind: function
+  file: crates/handl-kit-data-canonical/tests/graded_theory.rs
+  line: 301
+  module: handl-kit-data-canonical
+- name: dimension_evaluates_identically_to_the_call_form
+  kind: function
+  file: crates/handl-kit-data-canonical/tests/graded_theory.rs
+  line: 325
+  module: handl-kit-data-canonical
+- name: empty_dimension_bracket_rejected_through_real_lexer
+  kind: function
+  file: crates/handl-kit-data-canonical/tests/graded_theory.rs
+  line: 342
+  module: handl-kit-data-canonical
+- name: axis_flow_parses
+  kind: function
+  file: crates/handl-kit-data-canonical/tests/graded_theory.rs
+  line: 363
+  module: handl-kit-data-canonical
+- name: axis_flow_variable_axis_parses
+  kind: function
+  file: crates/handl-kit-data-canonical/tests/graded_theory.rs
+  line: 381
+  module: handl-kit-data-canonical
+- name: unindexed_flow_still_parses_as_flow
+  kind: function
+  file: crates/handl-kit-data-canonical/tests/graded_theory.rs
+  line: 394
+  module: handl-kit-data-canonical
+- name: axis_flow_chains_with_flow
+  kind: function
+  file: crates/handl-kit-data-canonical/tests/graded_theory.rs
+  line: 405
+  module: handl-kit-data-canonical
+- name: axis_flow_opener_lexes_as_single_token
+  kind: function
+  file: crates/handl-kit-data-canonical/tests/graded_theory.rs
+  line: 416
+  module: handl-kit-data-canonical
+- name: axis_flow_zero_evaluates_like_flow
+  kind: function
+  file: crates/handl-kit-data-canonical/tests/graded_theory.rs
+  line: 430
+  module: handl-kit-data-canonical
+- name: axis_flow_nonzero_axis_enforces_boundary
+  kind: function
+  file: crates/handl-kit-data-canonical/tests/graded_theory.rs
+  line: 448
+  module: handl-kit-data-canonical
+- name: test_registry
+  kind: function
+  file: crates/handl-kit-data-canonical/tests/kit_swap_engine.rs
+  line: 21
+  module: handl-kit-data-canonical
+- name: canonical_lang
+  kind: function
+  file: crates/handl-kit-data-canonical/tests/kit_swap_engine.rs
+  line: 30
+  module: handl-kit-data-canonical
+- name: manifest_with_eval
+  kind: function
+  file: crates/handl-kit-data-canonical/tests/kit_swap_engine.rs
+  line: 34
+  module: handl-kit-data-canonical
+- name: swap_eval_to_bytecode_succeeds
+  kind: function
+  file: crates/handl-kit-data-canonical/tests/kit_swap_engine.rs
+  line: 40
+  module: handl-kit-data-canonical
+- name: swap_eval_to_tree_walk_succeeds
+  kind: function
+  file: crates/handl-kit-data-canonical/tests/kit_swap_engine.rs
+  line: 58
+  module: handl-kit-data-canonical
+- name: swap_parse_to_chumsky_errors_clearly
+  kind: function
+  file: crates/handl-kit-data-canonical/tests/kit_swap_engine.rs
+  line: 70
+  module: handl-kit-data-canonical
+- name: no_eval_engine_leaves_eval_unbound
+  kind: function
+  file: crates/handl-kit-data-canonical/tests/kit_swap_engine.rs
+  line: 84
+  module: handl-kit-data-canonical
+- name: full_language
+  kind: function
+  file: crates/handl-kit-data-canonical/tests/full_language_parity.rs
+  line: 13
+  module: handl-kit-data-canonical
+- name: full_kit_assembles_without_collisions
+  kind: function
+  file: crates/handl-kit-data-canonical/tests/full_language_parity.rs
+  line: 19
+  module: handl-kit-data-canonical
+- name: language_has_eval_schemes_for_all_major_node_kinds
+  kind: function
+  file: crates/handl-kit-data-canonical/tests/full_language_parity.rs
+  line: 27
+  module: handl-kit-data-canonical
+- name: language_has_grammar_rows_for_all_major_constructs
+  kind: function
+  file: crates/handl-kit-data-canonical/tests/full_language_parity.rs
+  line: 98
+  module: handl-kit-data-canonical
+- name: language_has_token_kinds_for_all_major_tokens
+  kind: function
+  file: crates/handl-kit-data-canonical/tests/full_language_parity.rs
+  line: 169
+  module: handl-kit-data-canonical
+- name: language_has_ast_shapes_for_all_major_node_kinds
+  kind: function
+  file: crates/handl-kit-data-canonical/tests/full_language_parity.rs
+  line: 262
+  module: handl-kit-data-canonical
+- name: language_has_core_capabilities
+  kind: function
+  file: crates/handl-kit-data-canonical/tests/full_language_parity.rs
+  line: 322
+  module: handl-kit-data-canonical
+- name: full_kit_runtime_binds_engines
+  kind: function
+  file: crates/handl-kit-data-canonical/tests/full_language_parity.rs
+  line: 330
+  module: handl-kit-data-canonical
+- name: fixture_dir
+  kind: function
+  file: crates/handl-kit-data-canonical/tests/catopt_fragments.rs
+  line: 29
+  module: handl-kit-data-canonical
+- name: catopt_fragment_dir_assembles_a_language
+  kind: function
+  file: crates/handl-kit-data-canonical/tests/catopt_fragments.rs
+  line: 34
+  module: handl-kit-data-canonical
+- name: catopt_law_survives_as_data
+  kind: function
+  file: crates/handl-kit-data-canonical/tests/catopt_fragments.rs
+  line: 46
+  module: handl-kit-data-canonical
+- name: full_bank_dir
+  kind: function
+  file: crates/handl-kit-data-canonical/tests/catopt_fragments.rs
+  line: 66
+  module: handl-kit-data-canonical
+- name: catopt_full_bank_loads
+  kind: function
+  file: crates/handl-kit-data-canonical/tests/catopt_fragments.rs
+  line: 85
+  module: handl-kit-data-canonical
+- name: cnode
+  kind: function
+  file: crates/handl-kit-data-canonical/tests/catopt_fragments.rs
+  line: 117
+  module: handl-kit-data-canonical
+- name: catopt_law_fires_through_the_rewrite_engine
+  kind: function
+  file: crates/handl-kit-data-canonical/tests/catopt_fragments.rs
+  line: 122
+  module: handl-kit-data-canonical
+- name: catopt_root_eliminating_law_returns_the_subterm
+  kind: function
+  file: crates/handl-kit-data-canonical/tests/catopt_fragments.rs
+  line: 177
+  module: handl-kit-data-canonical
+- name: full_language
+  kind: function
+  file: crates/handl-kit-data-canonical/tests/with_handle.rs
+  line: 11
+  module: handl-kit-data-canonical
+- name: full_runtime
+  kind: function
+  file: crates/handl-kit-data-canonical/tests/with_handle.rs
+  line: 16
+  module: handl-kit-data-canonical
+- name: parse
+  kind: function
+  file: crates/handl-kit-data-canonical/tests/with_handle.rs
+  line: 28
+  module: handl-kit-data-canonical
+- name: root
+  kind: function
+  file: crates/handl-kit-data-canonical/tests/with_handle.rs
+  line: 34
+  module: handl-kit-data-canonical
+- name: children
+  kind: function
+  file: crates/handl-kit-data-canonical/tests/with_handle.rs
+  line: 38
+  module: handl-kit-data-canonical
+- name: handle_tokens_exist
+  kind: function
+  file: crates/handl-kit-data-canonical/tests/with_handle.rs
+  line: 49
+  module: handl-kit-data-canonical
+- name: handle_grammar_row_exists
+  kind: function
+  file: crates/handl-kit-data-canonical/tests/with_handle.rs
+  line: 57
+  module: handl-kit-data-canonical
+- name: handle_ast_shape_exists
+  kind: function
+  file: crates/handl-kit-data-canonical/tests/with_handle.rs
+  line: 66
+  module: handl-kit-data-canonical
+- name: handle_expression_parses
+  kind: function
+  file: crates/handl-kit-data-canonical/tests/with_handle.rs
+  line: 83
+  module: handl-kit-data-canonical
+- name: full_language
+  kind: function
+  file: crates/handl-kit-data-canonical/tests/proc_notation.rs
+  line: 33
+  module: handl-kit-data-canonical
+- name: full_runtime
+  kind: function
+  file: crates/handl-kit-data-canonical/tests/proc_notation.rs
+  line: 39
+  module: handl-kit-data-canonical
+- name: arrow_token_kind_exists
+  kind: function
+  file: crates/handl-kit-data-canonical/tests/proc_notation.rs
+  line: 58
+  module: handl-kit-data-canonical
+- name: arrow_grammar_row_exists
+  kind: function
+  file: crates/handl-kit-data-canonical/tests/proc_notation.rs
+  line: 67
+  module: handl-kit-data-canonical
+- name: function_ast_shape_exists
+  kind: function
+  file: crates/handl-kit-data-canonical/tests/proc_notation.rs
+  line: 78
+  module: handl-kit-data-canonical
+- name: function_eval_scheme_exists
+  kind: function
+  file: crates/handl-kit-data-canonical/tests/proc_notation.rs
+  line: 87
+  module: handl-kit-data-canonical
+- name: arrow_x_to_x_evaluates_to_the_identity_op
+  kind: function
+  file: crates/handl-kit-data-canonical/tests/proc_notation.rs
+  line: 101
+  module: handl-kit-data-canonical
+- name: arrow_x_to_x_plus_1_parses_as_function
+  kind: function
+  file: crates/handl-kit-data-canonical/tests/proc_notation.rs
+  line: 126
+  module: handl-kit-data-canonical
+- name: arrow_multi_param_parses_as_function_with_array_params
+  kind: function
+  file: crates/handl-kit-data-canonical/tests/proc_notation.rs
+  line: 159
+  module: handl-kit-data-canonical
+- name: canonical_lsp_validates_clean
+  kind: function
+  file: crates/handl-kit-data-canonical/tests/lsp_validation.rs
+  line: 5
+  module: handl-kit-data-canonical
+- name: KIT_NAME
+  kind: const
+  file: crates/handl-kit-data-canonical/src/lib.rs
+  line: 54
+  module: handl-kit-data-canonical
+- name: EXCLUDED_FRAGMENT_IDS
+  kind: const
+  file: crates/handl-kit-data-canonical/src/lib.rs
+  line: 66
+  module: handl-kit-data-canonical
+- name: TOKENS_YAML
+  kind: const
+  file: crates/handl-kit-data-canonical/src/lib.rs
+  line: 77
+  module: handl-kit-data-canonical
+- name: GRAMMAR_YAML
+  kind: const
+  file: crates/handl-kit-data-canonical/src/lib.rs
+  line: 78
+  module: handl-kit-data-canonical
+- name: EVAL_YAML
+  kind: const
+  file: crates/handl-kit-data-canonical/src/lib.rs
+  line: 79
+  module: handl-kit-data-canonical
+- name: TYPES_YAML
+  kind: const
+  file: crates/handl-kit-data-canonical/src/lib.rs
+  line: 80
+  module: handl-kit-data-canonical
+- name: AST_YAML
+  kind: const
+  file: crates/handl-kit-data-canonical/src/lib.rs
+  line: 81
+  module: handl-kit-data-canonical
+- name: CAPS_YAML
+  kind: const
+  file: crates/handl-kit-data-canonical/src/lib.rs
+  line: 82
+  module: handl-kit-data-canonical
+- name: OPTIONS_YAML
+  kind: const
+  file: crates/handl-kit-data-canonical/src/lib.rs
+  line: 83
+  module: handl-kit-data-canonical
+- name: LEXER_RULES_YAML
+  kind: const
+  file: crates/handl-kit-data-canonical/src/lib.rs
+  line: 84
+  module: handl-kit-data-canonical
+- name: TRANSFORMS_YAML
+  kind: const
+  file: crates/handl-kit-data-canonical/src/lib.rs
+  line: 85
+  module: handl-kit-data-canonical
+- name: LINTS_YAML
+  kind: const
+  file: crates/handl-kit-data-canonical/src/lib.rs
+  line: 86
+  module: handl-kit-data-canonical
+- name: LSP_YAML
+  kind: const
+  file: crates/handl-kit-data-canonical/src/lib.rs
+  line: 87
+  module: handl-kit-data-canonical
+- name: GLOBALS_YAML
+  kind: const
+  file: crates/handl-kit-data-canonical/src/lib.rs
+  line: 88
+  module: handl-kit-data-canonical
+- name: merge_globals
+  kind: function
+  file: crates/handl-kit-data-canonical/src/lib.rs
+  line: 96
+  module: handl-kit-data-canonical
+- name: language_from_yaml
+  kind: function
+  file: crates/handl-kit-data-canonical/src/lib.rs
+  line: 121
+  module: handl-kit-data-canonical
+- name: snapshot_key
+  kind: function
+  file: crates/handl-kit-data-canonical/src/lib.rs
+  line: 146
+  module: handl-kit-data-canonical
+- name: snapshot_path
+  kind: function
+  file: crates/handl-kit-data-canonical/src/lib.rs
+  line: 169
+  module: handl-kit-data-canonical
+- name: load_snapshot
+  kind: function
+  file: crates/handl-kit-data-canonical/src/lib.rs
+  line: 176
+  module: handl-kit-data-canonical
+- name: store_snapshot
+  kind: function
+  file: crates/handl-kit-data-canonical/src/lib.rs
+  line: 185
+  module: handl-kit-data-canonical
+- name: merge_fragments
+  kind: function
+  file: crates/handl-kit-data-canonical/src/lib.rs
+  line: 210
+  module: handl-kit-data-canonical
+- name: language_from_dir
+  kind: function
+  file: crates/handl-kit-data-canonical/src/lib.rs
+  line: 358
+  module: handl-kit-data-canonical
+- name: manifest
+  kind: function
+  file: crates/handl-kit-data-canonical/src/lib.rs
+  line: 441
+  module: handl-kit-data-canonical
+- name: registry
+  kind: function
+  file: crates/handl-kit-data-canonical/src/lib.rs
+  line: 448
+  module: handl-kit-data-canonical
+- name: KIT_MANIFESTS
+  kind: const
+  file: crates/handl-kit-data-canonical/src/lib.rs
+  line: 468
+  module: handl-kit-data-canonical
+- name: load_kit
+  kind: function
+  file: crates/handl-kit-data-canonical/src/lib.rs
+  line: 487
+  module: handl-kit-data-canonical
+- name: kit_module_names
+  kind: function
+  file: crates/handl-kit-data-canonical/src/lib.rs
+  line: 506
+  module: handl-kit-data-canonical
+- name: assemble
+  kind: function
+  file: crates/handl-kit-data-canonical/src/lib.rs
+  line: 527
+  module: handl-kit-data-canonical
+- name: tests
+  kind: module
+  file: crates/handl-kit-data-canonical/src/lib.rs
+  line: 533
+  module: handl-kit-data-canonical
+- name: manifest_has_no_fragment_sources
+  kind: function
+  file: crates/handl-kit-data-canonical/src/lib.rs
+  line: 538
+  module: handl-kit-data-canonical
+- name: manifest_serde_roundtrip
+  kind: function
+  file: crates/handl-kit-data-canonical/src/lib.rs
+  line: 550
+  module: handl-kit-data-canonical
+- name: assemble_produces_nonempty_language
+  kind: function
+  file: crates/handl-kit-data-canonical/src/lib.rs
+  line: 558
+  module: handl-kit-data-canonical
+- name: language_from_yaml_produces_language
+  kind: function
+  file: crates/handl-kit-data-canonical/src/lib.rs
+  line: 570
+  module: handl-kit-data-canonical
+- name: types_yaml_loads
+  kind: function
+  file: crates/handl-kit-data-canonical/src/lib.rs
+  line: 578
+  module: handl-kit-data-canonical
+- name: transforms_yaml_loads_first_class_rules
+  kind: function
+  file: crates/handl-kit-data-canonical/src/lib.rs
+  line: 595
+  module: handl-kit-data-canonical
+- name: desugar_field_still_lowers_into_transforms
+  kind: function
+  file: crates/handl-kit-data-canonical/src/lib.rs
+  line: 654
+  module: handl-kit-data-canonical
+- name: canonical_transforms_validate_clean
+  kind: function
+  file: crates/handl-kit-data-canonical/src/lib.rs
+  line: 684
+  module: handl-kit-data-canonical
+- name: merge_rejects_invalid_transform_rules
+  kind: function
+  file: crates/handl-kit-data-canonical/src/lib.rs
+  line: 698
+  module: handl-kit-data-canonical
+- name: load_kit_parses_embedded_manifests
+  kind: function
+  file: crates/handl-kit-data-canonical/src/lib.rs
+  line: 723
+  module: handl-kit-data-canonical
+- name: load_kit_unknown_name_errors
+  kind: function
+  file: crates/handl-kit-data-canonical/src/lib.rs
+  line: 735
+  module: handl-kit-data-canonical
+- name: load_kit_config_declares_pure_library_caps
+  kind: function
+  file: crates/handl-kit-data-canonical/src/lib.rs
+  line: 740
+  module: handl-kit-data-canonical
+- name: assemble_config_kit_merges_caps_via_extends
+  kind: function
+  file: crates/handl-kit-data-canonical/src/lib.rs
+  line: 775
+  module: handl-kit-data-canonical
+- name: kit_module_names_flattens_extends
+  kind: function
+  file: crates/handl-kit-data-canonical/src/lib.rs
+  line: 811
+  module: handl-kit-data-canonical
+- name: excluded_fragments_absent
+  kind: function
+  file: crates/handl-kit-data-canonical/src/lib.rs
+  line: 825
+  module: handl-kit-data-canonical
+- name: load_kit_config_carries_caps
+  kind: function
+  file: crates/handl-kit-data-canonical/src/lib.rs
+  line: 845
+  module: handl-kit-data-canonical
+- name: assemble_config_extends_canonical_caps
+  kind: function
+  file: crates/handl-kit-data-canonical/src/lib.rs
+  line: 873
+  module: handl-kit-data-canonical
+- name: assemble_config_inherits_parent_runtime
+  kind: function
+  file: crates/handl-kit-data-canonical/src/lib.rs
+  line: 906
+  module: handl-kit-data-canonical
+deps:
+- handl-kit-data
+- handl-language
+- handl-plugin-engine-transform
+- handl-plugin-ext-diag
+- handl-runtime
+- serde_json
+- serde_yaml
+- handl-plugin-engine-exec-bytecode
+- handl-plugin-engine-exec-cranelift
+- handl-plugin-engine-exec-tree-walk
+- handl-plugin-engine-lex-pattern
+- handl-plugin-engine-parse-pratt
+- handl-plugin-engine-transform-rewrite
+- handl_kit_data_canonical
+- handl_plugin_engine_exec_tree_walk
+- handl_plugin_engine_lex_pattern
+- handl_plugin_engine_parse_pratt
+- handl_runtime
+- handl_language
+- serde_json
+- handl_kit_data_canonical
+- handl_language
+- handl_plugin_engine_exec_tree_walk
+- handl_plugin_engine_lex_pattern
+- handl_plugin_engine_parse_pratt
+- handl_runtime
+- handl_kit_data
+- handl_kit_data_canonical
+- handl_language
+- handl_plugin_engine_exec_bytecode
+- handl_plugin_engine_exec_cranelift
+- handl_plugin_engine_exec_tree_walk
+- handl_plugin_engine_lex_pattern
+- handl_plugin_engine_parse_pratt
+- handl_runtime
+- serde_json
+- handl_kit_data_canonical
+- handl_language
+- handl_plugin_engine_exec_tree_walk
+- handl_plugin_engine_lex_pattern
+- handl_plugin_engine_parse_pratt
+- handl_runtime
+- handl_kit_data
+- handl_kit_data_canonical
+- handl_language
+- handl_plugin_engine_exec_bytecode
+- handl_plugin_engine_exec_tree_walk
+- handl_plugin_engine_parse_pratt
+- handl_runtime
+- handl_kit_data_canonical
+- handl_language
+- handl_plugin_engine_exec_tree_walk
+- handl_plugin_engine_lex_pattern
+- handl_plugin_engine_parse_pratt
+- handl_runtime
+- handl_kit_data_canonical
+- handl_language
+- handl_language
+- handl_plugin_engine_transform_rewrite
+- handl_kit_data_canonical
+- handl_language
+- handl_plugin_engine_exec_tree_walk
+- handl_plugin_engine_lex_pattern
+- handl_plugin_engine_parse_pratt
+- handl_runtime
+- handl_kit_data_canonical
+- handl_language
+- handl_plugin_engine_exec_tree_walk
+- handl_plugin_engine_lex_pattern
+- handl_plugin_engine_parse_pratt
+- handl_runtime
+- handl_kit_data_canonical
+- handl_plugin_ext_diag
+- handl_kit_data
+- handl_language
+- handl_kit_data
+- handl_language
+notes: ''
+verify:
+- crates/handl-kit-data-canonical/Cargo.toml
+- crates/handl-kit-data-canonical/tests/kit_assembly.rs
+- crates/handl-kit-data-canonical/tests/kit_assembly.rs
+- crates/handl-kit-data-canonical/tests/kit_assembly.rs
+- crates/handl-kit-data-canonical/tests/kit_assembly.rs
+- crates/handl-kit-data-canonical/tests/kit_assembly.rs
+- crates/handl-kit-data-canonical/tests/parse_packages.rs
+- crates/handl-kit-data-canonical/tests/parse_packages.rs
+- crates/handl-kit-data-canonical/tests/parse_packages.rs
+- crates/handl-kit-data-canonical/tests/parse_packages.rs
+- crates/handl-kit-data-canonical/tests/parse_packages.rs
+- crates/handl-kit-data-canonical/tests/loop_engines.rs
+- crates/handl-kit-data-canonical/tests/loop_engines.rs
+- crates/handl-kit-data-canonical/tests/loop_engines.rs
+- crates/handl-kit-data-canonical/tests/loop_engines.rs
+- crates/handl-kit-data-canonical/tests/loop_engines.rs
+- crates/handl-kit-data-canonical/tests/loop_engines.rs
+- crates/handl-kit-data-canonical/tests/loop_engines.rs
+- crates/handl-kit-data-canonical/tests/graded_theory.rs
+- crates/handl-kit-data-canonical/tests/graded_theory.rs
+- crates/handl-kit-data-canonical/tests/graded_theory.rs
+- crates/handl-kit-data-canonical/tests/graded_theory.rs
+- crates/handl-kit-data-canonical/tests/graded_theory.rs
+- crates/handl-kit-data-canonical/tests/graded_theory.rs
+- crates/handl-kit-data-canonical/tests/graded_theory.rs
+- crates/handl-kit-data-canonical/tests/graded_theory.rs
+- crates/handl-kit-data-canonical/tests/graded_theory.rs
+- crates/handl-kit-data-canonical/tests/graded_theory.rs
+- crates/handl-kit-data-canonical/tests/graded_theory.rs
+- crates/handl-kit-data-canonical/tests/graded_theory.rs
+- crates/handl-kit-data-canonical/tests/graded_theory.rs
+- crates/handl-kit-data-canonical/tests/graded_theory.rs
+- crates/handl-kit-data-canonical/tests/graded_theory.rs
+- crates/handl-kit-data-canonical/tests/graded_theory.rs
+- crates/handl-kit-data-canonical/tests/graded_theory.rs
+- crates/handl-kit-data-canonical/tests/graded_theory.rs
+- crates/handl-kit-data-canonical/tests/graded_theory.rs
+- crates/handl-kit-data-canonical/tests/graded_theory.rs
+- crates/handl-kit-data-canonical/tests/graded_theory.rs
+- crates/handl-kit-data-canonical/tests/graded_theory.rs
+- crates/handl-kit-data-canonical/tests/graded_theory.rs
+- crates/handl-kit-data-canonical/tests/graded_theory.rs
+- crates/handl-kit-data-canonical/tests/graded_theory.rs
+- crates/handl-kit-data-canonical/tests/graded_theory.rs
+- crates/handl-kit-data-canonical/tests/graded_theory.rs
+- crates/handl-kit-data-canonical/tests/graded_theory.rs
+- crates/handl-kit-data-canonical/tests/graded_theory.rs
+- crates/handl-kit-data-canonical/tests/graded_theory.rs
+- crates/handl-kit-data-canonical/tests/graded_theory.rs
+- crates/handl-kit-data-canonical/tests/kit_swap_engine.rs
+- crates/handl-kit-data-canonical/tests/kit_swap_engine.rs
+- crates/handl-kit-data-canonical/tests/kit_swap_engine.rs
+- crates/handl-kit-data-canonical/tests/kit_swap_engine.rs
+- crates/handl-kit-data-canonical/tests/kit_swap_engine.rs
+- crates/handl-kit-data-canonical/tests/kit_swap_engine.rs
+- crates/handl-kit-data-canonical/tests/kit_swap_engine.rs
+- crates/handl-kit-data-canonical/tests/full_language_parity.rs
+- crates/handl-kit-data-canonical/tests/full_language_parity.rs
+- crates/handl-kit-data-canonical/tests/full_language_parity.rs
+- crates/handl-kit-data-canonical/tests/full_language_parity.rs
+- crates/handl-kit-data-canonical/tests/full_language_parity.rs
+- crates/handl-kit-data-canonical/tests/full_language_parity.rs
+- crates/handl-kit-data-canonical/tests/full_language_parity.rs
+- crates/handl-kit-data-canonical/tests/full_language_parity.rs
+- crates/handl-kit-data-canonical/tests/catopt_fragments.rs
+- crates/handl-kit-data-canonical/tests/catopt_fragments.rs
+- crates/handl-kit-data-canonical/tests/catopt_fragments.rs
+- crates/handl-kit-data-canonical/tests/catopt_fragments.rs
+- crates/handl-kit-data-canonical/tests/catopt_fragments.rs
+- crates/handl-kit-data-canonical/tests/catopt_fragments.rs
+- crates/handl-kit-data-canonical/tests/catopt_fragments.rs
+- crates/handl-kit-data-canonical/tests/catopt_fragments.rs
+- crates/handl-kit-data-canonical/tests/with_handle.rs
+- crates/handl-kit-data-canonical/tests/with_handle.rs
+- crates/handl-kit-data-canonical/tests/with_handle.rs
+- crates/handl-kit-data-canonical/tests/with_handle.rs
+- crates/handl-kit-data-canonical/tests/with_handle.rs
+- crates/handl-kit-data-canonical/tests/with_handle.rs
+- crates/handl-kit-data-canonical/tests/with_handle.rs
+- crates/handl-kit-data-canonical/tests/with_handle.rs
+- crates/handl-kit-data-canonical/tests/with_handle.rs
+- crates/handl-kit-data-canonical/tests/proc_notation.rs
+- crates/handl-kit-data-canonical/tests/proc_notation.rs
+- crates/handl-kit-data-canonical/tests/proc_notation.rs
+- crates/handl-kit-data-canonical/tests/proc_notation.rs
+- crates/handl-kit-data-canonical/tests/proc_notation.rs
+- crates/handl-kit-data-canonical/tests/proc_notation.rs
+- crates/handl-kit-data-canonical/tests/proc_notation.rs
+- crates/handl-kit-data-canonical/tests/proc_notation.rs
+- crates/handl-kit-data-canonical/tests/proc_notation.rs
+- crates/handl-kit-data-canonical/tests/lsp_validation.rs
+- crates/handl-kit-data-canonical/src/lib.rs
+- crates/handl-kit-data-canonical/src/lib.rs
+- crates/handl-kit-data-canonical/src/lib.rs
+- crates/handl-kit-data-canonical/src/lib.rs
+- crates/handl-kit-data-canonical/src/lib.rs
+- crates/handl-kit-data-canonical/src/lib.rs
+- crates/handl-kit-data-canonical/src/lib.rs
+- crates/handl-kit-data-canonical/src/lib.rs
+- crates/handl-kit-data-canonical/src/lib.rs
+- crates/handl-kit-data-canonical/src/lib.rs
+- crates/handl-kit-data-canonical/src/lib.rs
+- crates/handl-kit-data-canonical/src/lib.rs
+- crates/handl-kit-data-canonical/src/lib.rs
+- crates/handl-kit-data-canonical/src/lib.rs
+- crates/handl-kit-data-canonical/src/lib.rs
+- crates/handl-kit-data-canonical/src/lib.rs
+- crates/handl-kit-data-canonical/src/lib.rs
+- crates/handl-kit-data-canonical/src/lib.rs
+- crates/handl-kit-data-canonical/src/lib.rs
+- crates/handl-kit-data-canonical/src/lib.rs
+- crates/handl-kit-data-canonical/src/lib.rs
+- crates/handl-kit-data-canonical/src/lib.rs
+- crates/handl-kit-data-canonical/src/lib.rs
+- crates/handl-kit-data-canonical/src/lib.rs
+- crates/handl-kit-data-canonical/src/lib.rs
+- crates/handl-kit-data-canonical/src/lib.rs
+- crates/handl-kit-data-canonical/src/lib.rs
+- crates/handl-kit-data-canonical/src/lib.rs
+- crates/handl-kit-data-canonical/src/lib.rs
+- crates/handl-kit-data-canonical/src/lib.rs
+- crates/handl-kit-data-canonical/src/lib.rs
+- crates/handl-kit-data-canonical/src/lib.rs
+- crates/handl-kit-data-canonical/src/lib.rs
+- crates/handl-kit-data-canonical/src/lib.rs
+- crates/handl-kit-data-canonical/src/lib.rs
+- crates/handl-kit-data-canonical/src/lib.rs
+- crates/handl-kit-data-canonical/src/lib.rs
+- crates/handl-kit-data-canonical/src/lib.rs
+- crates/handl-kit-data-canonical/src/lib.rs
+- crates/handl-kit-data-canonical/src/lib.rs
+- crates/handl-kit-data-canonical/src/lib.rs
+- crates/handl-kit-data-canonical/src/lib.rs
+- crates/handl-kit-data-canonical/src/lib.rs
+- crates/handl-kit-data-canonical/src/lib.rs
+- crates/handl-kit-data-canonical/src/lib.rs
+- crates/handl-kit-data-canonical/src/lib.rs
+- crates/handl-kit-data-canonical/src/lib.rs
+provenance:
+  files:
+  - crates/handl-kit-data-canonical/Cargo.toml
+  - crates/handl-kit-data-canonical/tests/kit_assembly.rs
+  - crates/handl-kit-data-canonical/tests/kit_assembly.rs
+  - crates/handl-kit-data-canonical/tests/kit_assembly.rs
+  - crates/handl-kit-data-canonical/tests/kit_assembly.rs
+  - crates/handl-kit-data-canonical/tests/kit_assembly.rs
+  - crates/handl-kit-data-canonical/tests/parse_packages.rs
+  - crates/handl-kit-data-canonical/tests/parse_packages.rs
+  - crates/handl-kit-data-canonical/tests/parse_packages.rs
+  - crates/handl-kit-data-canonical/tests/parse_packages.rs
+  - crates/handl-kit-data-canonical/tests/parse_packages.rs
+  - crates/handl-kit-data-canonical/tests/loop_engines.rs
+  - crates/handl-kit-data-canonical/tests/loop_engines.rs
+  - crates/handl-kit-data-canonical/tests/loop_engines.rs
+  - crates/handl-kit-data-canonical/tests/loop_engines.rs
+  - crates/handl-kit-data-canonical/tests/loop_engines.rs
+  - crates/handl-kit-data-canonical/tests/loop_engines.rs
+  - crates/handl-kit-data-canonical/tests/loop_engines.rs
+  - crates/handl-kit-data-canonical/tests/graded_theory.rs
+  - crates/handl-kit-data-canonical/tests/graded_theory.rs
+  - crates/handl-kit-data-canonical/tests/graded_theory.rs
+  - crates/handl-kit-data-canonical/tests/graded_theory.rs
+  - crates/handl-kit-data-canonical/tests/graded_theory.rs
+  - crates/handl-kit-data-canonical/tests/graded_theory.rs
+  - crates/handl-kit-data-canonical/tests/graded_theory.rs
+  - crates/handl-kit-data-canonical/tests/graded_theory.rs
+  - crates/handl-kit-data-canonical/tests/graded_theory.rs
+  - crates/handl-kit-data-canonical/tests/graded_theory.rs
+  - crates/handl-kit-data-canonical/tests/graded_theory.rs
+  - crates/handl-kit-data-canonical/tests/graded_theory.rs
+  - crates/handl-kit-data-canonical/tests/graded_theory.rs
+  - crates/handl-kit-data-canonical/tests/graded_theory.rs
+  - crates/handl-kit-data-canonical/tests/graded_theory.rs
+  - crates/handl-kit-data-canonical/tests/graded_theory.rs
+  - crates/handl-kit-data-canonical/tests/graded_theory.rs
+  - crates/handl-kit-data-canonical/tests/graded_theory.rs
+  - crates/handl-kit-data-canonical/tests/graded_theory.rs
+  - crates/handl-kit-data-canonical/tests/graded_theory.rs
+  - crates/handl-kit-data-canonical/tests/graded_theory.rs
+  - crates/handl-kit-data-canonical/tests/graded_theory.rs
+  - crates/handl-kit-data-canonical/tests/graded_theory.rs
+  - crates/handl-kit-data-canonical/tests/graded_theory.rs
+  - crates/handl-kit-data-canonical/tests/graded_theory.rs
+  - crates/handl-kit-data-canonical/tests/graded_theory.rs
+  - crates/handl-kit-data-canonical/tests/graded_theory.rs
+  - crates/handl-kit-data-canonical/tests/graded_theory.rs
+  - crates/handl-kit-data-canonical/tests/graded_theory.rs
+  - crates/handl-kit-data-canonical/tests/graded_theory.rs
+  - crates/handl-kit-data-canonical/tests/graded_theory.rs
+  - crates/handl-kit-data-canonical/tests/kit_swap_engine.rs
+  - crates/handl-kit-data-canonical/tests/kit_swap_engine.rs
+  - crates/handl-kit-data-canonical/tests/kit_swap_engine.rs
+  - crates/handl-kit-data-canonical/tests/kit_swap_engine.rs
+  - crates/handl-kit-data-canonical/tests/kit_swap_engine.rs
+  - crates/handl-kit-data-canonical/tests/kit_swap_engine.rs
+  - crates/handl-kit-data-canonical/tests/kit_swap_engine.rs
+  - crates/handl-kit-data-canonical/tests/full_language_parity.rs
+  - crates/handl-kit-data-canonical/tests/full_language_parity.rs
+  - crates/handl-kit-data-canonical/tests/full_language_parity.rs
+  - crates/handl-kit-data-canonical/tests/full_language_parity.rs
+  - crates/handl-kit-data-canonical/tests/full_language_parity.rs
+  - crates/handl-kit-data-canonical/tests/full_language_parity.rs
+  - crates/handl-kit-data-canonical/tests/full_language_parity.rs
+  - crates/handl-kit-data-canonical/tests/full_language_parity.rs
+  - crates/handl-kit-data-canonical/tests/catopt_fragments.rs
+  - crates/handl-kit-data-canonical/tests/catopt_fragments.rs
+  - crates/handl-kit-data-canonical/tests/catopt_fragments.rs
+  - crates/handl-kit-data-canonical/tests/catopt_fragments.rs
+  - crates/handl-kit-data-canonical/tests/catopt_fragments.rs
+  - crates/handl-kit-data-canonical/tests/catopt_fragments.rs
+  - crates/handl-kit-data-canonical/tests/catopt_fragments.rs
+  - crates/handl-kit-data-canonical/tests/catopt_fragments.rs
+  - crates/handl-kit-data-canonical/tests/with_handle.rs
+  - crates/handl-kit-data-canonical/tests/with_handle.rs
+  - crates/handl-kit-data-canonical/tests/with_handle.rs
+  - crates/handl-kit-data-canonical/tests/with_handle.rs
+  - crates/handl-kit-data-canonical/tests/with_handle.rs
+  - crates/handl-kit-data-canonical/tests/with_handle.rs
+  - crates/handl-kit-data-canonical/tests/with_handle.rs
+  - crates/handl-kit-data-canonical/tests/with_handle.rs
+  - crates/handl-kit-data-canonical/tests/with_handle.rs
+  - crates/handl-kit-data-canonical/tests/proc_notation.rs
+  - crates/handl-kit-data-canonical/tests/proc_notation.rs
+  - crates/handl-kit-data-canonical/tests/proc_notation.rs
+  - crates/handl-kit-data-canonical/tests/proc_notation.rs
+  - crates/handl-kit-data-canonical/tests/proc_notation.rs
+  - crates/handl-kit-data-canonical/tests/proc_notation.rs
+  - crates/handl-kit-data-canonical/tests/proc_notation.rs
+  - crates/handl-kit-data-canonical/tests/proc_notation.rs
+  - crates/handl-kit-data-canonical/tests/proc_notation.rs
+  - crates/handl-kit-data-canonical/tests/lsp_validation.rs
+  - crates/handl-kit-data-canonical/src/lib.rs
+  - crates/handl-kit-data-canonical/src/lib.rs
+  - crates/handl-kit-data-canonical/src/lib.rs
+  - crates/handl-kit-data-canonical/src/lib.rs
+  - crates/handl-kit-data-canonical/src/lib.rs
+  - crates/handl-kit-data-canonical/src/lib.rs
+  - crates/handl-kit-data-canonical/src/lib.rs
+  - crates/handl-kit-data-canonical/src/lib.rs
+  - crates/handl-kit-data-canonical/src/lib.rs
+  - crates/handl-kit-data-canonical/src/lib.rs
+  - crates/handl-kit-data-canonical/src/lib.rs
+  - crates/handl-kit-data-canonical/src/lib.rs
+  - crates/handl-kit-data-canonical/src/lib.rs
+  - crates/handl-kit-data-canonical/src/lib.rs
+  - crates/handl-kit-data-canonical/src/lib.rs
+  - crates/handl-kit-data-canonical/src/lib.rs
+  - crates/handl-kit-data-canonical/src/lib.rs
+  - crates/handl-kit-data-canonical/src/lib.rs
+  - crates/handl-kit-data-canonical/src/lib.rs
+  - crates/handl-kit-data-canonical/src/lib.rs
+  - crates/handl-kit-data-canonical/src/lib.rs
+  - crates/handl-kit-data-canonical/src/lib.rs
+  - crates/handl-kit-data-canonical/src/lib.rs
+  - crates/handl-kit-data-canonical/src/lib.rs
+  - crates/handl-kit-data-canonical/src/lib.rs
+  - crates/handl-kit-data-canonical/src/lib.rs
+  - crates/handl-kit-data-canonical/src/lib.rs
+  - crates/handl-kit-data-canonical/src/lib.rs
+  - crates/handl-kit-data-canonical/src/lib.rs
+  - crates/handl-kit-data-canonical/src/lib.rs
+  - crates/handl-kit-data-canonical/src/lib.rs
+  - crates/handl-kit-data-canonical/src/lib.rs
+  - crates/handl-kit-data-canonical/src/lib.rs
+  - crates/handl-kit-data-canonical/src/lib.rs
+  - crates/handl-kit-data-canonical/src/lib.rs
+  - crates/handl-kit-data-canonical/src/lib.rs
+  - crates/handl-kit-data-canonical/src/lib.rs
+  - crates/handl-kit-data-canonical/src/lib.rs
+  - crates/handl-kit-data-canonical/src/lib.rs
+  - crates/handl-kit-data-canonical/src/lib.rs
+  - crates/handl-kit-data-canonical/src/lib.rs
+  - crates/handl-kit-data-canonical/src/lib.rs
+  - crates/handl-kit-data-canonical/src/lib.rs
+  - crates/handl-kit-data-canonical/src/lib.rs
+  - crates/handl-kit-data-canonical/src/lib.rs
+  - crates/handl-kit-data-canonical/src/lib.rs
+  - crates/handl-kit-data-canonical/src/lib.rs
+  hashes:
+  - 2fd686fdd763eae9ae262abca8c3328f7c4f102c
+  - ff8e3c58f08c7ff147cd83f919840a8099320c09
+  - ff8e3c58f08c7ff147cd83f919840a8099320c09
+  - ff8e3c58f08c7ff147cd83f919840a8099320c09
+  - ff8e3c58f08c7ff147cd83f919840a8099320c09
+  - ff8e3c58f08c7ff147cd83f919840a8099320c09
+  - 88e1e5f8c9626b973ee5ca0c01afa54416334fcb
+  - 88e1e5f8c9626b973ee5ca0c01afa54416334fcb
+  - 88e1e5f8c9626b973ee5ca0c01afa54416334fcb
+  - 88e1e5f8c9626b973ee5ca0c01afa54416334fcb
+  - 88e1e5f8c9626b973ee5ca0c01afa54416334fcb
+  - b24a6766ca433dc730fa5948dc6a5f23878b6345
+  - b24a6766ca433dc730fa5948dc6a5f23878b6345
+  - b24a6766ca433dc730fa5948dc6a5f23878b6345
+  - b24a6766ca433dc730fa5948dc6a5f23878b6345
+  - b24a6766ca433dc730fa5948dc6a5f23878b6345
+  - b24a6766ca433dc730fa5948dc6a5f23878b6345
+  - b24a6766ca433dc730fa5948dc6a5f23878b6345
+  - 839a749a88510899b117b891cfa67ecbae2e26d7
+  - 839a749a88510899b117b891cfa67ecbae2e26d7
+  - 839a749a88510899b117b891cfa67ecbae2e26d7
+  - 839a749a88510899b117b891cfa67ecbae2e26d7
+  - 839a749a88510899b117b891cfa67ecbae2e26d7
+  - 839a749a88510899b117b891cfa67ecbae2e26d7
+  - 839a749a88510899b117b891cfa67ecbae2e26d7
+  - 839a749a88510899b117b891cfa67ecbae2e26d7
+  - 839a749a88510899b117b891cfa67ecbae2e26d7
+  - 839a749a88510899b117b891cfa67ecbae2e26d7
+  - 839a749a88510899b117b891cfa67ecbae2e26d7
+  - 839a749a88510899b117b891cfa67ecbae2e26d7
+  - 839a749a88510899b117b891cfa67ecbae2e26d7
+  - 839a749a88510899b117b891cfa67ecbae2e26d7
+  - 839a749a88510899b117b891cfa67ecbae2e26d7
+  - 839a749a88510899b117b891cfa67ecbae2e26d7
+  - 839a749a88510899b117b891cfa67ecbae2e26d7
+  - 839a749a88510899b117b891cfa67ecbae2e26d7
+  - 839a749a88510899b117b891cfa67ecbae2e26d7
+  - 839a749a88510899b117b891cfa67ecbae2e26d7
+  - 839a749a88510899b117b891cfa67ecbae2e26d7
+  - 839a749a88510899b117b891cfa67ecbae2e26d7
+  - 839a749a88510899b117b891cfa67ecbae2e26d7
+  - 839a749a88510899b117b891cfa67ecbae2e26d7
+  - 839a749a88510899b117b891cfa67ecbae2e26d7
+  - 839a749a88510899b117b891cfa67ecbae2e26d7
+  - 839a749a88510899b117b891cfa67ecbae2e26d7
+  - 839a749a88510899b117b891cfa67ecbae2e26d7
+  - 839a749a88510899b117b891cfa67ecbae2e26d7
+  - 839a749a88510899b117b891cfa67ecbae2e26d7
+  - 839a749a88510899b117b891cfa67ecbae2e26d7
+  - a28ef4930b0e2a465508ca25b4eb0d2b0aa22471
+  - a28ef4930b0e2a465508ca25b4eb0d2b0aa22471
+  - a28ef4930b0e2a465508ca25b4eb0d2b0aa22471
+  - a28ef4930b0e2a465508ca25b4eb0d2b0aa22471
+  - a28ef4930b0e2a465508ca25b4eb0d2b0aa22471
+  - a28ef4930b0e2a465508ca25b4eb0d2b0aa22471
+  - a28ef4930b0e2a465508ca25b4eb0d2b0aa22471
+  - e5c4f081e522c363121578128a18997fd6f8517f
+  - e5c4f081e522c363121578128a18997fd6f8517f
+  - e5c4f081e522c363121578128a18997fd6f8517f
+  - e5c4f081e522c363121578128a18997fd6f8517f
+  - e5c4f081e522c363121578128a18997fd6f8517f
+  - e5c4f081e522c363121578128a18997fd6f8517f
+  - e5c4f081e522c363121578128a18997fd6f8517f
+  - e5c4f081e522c363121578128a18997fd6f8517f
+  - 33ef6b0a455bd45e115caaa6ee75d585b9f6f10d
+  - 33ef6b0a455bd45e115caaa6ee75d585b9f6f10d
+  - 33ef6b0a455bd45e115caaa6ee75d585b9f6f10d
+  - 33ef6b0a455bd45e115caaa6ee75d585b9f6f10d
+  - 33ef6b0a455bd45e115caaa6ee75d585b9f6f10d
+  - 33ef6b0a455bd45e115caaa6ee75d585b9f6f10d
+  - 33ef6b0a455bd45e115caaa6ee75d585b9f6f10d
+  - 33ef6b0a455bd45e115caaa6ee75d585b9f6f10d
+  - c4127d3cdf3413813ec92b9b8aaa964a2fc0bc64
+  - c4127d3cdf3413813ec92b9b8aaa964a2fc0bc64
+  - c4127d3cdf3413813ec92b9b8aaa964a2fc0bc64
+  - c4127d3cdf3413813ec92b9b8aaa964a2fc0bc64
+  - c4127d3cdf3413813ec92b9b8aaa964a2fc0bc64
+  - c4127d3cdf3413813ec92b9b8aaa964a2fc0bc64
+  - c4127d3cdf3413813ec92b9b8aaa964a2fc0bc64
+  - c4127d3cdf3413813ec92b9b8aaa964a2fc0bc64
+  - c4127d3cdf3413813ec92b9b8aaa964a2fc0bc64
+  - a40357af49d40afc62ee758858fa759da39771cf
+  - a40357af49d40afc62ee758858fa759da39771cf
+  - a40357af49d40afc62ee758858fa759da39771cf
+  - a40357af49d40afc62ee758858fa759da39771cf
+  - a40357af49d40afc62ee758858fa759da39771cf
+  - a40357af49d40afc62ee758858fa759da39771cf
+  - a40357af49d40afc62ee758858fa759da39771cf
+  - a40357af49d40afc62ee758858fa759da39771cf
+  - a40357af49d40afc62ee758858fa759da39771cf
+  - 4480bd7b9dc8798131774d59295e03632fb7e5ec
+  - fd21a8cca0e29ea6bd89edcd7a612ab01ad2ab52
+  - fd21a8cca0e29ea6bd89edcd7a612ab01ad2ab52
+  - fd21a8cca0e29ea6bd89edcd7a612ab01ad2ab52
+  - fd21a8cca0e29ea6bd89edcd7a612ab01ad2ab52
+  - fd21a8cca0e29ea6bd89edcd7a612ab01ad2ab52
+  - fd21a8cca0e29ea6bd89edcd7a612ab01ad2ab52
+  - fd21a8cca0e29ea6bd89edcd7a612ab01ad2ab52
+  - fd21a8cca0e29ea6bd89edcd7a612ab01ad2ab52
+  - fd21a8cca0e29ea6bd89edcd7a612ab01ad2ab52
+  - fd21a8cca0e29ea6bd89edcd7a612ab01ad2ab52
+  - fd21a8cca0e29ea6bd89edcd7a612ab01ad2ab52
+  - fd21a8cca0e29ea6bd89edcd7a612ab01ad2ab52
+  - fd21a8cca0e29ea6bd89edcd7a612ab01ad2ab52
+  - fd21a8cca0e29ea6bd89edcd7a612ab01ad2ab52
+  - fd21a8cca0e29ea6bd89edcd7a612ab01ad2ab52
+  - fd21a8cca0e29ea6bd89edcd7a612ab01ad2ab52
+  - fd21a8cca0e29ea6bd89edcd7a612ab01ad2ab52
+  - fd21a8cca0e29ea6bd89edcd7a612ab01ad2ab52
+  - fd21a8cca0e29ea6bd89edcd7a612ab01ad2ab52
+  - fd21a8cca0e29ea6bd89edcd7a612ab01ad2ab52
+  - fd21a8cca0e29ea6bd89edcd7a612ab01ad2ab52
+  - fd21a8cca0e29ea6bd89edcd7a612ab01ad2ab52
+  - fd21a8cca0e29ea6bd89edcd7a612ab01ad2ab52
+  - fd21a8cca0e29ea6bd89edcd7a612ab01ad2ab52
+  - fd21a8cca0e29ea6bd89edcd7a612ab01ad2ab52
+  - fd21a8cca0e29ea6bd89edcd7a612ab01ad2ab52
+  - fd21a8cca0e29ea6bd89edcd7a612ab01ad2ab52
+  - fd21a8cca0e29ea6bd89edcd7a612ab01ad2ab52
+  - fd21a8cca0e29ea6bd89edcd7a612ab01ad2ab52
+  - fd21a8cca0e29ea6bd89edcd7a612ab01ad2ab52
+  - fd21a8cca0e29ea6bd89edcd7a612ab01ad2ab52
+  - fd21a8cca0e29ea6bd89edcd7a612ab01ad2ab52
+  - fd21a8cca0e29ea6bd89edcd7a612ab01ad2ab52
+  - fd21a8cca0e29ea6bd89edcd7a612ab01ad2ab52
+  - fd21a8cca0e29ea6bd89edcd7a612ab01ad2ab52
+  - fd21a8cca0e29ea6bd89edcd7a612ab01ad2ab52
+  - fd21a8cca0e29ea6bd89edcd7a612ab01ad2ab52
+  - fd21a8cca0e29ea6bd89edcd7a612ab01ad2ab52
+  - fd21a8cca0e29ea6bd89edcd7a612ab01ad2ab52
+  - fd21a8cca0e29ea6bd89edcd7a612ab01ad2ab52
+  - fd21a8cca0e29ea6bd89edcd7a612ab01ad2ab52
+  - fd21a8cca0e29ea6bd89edcd7a612ab01ad2ab52
+  - fd21a8cca0e29ea6bd89edcd7a612ab01ad2ab52
+  - fd21a8cca0e29ea6bd89edcd7a612ab01ad2ab52
+  - fd21a8cca0e29ea6bd89edcd7a612ab01ad2ab52
+  - fd21a8cca0e29ea6bd89edcd7a612ab01ad2ab52
+  - fd21a8cca0e29ea6bd89edcd7a612ab01ad2ab52
+  commit_sha: 992fd5c56862bb0f606d0c01eec38d7bfa9bdb0e
+  generated_at: '1792281128'
+  generator: kuda-template/0.1.0

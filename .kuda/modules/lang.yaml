@@ -1,0 +1,21 @@
+name: lang
+path: Cargo.toml
+purpose: lang
+api:
+- name: lang
+  kind: module
+  file: Cargo.toml
+  line: 1
+  module: lang
+deps: []
+notes: ''
+verify:
+- Cargo.toml
+provenance:
+  files:
+  - Cargo.toml
+  hashes:
+  - 6a4c79ad08ab0d967625f73c49684aa2d759627a
+  commit_sha: 992fd5c56862bb0f606d0c01eec38d7bfa9bdb0e
+  generated_at: '1792281128'
+  generator: kuda-template/0.1.0
