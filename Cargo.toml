@@ -9,14 +9,14 @@ license = "MIT OR Apache-2.0"
 repository = "https://github.com/handl-lang/lang"
 
 # ADR-0128 §Resolution: local development resolves the platform crates from
-# the sibling `../platform` checkout; without the checkout (or this block),
+# the sibling `../host` checkout; without the checkout (or this block),
 # the git source is used. The git source must still resolve — before the
 # remote exists, point it at the local clone:
 #
 #   CARGO_NET_GIT_FETCH_WITH_CLI=true \
 #   GIT_CONFIG_COUNT=1 \
-#   GIT_CONFIG_KEY_0="url.file:///home/luis/GitHub/handl-lang/platform.insteadOf" \
-#   GIT_CONFIG_VALUE_0="https://github.com/handl-lang/platform" \
+#   GIT_CONFIG_KEY_0="url.file:///home/luis/GitHub/handl-lang/host.insteadOf" \
+#   GIT_CONFIG_VALUE_0="https://github.com/handl-lang/host" \
 #   cargo check --workspace
 
 
@@ -60,8 +60,8 @@ handl-plugin-ffi = { path = "../kit-canonical/modules/ffi" }
 
 [patch."https://github.com/handl-lang/native"]
 
-[patch."https://github.com/handl-lang/platform"]
-handl-kit-data = { path = "../platform/crates/handl-kit-data" }
-handl-platform = { path = "../platform/crates/platform" }
-handl-plugin-ext-diag = { path = "../platform/crates/plugin-ext-diag" }
-handl-runtime = { path = "../platform/crates/handl-runtime" }
+[patch."https://github.com/handl-lang/host"]
+handl-kit-data = { path = "../host/crates/handl-kit-data" }
+handl-platform = { path = "../host/crates/platform" }
+handl-plugin-ext-diag = { path = "../host/crates/plugin-ext-diag" }
+handl-runtime = { path = "../host/crates/handl-runtime" }
