@@ -305,7 +305,7 @@ fn merge_fragments(
     }
 
     // ADR-0100: LSP surface validation runs at Language build.
-    let lsp_diags = handl_plugin_engine_transform::validate::validate_lsp(&lang);
+    let lsp_diags = hnl_engine_transform::validate::validate_lsp(&lang);
     let lsp_errors: Vec<String> = lsp_diags
         .iter()
         .filter(|d| d.severity == handl_plugin_ext_diag::Severity::Error)
@@ -325,7 +325,7 @@ fn merge_fragments(
     // fail the merge; warnings (unknown target kinds, potential `Fixpoint`
     // cycles, `Native` rules pending a wired registry) do not — shapes and
     // registries may legitimately arrive from other fragments or engines.
-    let diags = handl_plugin_engine_transform::validate::validate_transforms(&lang);
+    let diags = hnl_engine_transform::validate::validate_transforms(&lang);
     let errors: Vec<String> = diags
         .iter()
         .filter(|d| d.severity == handl_plugin_ext_diag::Severity::Error)
@@ -686,7 +686,7 @@ mod tests {
         // `Language` build (see `merge_fragments`); the canonical kit must
         // produce zero Error-severity diagnostics.
         let lang = language_from_yaml().unwrap();
-        let diags = handl_plugin_engine_transform::validate::validate_transforms(&lang);
+        let diags = hnl_engine_transform::validate::validate_transforms(&lang);
         let errors: Vec<_> = diags
             .iter()
             .filter(|d| d.severity == handl_plugin_ext_diag::Severity::Error)

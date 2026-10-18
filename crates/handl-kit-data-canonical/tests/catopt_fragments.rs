@@ -112,7 +112,7 @@ fn catopt_full_bank_loads() {
 // exactly the associativity law.
 
 use handl_language::{Ast, AstNode, AstRef};
-use handl_plugin_engine_transform_rewrite::RewriteEngine;
+use hnl_engine_transform_rewrite::RewriteEngine;
 
 fn cnode(kind: &str, children: &[usize]) -> AstNode {
     AstNode::new(kind).with_payload(serde_json::json!({ "children": children }))
