@@ -35,8 +35,6 @@ base_modules:
   - tar
   - url_rfc
   - kv_map
-  - toml_c
-  - yaml_c
   - url_whatwg
   - entropy
   - crypto
