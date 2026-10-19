@@ -23,7 +23,7 @@
 
 use std::path::Path;
 
-use handl_kit_data_canonical::language_from_dir;
+use handl_kit_data_prelude::language_from_dir;
 use handl_language::TransformCondition;
 
 fn fixture_dir() -> std::path::PathBuf {

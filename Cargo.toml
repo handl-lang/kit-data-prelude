@@ -1,12 +1,12 @@
 [workspace]
 resolver = "3"
-members = ["crates/handl-kit-data-canonical"]
+members = ["crates/handl-kit-data-prelude"]
 
 [workspace.package]
 version = "0.1.0"
 edition = "2024"
 license = "MIT OR Apache-2.0"
-repository = "https://github.com/handl-lang/kit-data-canonical"
+repository = "https://github.com/handl-lang/kit-data-prelude"
 
 # ADR-0128 §Resolution: local development resolves the platform crates from
 # the sibling `../host` checkout; without the checkout (or this block),
@@ -55,8 +55,8 @@ hnl-engine-transform-rewrite = { path = "../engine-transform-rewrite" }
 handl-language = { path = "../kernel/crates/handl-language" }
 handl-value = { path = "../kernel/crates/handl-value" }
 
-[patch."https://github.com/handl-lang/kit-canonical"]
-handl-plugin-ffi = { path = "../kit-canonical/modules/ffi" }
+[patch."https://github.com/handl-lang/kit-prelude"]
+handl-plugin-ffi = { path = "../kit-ffi/modules/ffi" }
 
 [patch."https://github.com/handl-lang/native"]
 

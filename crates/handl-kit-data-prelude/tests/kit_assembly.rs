@@ -1,12 +1,12 @@
-//! Integration test: assemble `handl-kit-data-canonical` from the YAML data
+//! Integration test: assemble `handl-kit-data-prelude` from the YAML data
 //! files and verify the resulting `Language` has the expected fragments
 //! (ADR-0044 §6 end state, v0.1 surface syntax ADR-0074).
 
-use handl_kit_data_canonical;
+use handl_kit_data_prelude;
 
 #[test]
 fn assemble_canonical_has_expected_fragment_counts() {
-    let kit = handl_kit_data_canonical::assemble().expect("assembly should succeed");
+    let kit = handl_kit_data_prelude::assemble().expect("assembly should succeed");
     let lang = kit.lang();
 
     // Token kinds: 79 — v0.1 surface syntax (ADR-0074) + `::`/`data`
@@ -99,7 +99,7 @@ fn assemble_canonical_has_expected_fragment_counts() {
 
 #[test]
 fn assemble_canonical_runtime_config_is_pratt_tree_walk() {
-    let kit = handl_kit_data_canonical::assemble().unwrap();
+    let kit = handl_kit_data_prelude::assemble().unwrap();
     assert_eq!(kit.runtime_config().parse, "pratt");
     assert_eq!(kit.runtime_config().eval, "tree-walk");
     assert_eq!(kit.runtime_config().typecheck, "nbe");
@@ -112,7 +112,7 @@ fn assemble_canonical_into_runtime_binds_engines() {
     use hnl_engine_parse_pratt::PrattEngine;
     use handl_runtime::{EngineRegistry, Runtime};
     use std::rc::Rc;
-    let kit = handl_kit_data_canonical::assemble().unwrap();
+    let kit = handl_kit_data_prelude::assemble().unwrap();
     let mut reg = EngineRegistry::new();
     reg.register_lex("data", Box::new(DataLexerEngine::new()));
     reg.register_parse("pratt", PrattEngine::new());
@@ -131,7 +131,7 @@ fn assemble_canonical_into_runtime_binds_engines() {
 
 #[test]
 fn assemble_canonical_specific_fragments_present() {
-    let kit = handl_kit_data_canonical::assemble().unwrap();
+    let kit = handl_kit_data_prelude::assemble().unwrap();
     let lang = kit.lang();
 
     // --- Token kinds (union/idempotent — re-declared by many emitters) ---
@@ -254,7 +254,7 @@ fn optional_child_roles_resolve_arity_aware() {
     use handl_language::AstNode;
     use serde_json::json;
 
-    let kit = handl_kit_data_canonical::assemble().expect("assembly should succeed");
+    let kit = handl_kit_data_prelude::assemble().expect("assembly should succeed");
     let lang = kit.lang();
 
     // --- match ---

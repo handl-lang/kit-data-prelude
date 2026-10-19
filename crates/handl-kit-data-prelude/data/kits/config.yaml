@@ -1,5 +1,5 @@
 # The config kit: canonical language plus the configuration/edge module set.
-extends: canonical
+extends: prelude
 caps:
   - id: lib.math
     description: pure library capability

@@ -2,7 +2,7 @@
 #
 # `module-runtime` is the shared module host every kit registers first so
 # library plugins can contribute their `ModuleRule`s into it.
-extends: canonical
+extends: prelude
 modules:
   - module-runtime
   - hello

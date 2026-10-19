@@ -1,5 +1,5 @@
 # The cli kit: canonical language plus OS, data-format, and utility modules.
-extends: canonical
+extends: prelude
 modules:
   - module-runtime
   - utils

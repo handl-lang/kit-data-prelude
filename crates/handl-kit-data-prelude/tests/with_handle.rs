@@ -1,6 +1,6 @@
 //! Tests for the `handle <expr> with <handler>` surface syntax.
 
-use handl_kit_data_canonical;
+use handl_kit_data_prelude;
 use handl_language::{Ast, AstNode, Language, Source};
 use hnl_engine_exec_tree_walk::TreeWalkEngine;
 use hnl_engine_lex_pattern::DataLexerEngine;
@@ -9,12 +9,12 @@ use handl_runtime::{EngineRegistry, Runtime};
 use std::rc::Rc;
 
 fn full_language() -> Language {
-    let kit = handl_kit_data_canonical::assemble().expect("full kit assembles");
+    let kit = handl_kit_data_prelude::assemble().expect("full kit assembles");
     kit.lang().clone()
 }
 
 fn full_runtime() -> Runtime {
-    let kit = handl_kit_data_canonical::assemble().expect("full kit assembles");
+    let kit = handl_kit_data_prelude::assemble().expect("full kit assembles");
     let mut reg = EngineRegistry::new();
     reg.register_lex("data", Box::new(DataLexerEngine::new()));
     reg.register_parse("pratt", PrattEngine::new());

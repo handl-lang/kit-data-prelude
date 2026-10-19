@@ -1,4 +1,4 @@
-//! Full-language parity test for `handl-kit-data-canonical`.
+//! Full-language parity test for `handl-kit-data-prelude`.
 //!
 //! Assembles the complete data-driven canonical kit and verifies the merged
 //! [`Language`] covers the full Handl dialect: eval schemes for every major
@@ -6,12 +6,12 @@
 //! every major token. This is the v0.1 surface syntax coverage check
 //! (ADR-0074).
 
-use handl_kit_data_canonical;
+use handl_kit_data_prelude;
 use handl_language::Language;
 
 /// Assemble the full canonical kit and return its language.
 fn full_language() -> Language {
-    let kit = handl_kit_data_canonical::assemble().expect("full kit assembles");
+    let kit = handl_kit_data_prelude::assemble().expect("full kit assembles");
     kit.lang().clone()
 }
 
@@ -337,7 +337,7 @@ fn full_kit_runtime_binds_engines() {
     use hnl_engine_parse_pratt::PrattEngine;
     use handl_runtime::{EngineRegistry, Runtime};
     use std::rc::Rc;
-    let kit = handl_kit_data_canonical::assemble().expect("full kit assembles");
+    let kit = handl_kit_data_prelude::assemble().expect("full kit assembles");
     let eval_len = kit.lang().eval.len();
     let grammar_len = kit.lang().grammar.len();
     let mut reg = EngineRegistry::new();

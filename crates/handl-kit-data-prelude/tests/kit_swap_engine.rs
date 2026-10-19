@@ -8,7 +8,7 @@
 //! runtime.
 
 use handl_kit_data::{DataKit, DataKitManifest};
-use handl_kit_data_canonical;
+use handl_kit_data_prelude;
 use handl_language::LangError;
 use hnl_engine_exec_bytecode::BytecodeEngine;
 use hnl_engine_exec_tree_walk::TreeWalkEngine;
@@ -28,7 +28,7 @@ fn test_registry() -> Rc<EngineRegistry> {
 
 /// The canonical language, passed to `DataKit::assemble` as `base_language`.
 fn canonical_lang() -> handl_language::Language {
-    handl_kit_data_canonical::language_from_yaml().expect("canonical language")
+    handl_kit_data_prelude::language_from_yaml().expect("canonical language")
 }
 
 fn manifest_with_eval(eval: &str) -> DataKitManifest {
@@ -38,7 +38,7 @@ fn manifest_with_eval(eval: &str) -> DataKitManifest {
 
 #[test]
 fn swap_eval_to_bytecode_succeeds() {
-    let reg = handl_kit_data_canonical::registry();
+    let reg = handl_kit_data_prelude::registry();
     let registry = test_registry();
     let manifest = manifest_with_eval("bytecode");
     let kit = DataKit::assemble(&manifest, &reg, canonical_lang()).expect("assembly should succeed");
@@ -56,7 +56,7 @@ fn swap_eval_to_bytecode_succeeds() {
 
 #[test]
 fn swap_eval_to_tree_walk_succeeds() {
-    let reg = handl_kit_data_canonical::registry();
+    let reg = handl_kit_data_prelude::registry();
     let registry = test_registry();
     let manifest = manifest_with_eval("tree-walk");
     let kit = DataKit::assemble(&manifest, &reg, canonical_lang()).unwrap();
@@ -68,7 +68,7 @@ fn swap_eval_to_tree_walk_succeeds() {
 
 #[test]
 fn swap_parse_to_chumsky_errors_clearly() {
-    let reg = handl_kit_data_canonical::registry();
+    let reg = handl_kit_data_prelude::registry();
     let registry = test_registry();
     let manifest = DataKitManifest::new().with_runtime(
         RuntimeConfig::new()
@@ -84,7 +84,7 @@ fn swap_parse_to_chumsky_errors_clearly() {
 fn no_eval_engine_leaves_eval_unbound() {
     // A manifest with no eval engine selection assembles fine; the runtime
     // builds but eval dispatch returns NotImplemented (no eval engine bound).
-    let reg = handl_kit_data_canonical::registry();
+    let reg = handl_kit_data_prelude::registry();
     let registry = test_registry();
     let manifest =
         DataKitManifest::new().with_runtime(RuntimeConfig::new().with_parse("pratt"));

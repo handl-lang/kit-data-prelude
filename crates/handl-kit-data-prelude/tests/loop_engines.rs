@@ -18,7 +18,7 @@
 //! body closure. The examples use this form.
 
 use handl_kit_data::{DataKit, DataKitManifest};
-use handl_kit_data_canonical;
+use handl_kit_data_prelude;
 use handl_language::Source;
 use hnl_engine_exec_bytecode::BytecodeEngine;
 use hnl_engine_exec_cranelift::CraneliftEngine;
@@ -42,7 +42,7 @@ fn manifest_with_eval(eval: &str) -> DataKitManifest {
 /// Build a runtime over the full canonical language with the requested eval
 /// engine bound. The module chain is `None`.
 fn runtime_with_eval(eval: &str) -> handl_runtime::Runtime {
-    let reg = handl_kit_data_canonical::registry();
+    let reg = handl_kit_data_prelude::registry();
     let mut registry = EngineRegistry::new();
     registry.register_lex("data", Box::new(DataLexerEngine::new()));
     registry.register_parse("pratt", PrattEngine::new());
@@ -50,7 +50,7 @@ fn runtime_with_eval(eval: &str) -> handl_runtime::Runtime {
     registry.register_eval("bytecode", Box::new(BytecodeEngine::new()));
     registry.register_eval("cranelift", Box::new(CraneliftEngine::new()));
     let registry = Rc::new(registry);
-    let base = handl_kit_data_canonical::language_from_yaml().expect("canonical language");
+    let base = handl_kit_data_prelude::language_from_yaml().expect("canonical language");
     let kit = DataKit::assemble(&manifest_with_eval(eval), &reg, base)
         .expect("canonical kit assembles");
     kit.into_runtime(&registry, None)

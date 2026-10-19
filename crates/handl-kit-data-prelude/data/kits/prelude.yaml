@@ -1,6 +1,6 @@
 # The canonical language kit.
 #
-# Loaded by `handl_kit_data_canonical::manifest()`: no fragment sources — the
+# Loaded by `handl_kit_data_prelude::manifest()`: no fragment sources — the
 # canonical `Language` enters `DataKit::assemble` directly as `base_language`
 # (see `assemble()`). Runtime engine selection only.
 # No library modules — the canonical kit is the language only.
@@ -36,6 +36,7 @@ base_modules:
   - tar
   - url_rfc
   - kv_map
+  - otlp
   - url_whatwg
   - entropy
   - crypto

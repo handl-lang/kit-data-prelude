@@ -1,4 +1,4 @@
-use handl_kit_data_canonical::language_from_yaml;
+use handl_kit_data_prelude::language_from_yaml;
 use handl_plugin_ext_diag::Severity;
 
 #[test]

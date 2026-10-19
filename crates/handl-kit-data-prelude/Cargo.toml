@@ -1,5 +1,5 @@
 [package]
-name = "handl-kit-data-canonical"
+name = "handl-kit-data-prelude"
 version.workspace = true
 edition.workspace = true
 description = "The **data-driven canonical kit** — the ADR-0044 §6 end state."

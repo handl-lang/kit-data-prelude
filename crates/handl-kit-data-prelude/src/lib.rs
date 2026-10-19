@@ -1,4 +1,4 @@
-//! # handl-kit-data-canonical
+//! # handl-kit-data-prelude
 //!
 //! The **data-driven canonical kit** — the ADR-0044 §6 end state.
 //!
@@ -28,7 +28,7 @@
 //! ## Usage
 //!
 //! ```no_run
-//! let kit = handl_kit_data_canonical::assemble().unwrap();
+//! let kit = handl_kit_data_prelude::assemble().unwrap();
 //! let lang = kit.lang();
 //! ```
 //!
@@ -51,7 +51,7 @@ use handl_language::{
 
 /// The kit name under which this kit registers itself (for `extends`
 /// resolution by child kits).
-pub const KIT_NAME: &str = "kit-data-canonical";
+pub const KIT_NAME: &str = "kit-data-prelude";
 
 /// Fragment ids that were excluded when generating the YAML files.
 ///
@@ -439,11 +439,11 @@ pub fn language_from_dir(dir: &Path) -> Result<Language, LangError> {
 ///
 /// The `runtime.typecheck` field selects the `nbe` engine registered by the host.
 pub fn manifest() -> DataKitManifest {
-    load_kit("canonical").unwrap_or_else(|e| panic!("failed to load canonical manifest: {}", e))
+    load_kit("prelude").unwrap_or_else(|e| panic!("failed to load canonical manifest: {}", e))
 }
 
 /// Build a [`KitRegistry`] with all embedded `data/kits/*.yaml` manifests
-/// registered under their kit names (so `extends: canonical` resolves for
+/// registered under their kit names (so `extends: prelude` resolves for
 /// child kits).
 pub fn registry() -> KitRegistry {
     let mut reg = KitRegistry::new();
@@ -466,7 +466,7 @@ pub fn registry() -> KitRegistry {
 /// contribution order. The `extends` chain composes kits: a child's modules
 /// append to its parent's (e.g. `server` extends `config`).
 const KIT_MANIFESTS: &[(&str, &str)] = &[
-    ("canonical", include_str!("../data/kits/canonical.yaml")),
+    ("prelude", include_str!("../data/kits/prelude.yaml")),
     ("hello", include_str!("../data/kits/hello.yaml")),
     ("stdlib", include_str!("../data/kits/stdlib.yaml")),
     ("cli", include_str!("../data/kits/cli.yaml")),
@@ -721,13 +721,13 @@ mod tests {
 
     #[test]
     fn load_kit_parses_embedded_manifests() {
-        let canonical = load_kit("canonical").unwrap();
+        let canonical = load_kit("prelude").unwrap();
         assert!(canonical.fragments.is_empty());
         assert_eq!(canonical.runtime.eval, "tree-walk");
         assert!(canonical.modules.is_empty());
 
         let hello = load_kit("hello").unwrap();
-        assert_eq!(hello.extends.as_deref(), Some("canonical"));
+        assert_eq!(hello.extends.as_deref(), Some("prelude"));
         assert_eq!(hello.modules, vec!["module-runtime", "hello"]);
     }
 
@@ -742,7 +742,7 @@ mod tests {
         // `data/kits/config.yaml` (they used to come from the deleted
         // `handl-kit-data-config` crate's `PureCapsEmitter`).
         let config = load_kit("config").unwrap();
-        assert_eq!(config.extends.as_deref(), Some("canonical"));
+        assert_eq!(config.extends.as_deref(), Some("prelude"));
         let ids: Vec<&str> = config.caps.iter().map(|c| c.id.as_str()).collect();
         assert_eq!(
             ids,
