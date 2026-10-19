@@ -36,8 +36,6 @@ base_modules:
   - tar
   - url_rfc
   - kv_map
-  - otlp
-  - otlp_c
   - toml_c
   - yaml_c
   - url_whatwg
