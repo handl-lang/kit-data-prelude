@@ -35,6 +35,7 @@ base_modules:
   - hex
   - tar
   - url_rfc
+  - kv_map
   - url_whatwg
   - entropy
   - crypto
