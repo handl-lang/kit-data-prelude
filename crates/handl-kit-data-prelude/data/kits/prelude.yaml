@@ -59,7 +59,6 @@ base_modules:
   - assert
   - rand
   - char
-  - sym
   - tag
   - transform
   - comb
