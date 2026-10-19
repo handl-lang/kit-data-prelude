@@ -50,9 +50,6 @@ base_modules:
   - perlin
   - simplex
   - test
-  - property
-  - benchmark
-  - fuzz
   - snapshot
   - assert
   - rand
