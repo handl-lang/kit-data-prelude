@@ -45,6 +45,21 @@ base_modules:
   - crypto
   - intl_c
   - unicode_c
+  - ucol
+  - unum
+  - upluralrules
+  - ureldatefmt
+  - udat
+  - ufieldpositer
+  - unumberformatter
+  - uformattednumber
+  - ubrk
+  - uloc
+  - uldnames
+  - ures
+  - unorm2
+  - ustring
+  - uchar
   - str
   - type
   - ffi
