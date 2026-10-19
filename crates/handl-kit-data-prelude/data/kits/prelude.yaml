@@ -19,7 +19,6 @@ base_modules:
   - math
   - prim
   - cmp
-  - mood
   - bytes
   - obj
   - error
