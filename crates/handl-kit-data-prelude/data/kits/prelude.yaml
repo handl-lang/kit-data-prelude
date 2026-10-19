@@ -37,6 +37,9 @@ base_modules:
   - url_rfc
   - kv_map
   - otlp
+  - otlp_c
+  - toml_c
+  - yaml_c
   - url_whatwg
   - entropy
   - crypto
@@ -45,7 +48,6 @@ base_modules:
   - str
   - type
   - ffi
-  - dedent
   - perlin
   - simplex
   - test
