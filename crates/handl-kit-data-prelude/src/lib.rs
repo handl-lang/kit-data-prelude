@@ -2,28 +2,18 @@
 //!
 //! The **data-driven canonical kit** — the ADR-0044 §6 end state.
 //!
-//! Assembles a [`Language`] from **authored YAML data files** (one per fragment
-//! type: `tokens.yaml`, `grammar.yaml`, `eval.yaml`, `ast.yaml`, `caps.yaml`,
-//! `options.yaml`, `lexer_rules.yaml`, `transforms.yaml`), embedded at compile time via
-//! `include_str!`. No Rust emitter crates are needed — the language definition
-//! is pure data.
+//! Composes [`handl_kit_prelude_lang`] — the eval-path `Language` fragment
+//! set (`tokens`, `grammar`, `eval`, `types`, `ast`, `caps`, `options`,
+//! `lexer_rules`, `transforms`, `globals`) — and layers the **tooling
+//! fragments** on top: `lints.yaml` (ADR-0097) and `lsp.yaml` (ADR-0100),
+//! plus the kit-composition manifests in `data/kits/`.
 //!
-//! This realizes ADR-0044 §6: "the end state is authored data files are
-//! canonical." The 37 `handl-emitter-*` crates that produced these files have
-//! been deleted. The YAML files are the language definition.
-//!
-//! ## Collision handling
-//!
-//! The YAML files are the pre-resolved output of merging all 37 emitters (with
-//! 3 excluded fragment ids — see [`EXCLUDED_FRAGMENT_IDS`]). Collisions were
-//! resolved at generation time:
-//!
-//! - **Token kinds & AST shapes** are union (idempotent) fragment types, so
-//!   duplicate declarations merged idempotently.
-//! - **Eval scheme collisions** on the same node kind were resolved by
-//!   excluding non-canonical duplicate fragment ids.
-//! - **Grammar row collisions** on the same `(token, position)` were resolved
-//!   by excluding non-canonical duplicate grammar row ids.
+//! The eval-path YAML files moved to the sibling `handl-lang/kit-prelude-lang`
+//! repo so consumers that only lex / parse / desugar / eval `.hnl` (e.g.
+//! `research-mlopt`) can take the language without the tooling surface.
+//! This crate's [`language_from_yaml`] produces the same canonical
+//! `Language` as before — lints and lsp occupy disjoint `lang.lints` /
+//! `lang.lsp` sections merged last.
 //!
 //! ## Usage
 //!
@@ -31,398 +21,65 @@
 //! let kit = handl_kit_data_prelude::assemble().unwrap();
 //! let lang = kit.lang();
 //! ```
-//!
-//! ## Regenerating the YAML files
-//!
-//! The data files were generated from the (now-deleted) emitter crates. To
-//! regenerate, re-introduce the emitters, run the generation test, then
-//! delete the emitters again. The files are checked in and should not need
-//! regeneration unless the language definition changes.
 
 #![warn(missing_docs)]
 
 use std::path::Path;
 
 use handl_kit_data::{DataKit, DataKitManifest, KitRegistry};
-use handl_language::{
-    AstShapeDef, CapabilityDecl, EvalSchemeDef, GrammarRow, LangError, Language, LexerRuleDef,
-    LintRuleDef, LspDef, OptionSchema, TokenKindDef, TransformDef, TypeRuleDef,
-};
+use handl_language::{LangError, Language};
+
+pub use handl_kit_prelude_lang::EXCLUDED_FRAGMENT_IDS;
 
 /// The kit name under which this kit registers itself (for `extends`
 /// resolution by child kits).
 pub const KIT_NAME: &str = "kit-data-prelude";
 
-/// Fragment ids that were excluded when generating the YAML files.
-///
-/// These are non-canonical duplicate fragments (behavioral, non-union types)
-/// that share an identity key with a canonical fragment:
-///
-/// - `eval.call.postfix` — `call`'s `eval.call` is the canonical eval scheme.
-/// - `grammar.call.postfix` — `call`'s `grammar.call.infix` is the canonical
-///   infix rule for `(`.
-/// - `grammar.apply.prefix` — `paren`'s `grammar.paren.prefix` is the
-///   canonical prefix rule for `(`.
-pub const EXCLUDED_FRAGMENT_IDS: &[&str] = &[
-    "eval.call.postfix",
-    "grammar.call.postfix",
-    "grammar.apply.prefix",
-];
-
 // ---------------------------------------------------------------------------
-// YAML data file loading
+// Tooling YAML data files
 // ---------------------------------------------------------------------------
 
-/// Embed a YAML data file at compile time.
-const TOKENS_YAML: &str = include_str!("../data/tokens.yaml");
-const GRAMMAR_YAML: &str = include_str!("../data/grammar.yaml");
-const EVAL_YAML: &str = include_str!("../data/eval.yaml");
-const TYPES_YAML: &str = include_str!("../data/types.yaml");
-const AST_YAML: &str = include_str!("../data/ast.yaml");
-const CAPS_YAML: &str = include_str!("../data/caps.yaml");
-const OPTIONS_YAML: &str = include_str!("../data/options.yaml");
-const LEXER_RULES_YAML: &str = include_str!("../data/lexer_rules.yaml");
-const TRANSFORMS_YAML: &str = include_str!("../data/transforms.yaml");
 const LINTS_YAML: &str = include_str!("../data/lints.yaml");
 const LSP_YAML: &str = include_str!("../data/lsp.yaml");
-const GLOBALS_YAML: &str = include_str!("../data/globals.yaml");
 
-/// Merge ambient global value bindings (`globals.yaml`) into `lang`.
-///
-/// `globals.yaml` is a YAML mapping of `name: <literal value>` — the values
-/// are data (numbers, strings, booleans, records), not evaluated source, so
-/// no eval engine is needed at merge time. `Runtime` seeds them into the
-/// engines' global scope at build time (`Language::globals`).
-fn merge_globals(lang: &mut Language, globals_yaml: &str) -> Result<(), LangError> {
-    let globals: std::collections::BTreeMap<String, handl_language::Value> =
-        serde_yaml::from_str(globals_yaml)
-            .map_err(|e| LangError::engine(format!("globals.yaml: {}", e)))?;
-    lang.globals.extend(globals);
-    Ok(())
-}
-
-/// Build a [`Language`] from the 10 embedded YAML data files.
-///
-/// Each file contains a YAML list of fragments of one type. The fragments are
-/// deserialized and merged into a single [`Language`]. `eval.yaml` holds the
-/// arrow-calculus `Term` definitions (ADR-0052 kernel).
-///
-/// The full parse is cached on disk: the merged `Language` is serialized to
-/// `~/.cache/handl-lang/language-<key>.bin`, keyed by a content hash of every
-/// embedded fragment plus the package version. Reading the snapshot is ~100×
-/// faster than re-parsing ~10k lines of YAML, which matters under runners
-/// that spawn a process per test (nextest) — every test paid the parse.
-/// A corrupt or stale snapshot simply falls back to parsing.
+/// Build the full canonical [`Language`]: the eval-path language from
+/// [`handl_kit_prelude_lang::language_from_yaml`] with `lints.yaml` and
+/// `lsp.yaml` merged on top (plus the ADR-0100 LSP validation).
 ///
 /// # Errors
 ///
-/// Returns [`LangError`] if any YAML file fails to deserialize or a merge
-/// fails (should not happen — the files are pre-resolved).
+/// Returns [`LangError`] if any YAML fails to deserialize, a merge fails, or
+/// LSP validation reports errors.
 pub fn language_from_yaml() -> Result<Language, LangError> {
-    let key = snapshot_key();
-    if let Some(lang) = load_snapshot(key) {
-        return Ok(lang);
-    }
-    let mut lang = merge_fragments(
-        TOKENS_YAML,
-        GRAMMAR_YAML,
-        EVAL_YAML,
-        TYPES_YAML,
-        AST_YAML,
-        CAPS_YAML,
-        OPTIONS_YAML,
-        LEXER_RULES_YAML,
-        TRANSFORMS_YAML,
-        LINTS_YAML,
-        LSP_YAML,
-    )?;
-    merge_globals(&mut lang, GLOBALS_YAML)?;
-    store_snapshot(key, &lang);
+    let mut lang = handl_kit_prelude_lang::language_from_yaml()?;
+    handl_kit_prelude_lang::merge_lints(&mut lang, LINTS_YAML)?;
+    handl_kit_prelude_lang::merge_lsp(&mut lang, LSP_YAML)?;
     Ok(lang)
 }
 
-/// Content hash of every embedded fragment plus the package version — any
-/// data or layout change produces a new snapshot file instead of a stale hit.
-fn snapshot_key() -> u64 {
-    use std::hash::{Hash, Hasher};
-    let mut h = std::collections::hash_map::DefaultHasher::new();
-    env!("CARGO_PKG_VERSION").hash(&mut h);
-    for frag in [
-        TOKENS_YAML,
-        GRAMMAR_YAML,
-        EVAL_YAML,
-        TYPES_YAML,
-        AST_YAML,
-        CAPS_YAML,
-        OPTIONS_YAML,
-        LEXER_RULES_YAML,
-        TRANSFORMS_YAML,
-        LINTS_YAML,
-        LSP_YAML,
-        GLOBALS_YAML,
-    ] {
-        frag.hash(&mut h);
-    }
-    h.finish()
-}
-
-fn snapshot_path(key: u64) -> Option<std::path::PathBuf> {
-    let base = std::env::var_os("HOME")
-        .map(|h| std::path::PathBuf::from(h).join(".cache"))
-        .unwrap_or_else(std::env::temp_dir);
-    Some(base.join("handl-lang").join(format!("language-{key:016x}.bin")))
-}
-
-fn load_snapshot(key: u64) -> Option<Language> {
-    let path = snapshot_path(key)?;
-    let bytes = std::fs::read(&path).ok()?;
-    serde_json::from_slice(&bytes).ok()
-}
-
-/// Write via tmp-file + rename so a concurrent reader never sees a torn
-/// snapshot (nextest spawns test processes in parallel). Best-effort: a
-/// failed store just means the next caller parses YAML again.
-fn store_snapshot(key: u64, lang: &Language) {
-    let Some(path) = snapshot_path(key) else { return };
-    let Some(dir) = path.parent() else { return };
-    if std::fs::create_dir_all(dir).is_err() {
-        return;
-    }
-    let Ok(bytes) = serde_json::to_vec(lang) else {
-        return;
-    };
-    let tmp = path.with_extension(format!("tmp-{}", std::process::id()));
-    if std::fs::write(&tmp, &bytes).is_ok() {
-        let _ = std::fs::rename(&tmp, &path);
-    } else {
-        let _ = std::fs::remove_file(&tmp);
-    }
-}
-
-/// Merge the ten YAML fragment strings into a single [`Language`].
+/// Build a [`Language`] from the YAML data files in a directory.
 ///
-/// Each argument is the raw YAML text for one fragment type. The fragments are
-/// deserialized and merged in the same order as [`language_from_yaml`].
+/// Reads the eval-path files via [`handl_kit_prelude_lang::language_from_dir`]
+/// and then merges (optionally) `lints.yaml` and `lsp.yaml` — fragment
+/// directories written before ADR-0097/ADR-0100 do not carry them.
 ///
 /// # Errors
 ///
-/// Returns [`LangError`] if any YAML fails to deserialize or a merge fails.
-fn merge_fragments(
-    tokens_yaml: &str,
-    grammar_yaml: &str,
-    eval_yaml: &str,
-    types_yaml: &str,
-    ast_yaml: &str,
-    caps_yaml: &str,
-    options_yaml: &str,
-    lexer_rules_yaml: &str,
-    transforms_yaml: &str,
-    lints_yaml: &str,
-    lsp_yaml: &str,
-) -> Result<Language, LangError> {
-    let mut lang = Language::new();
-
-    // Token kinds (union — idempotent merge).
-    let tokens: Vec<TokenKindDef> = serde_yaml::from_str(tokens_yaml)
-        .map_err(|e| LangError::engine(format!("tokens.yaml: {}", e)))?;
-    for frag in tokens {
-        lang.tokens.merge(frag)?;
-    }
-
-    // Grammar rows (non-union — pre-resolved, no collisions).
-    let grammar: Vec<GrammarRow> = serde_yaml::from_str(grammar_yaml)
-        .map_err(|e| LangError::engine(format!("grammar.yaml: {}", e)))?;
-    for frag in grammar {
-        lang.grammar.merge(frag)?;
-    }
-
-    // Eval schemes (arrow-calculus kernel, ADR-0052; non-union — pre-resolved,
-    // no collisions).
-    let eval: Vec<EvalSchemeDef> = serde_yaml::from_str(eval_yaml)
-        .map_err(|e| LangError::engine(format!("eval.yaml: {}", e)))?;
-    for frag in eval {
-        lang.eval.merge(frag)?;
-    }
-
-    // Type rules (ADR-0054 — non-union, pre-resolved).
-    let types: Vec<TypeRuleDef> = serde_yaml::from_str(types_yaml)
-        .map_err(|e| LangError::engine(format!("types.yaml: {}", e)))?;
-    for frag in types {
-        lang.types.merge(frag)?;
-    }
-
-    // AST shapes (union — idempotent merge). `merge_ast_fragment` also
-    // lowers any `desugar:` rule each shape carries into a `TransformDef` in
-    // `lang.transforms` (pass "desugar", ADR-0094 §6).
-    let ast: Vec<AstShapeDef> = serde_yaml::from_str(ast_yaml)
-        .map_err(|e| LangError::engine(format!("ast.yaml: {}", e)))?;
-    for frag in ast {
-        lang.merge_ast_fragment(frag)?;
-    }
-
-    // Capabilities (union — idempotent merge).
-    let caps: Vec<CapabilityDecl> = serde_yaml::from_str(caps_yaml)
-        .map_err(|e| LangError::engine(format!("caps.yaml: {}", e)))?;
-    for frag in caps {
-        lang.caps.merge(frag)?;
-    }
-
-    // Options (non-union).
-    let options: Vec<OptionSchema> = serde_yaml::from_str(options_yaml)
-        .map_err(|e| LangError::engine(format!("options.yaml: {}", e)))?;
-    for frag in options {
-        lang.options.merge(frag)?;
-    }
-
-    // Lexer rules (non-union).
-    let lexer_rules: Vec<LexerRuleDef> = serde_yaml::from_str(lexer_rules_yaml)
-        .map_err(|e| LangError::engine(format!("lexer_rules.yaml: {}", e)))?;
-    for frag in lexer_rules {
-        lang.lexer_rules.merge(frag)?;
-    }
-
-    // Transform rules (ADR-0094 — non-union, pre-resolved). Merged *after*
-    // the ast pass so a first-class rule may `replaces:` a `desugar:`-lowered
-    // `transform.desugar.*` rule synthesized above.
-    let transforms: Vec<TransformDef> = serde_yaml::from_str(transforms_yaml)
-        .map_err(|e| LangError::engine(format!("transforms.yaml: {}", e)))?;
-    for frag in transforms {
-        lang.transforms.merge(frag)?;
-    }
-
-    // Lint rules (ADR-0097 — non-union, pre-resolved).
-    let lints: Vec<LintRuleDef> = serde_yaml::from_str(lints_yaml)
-        .map_err(|e| LangError::engine(format!("lints.yaml: {}", e)))?;
-    for frag in lints {
-        lang.lints.merge(frag)?;
-    }
-
-    // LSP surface (ADR-0100 — non-union, pre-resolved).
-    let lsp_frags: Vec<LspDef> = serde_yaml::from_str(lsp_yaml)
-        .map_err(|e| LangError::engine(format!("lsp.yaml: {}", e)))?;
-    for frag in lsp_frags {
-        lang.lsp.merge(frag)?;
-    }
-
-    // ADR-0100: LSP surface validation runs at Language build.
-    let lsp_diags = hnl_engine_transform::validate::validate_lsp(&lang);
-    let lsp_errors: Vec<String> = lsp_diags
-        .iter()
-        .filter(|d| d.severity == handl_plugin_ext_diag::Severity::Error)
-        .map(|d| d.message.clone())
-        .collect();
-    if !lsp_errors.is_empty() {
-        return Err(LangError::engine(format!(
-            "lsp rule validation failed: {}",
-            lsp_errors.join("; ")
-        )));
-    }
-
-    // ADR-0094 "Production readiness": transform-rule validation runs at
-    // `Language` build. Error-severity diagnostics (duplicate identity keys,
-    // out-of-bounds `Keep`/`KeepRole`/`KeepPath`/`KeepRest`/`Apply` steps,
-    // dangling `Apply` rule ids, contradictory `KindAt` role/index pairs)
-    // fail the merge; warnings (unknown target kinds, potential `Fixpoint`
-    // cycles, `Native` rules pending a wired registry) do not — shapes and
-    // registries may legitimately arrive from other fragments or engines.
-    let diags = hnl_engine_transform::validate::validate_transforms(&lang);
-    let errors: Vec<String> = diags
-        .iter()
-        .filter(|d| d.severity == handl_plugin_ext_diag::Severity::Error)
-        .map(|d| d.message.clone())
-        .collect();
-    if !errors.is_empty() {
-        return Err(LangError::engine(format!(
-            "transform rule validation failed: {}",
-            errors.join("; ")
-        )));
-    }
-
-    Ok(lang)
-}
-
-/// Build a [`Language`] from the ten YAML data files in a directory.
-///
-/// Reads `tokens.yaml`, `grammar.yaml`, `eval.yaml`, `types.yaml`,
-/// `ast.yaml`, `caps.yaml`, `options.yaml`, `lexer_rules.yaml`,
-/// (optionally) `transforms.yaml`, (optionally) `lints.yaml`, and (optionally)
-/// `lsp.yaml` from `dir` and merges them the same way [`language_from_yaml`]
-/// merges the embedded files. This is the per-file kit loading path (ADR 0003):
-/// a host resolves a kit data directory and assembles a [`Language`] from its
-/// authored YAML.
-///
-/// # Errors
-///
-/// Returns [`LangError`] if `dir` is not a directory, any YAML file is
-/// missing or unreadable, or a fragment fails to deserialize/merge.
+/// Returns [`LangError`] if `dir` is not a directory, a required YAML file
+/// is missing or unreadable, or a fragment fails to deserialize/merge.
 pub fn language_from_dir(dir: &Path) -> Result<Language, LangError> {
-    if !dir.is_dir() {
-        return Err(LangError::engine(format!(
-            "language_from_dir: {:?} is not a directory",
-            dir
-        )));
+    let mut lang = handl_kit_prelude_lang::language_from_dir(dir)?;
+
+    for (name, merge) in [
+        ("lints.yaml", handl_kit_prelude_lang::merge_lints as fn(&mut Language, &str) -> Result<(), LangError>),
+        ("lsp.yaml", handl_kit_prelude_lang::merge_lsp),
+    ] {
+        match std::fs::read_to_string(dir.join(name)) {
+            Ok(s) => merge(&mut lang, &s)?,
+            Err(e) if e.kind() == std::io::ErrorKind::NotFound => {}
+            Err(e) => return Err(LangError::engine(format!("{}: {}", name, e))),
+        }
     }
-
-    let read = |name: &str| -> Result<String, LangError> {
-        std::fs::read_to_string(dir.join(name))
-            .map_err(|e| LangError::engine(format!("{}: {}", name, e)))
-    };
-
-    let tokens_yaml = read("tokens.yaml")?;
-    let grammar_yaml = read("grammar.yaml")?;
-    let eval_yaml = read("eval.yaml")?;
-    let types_yaml = read("types.yaml")?;
-    let ast_yaml = read("ast.yaml")?;
-    let caps_yaml = read("caps.yaml")?;
-    let options_yaml = read("options.yaml")?;
-    let lexer_rules_yaml = read("lexer_rules.yaml")?;
-
-    // `transforms.yaml` is optional: fragment directories written before
-    // ADR-0094's first-class transform section do not carry one.
-    let transforms_yaml = match std::fs::read_to_string(dir.join("transforms.yaml")) {
-        Ok(s) => s,
-        Err(e) if e.kind() == std::io::ErrorKind::NotFound => "[]".to_string(),
-        Err(e) => return Err(LangError::engine(format!("transforms.yaml: {}", e))),
-    };
-
-    // `lints.yaml` is optional: fragment directories written before
-    // ADR-0097's first-class lint-rule section do not carry one.
-    let lints_yaml = match std::fs::read_to_string(dir.join("lints.yaml")) {
-        Ok(s) => s,
-        Err(e) if e.kind() == std::io::ErrorKind::NotFound => "[]".to_string(),
-        Err(e) => return Err(LangError::engine(format!("lints.yaml: {}", e))),
-    };
-
-    // `lsp.yaml` is optional: fragment directories written before ADR-0100
-    // do not carry one.
-    let lsp_yaml = match std::fs::read_to_string(dir.join("lsp.yaml")) {
-        Ok(s) => s,
-        Err(e) if e.kind() == std::io::ErrorKind::NotFound => "[]".to_string(),
-        Err(e) => return Err(LangError::engine(format!("lsp.yaml: {}", e))),
-    };
-
-    // `globals.yaml` is optional: fragment directories written before
-    // ambient globals do not carry one.
-    let globals_yaml = match std::fs::read_to_string(dir.join("globals.yaml")) {
-        Ok(s) => s,
-        Err(e) if e.kind() == std::io::ErrorKind::NotFound => "{}".to_string(),
-        Err(e) => return Err(LangError::engine(format!("globals.yaml: {}", e))),
-    };
-
-    let mut lang = merge_fragments(
-        &tokens_yaml,
-        &grammar_yaml,
-        &eval_yaml,
-        &types_yaml,
-        &ast_yaml,
-        &caps_yaml,
-        &options_yaml,
-        &lexer_rules_yaml,
-        &transforms_yaml,
-        &lints_yaml,
-        &lsp_yaml,
-    )?;
-    merge_globals(&mut lang, &globals_yaml)?;
     Ok(lang)
 }
 
@@ -572,151 +229,6 @@ mod tests {
         assert!(lang.tokens.len() > 0);
         assert!(lang.grammar.len() > 0);
         assert!(lang.eval.len() > 0);
-    }
-
-    #[test]
-    fn types_yaml_loads() {
-        let lang = language_from_yaml().unwrap();
-        // +13 Term frontier type rules + 1 transport rule + 1 axis_flow rule
-        // (ADR-0120 Phase 2) + `type.family`/`type.data`/`type.loop`
-        // (ADR-0120 Phase 4 dependent structure).
-        assert_eq!(lang.types.len(), 82);
-        // The `value` kind (literals) must have a rule.
-        assert!(lang.types.get_by_identity("value").is_some());
-        // Spot-check a few meaningful rules.
-        assert!(lang.types.get_by_identity("var").is_some());
-        assert!(lang.types.get_by_identity("if").is_some());
-        assert!(lang.types.get_by_identity("binary.add").is_some());
-        assert!(lang.types.get_by_identity("unary.neg").is_some());
-        assert!(lang.types.get_by_identity("paren").is_some());
-    }
-
-    #[test]
-    fn transforms_yaml_loads_first_class_rules() {
-        // ADR-0094: transform rules are authored in `data/transforms.yaml`
-        // and land in `lang.transforms` directly — identical semantics to
-        // the old `desugar:`-field lowering (same ids, pass, conditions,
-        // and rewrite steps).
-        use handl_language::{RewriteStep, TransformCondition, TransformRule};
-        let lang = language_from_yaml().unwrap();
-        // 2 baseline rules (entry, lower.entry) + 6 desugar rules
-        // (do_while, nullish, opt-chain, while, while.state, for)
-        // + 1 `desugar.dimension` (ADR-0106 §11/§12: `f<X>` lowers to the
-        // application `f(X)` by re-tagging the node as a `call`).
-        // + 1 `meta-transform` placeholder for N-dimensional arrows.
-        // + 1 `n_dim_opt` flow rule.
-        assert_eq!(lang.transforms.len(), 11);
-        assert_eq!(
-            lang.transforms_for("desugar", "do-while")[0].id,
-            "transform.desugar.do_while"
-        );
-
-        let dimension = &lang.transforms_for("desugar", "dimension")[0];
-        assert_eq!(dimension.id, "transform.desugar.dimension");
-        assert_eq!(dimension.priority, 0);
-        assert_eq!(
-            dimension.rule,
-            TransformRule::Declarative {
-                target_kind: "call".into(),
-                children: vec![RewriteStep::Keep(0), RewriteStep::KeepRest(1)],
-                payload: None,
-            }
-        );
-
-        let entry = &lang.transforms_for("desugar", "entry")[0];
-        assert_eq!(entry.id, "transform.desugar.entry");
-        assert_eq!(
-            entry.when,
-            Some(TransformCondition::KindAt {
-                index: Some(0),
-                role: None,
-                kind: "array".into()
-            })
-        );
-        assert_eq!(
-            entry.rule,
-            TransformRule::Declarative {
-                target_kind: "entry".into(),
-                children: vec![
-                    RewriteStep::Create {
-                        kind: "paren".into(),
-                        payload: None,
-                        children: vec![RewriteStep::KeepPath(vec![0, 0])],
-                    },
-                    RewriteStep::Keep(1),
-                ],
-                payload: None,
-            }
-        );
-    }
-
-    #[test]
-    fn desugar_field_still_lowers_into_transforms() {
-        // Backward compat (ADR-0094): an `AstShapeDef` carrying a `desugar:`
-        // rule still lowers into a `TransformDef` in pass "desugar" — the
-        // field is kept for third-party fragments.
-        let ast_yaml = r#"
-- id: ast.sugared
-  node_kind: sugared
-  children:
-    - role: a
-    - role: b
-  desugar:
-    target_kind: plain
-    when:
-      child_index: 0
-      child_kind: paren
-    children:
-      - !Keep 0
-      - !Keep 1
-"#;
-        let lang = merge_fragments(
-            "[]", "[]", "[]", "[]", ast_yaml, "[]", "[]", "[]", "[]", "[]", "[]",
-        )
-        .unwrap();
-        let rules = lang.transforms_for("desugar", "sugared");
-        assert_eq!(rules.len(), 1);
-        assert_eq!(rules[0].id, "transform.desugar.sugared");
-        assert_eq!(rules[0].pass, "desugar");
-    }
-
-    #[test]
-    fn canonical_transforms_validate_clean() {
-        // ADR-0094 "Production readiness": `validate_transforms` runs at
-        // `Language` build (see `merge_fragments`); the canonical kit must
-        // produce zero Error-severity diagnostics.
-        let lang = language_from_yaml().unwrap();
-        let diags = hnl_engine_transform::validate::validate_transforms(&lang);
-        let errors: Vec<_> = diags
-            .iter()
-            .filter(|d| d.severity == handl_plugin_ext_diag::Severity::Error)
-            .collect();
-        assert!(errors.is_empty(), "unexpected transform errors: {errors:?}");
-    }
-
-    #[test]
-    fn merge_rejects_invalid_transform_rules() {
-        // A `desugar:` rule whose `Keep` index is out of bounds for the
-        // shape's declared roles must fail `Language` assembly, not pass
-        // silently (ADR-0094: no silent fallthrough).
-        let ast_yaml = r#"
-- id: ast.bogus
-  node_kind: bogus
-  children:
-    - role: only
-  desugar:
-    target_kind: bogus
-    children:
-      - !Keep 7
-"#;
-        let err = merge_fragments(
-            "[]", "[]", "[]", "[]", ast_yaml, "[]", "[]", "[]", "[]", "[]", "[]",
-        )
-        .unwrap_err();
-        assert!(
-            format!("{err}").contains("transform rule validation failed"),
-            "expected validation failure, got: {err}"
-        );
     }
 
     #[test]

@@ -10,16 +10,16 @@ repository.workspace = true
 # platform dependencies are git deps (see the workspace root for the
 # sibling-checkout `[patch]` override used for local development).
 [dependencies]
+handl-kit-prelude-lang = { git = "https://github.com/handl-lang/kit-prelude-lang", branch = "main" }
 handl-language = { git = "https://github.com/handl-lang/kernel", branch = "main" }
-hnl-engine-transform = { git = "https://github.com/handl-lang/engine-transform", branch = "main" }
-handl-plugin-ext-diag = { git = "https://github.com/handl-lang/host", branch = "main" }
 handl-kit-data = { git = "https://github.com/handl-lang/host", branch = "main" }
-handl-runtime = { git = "https://github.com/handl-lang/host", branch = "main" }
 serde_yaml = "0.9"
-# Serialized `Language` snapshot cache (see `language_from_yaml`).
 serde_json = "1"
 
 [dev-dependencies]
+hnl-engine-transform = { git = "https://github.com/handl-lang/engine-transform", branch = "main" }
+handl-plugin-ext-diag = { git = "https://github.com/handl-lang/host", branch = "main" }
+handl-runtime = { git = "https://github.com/handl-lang/host", branch = "main" }
 hnl-engine-lex-pattern = { git = "https://github.com/handl-lang/engine-lex-pattern", branch = "main" }
 hnl-engine-parse-pratt = { git = "https://github.com/handl-lang/engine-parse-pratt", branch = "main" }
 hnl-engine-exec-tree-walk = { git = "https://github.com/handl-lang/engine-exec-tree-walk", branch = "main" }

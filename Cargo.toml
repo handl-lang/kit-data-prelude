@@ -65,6 +65,9 @@ handl-lib-prim = { path = "../kernel/crates/prim" }
 handl-lib-prim-handl = { path = "../kernel/crates/prim-handl" }
 handl-lib-type = { path = "../kernel/crates/type" }
 
+[patch."https://github.com/handl-lang/kit-prelude-lang"]
+handl-kit-prelude-lang = { path = "../kit-prelude-lang/crates/handl-kit-prelude-lang" }
+
 [patch."https://github.com/handl-lang/kit-prelude"]
 handl-plugin-ffi = { path = "../kit-ffi/modules/ffi" }
 
