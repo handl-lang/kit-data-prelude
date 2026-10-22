@@ -76,6 +76,15 @@
   severity: error
   message: "reference to unbound name '{name}'"
   check: !Native "scope.unbound-wire"
+# `unbound-export` — `export <name>` of a name no module statement binds.
+# Emitted by the same `check_module` scope pass as `unbound-wire`
+# (`plugin-ext-lint` delegates both; the native is a no-op so the data
+# rule resolves).
+- id: lint.scope.unbound-export
+  name: unbound-export
+  severity: error
+  message: "export of unbound name '{name}'"
+  check: !Native "scope.unbound-export"
 - id: lint.scope.shadowed-binding
   name: shadowed-binding
   severity: warning
