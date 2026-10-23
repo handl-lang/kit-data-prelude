@@ -36,7 +36,8 @@ fn assemble_canonical_has_expected_fragment_counts() {
     // `lex.bool.{true,false}` removed — booleans are imported values.
     // +1 `lex.flow_axis_open` for `>>>[` (ADR-0120 Phase 2).
     // +1 `lex.keyword.absurd` for absurd match arms.
-    assert_eq!(lang.lexer_rules.len(), 102);
+    // +1 `lex.keyword.j` for the J eliminator surface.
+    assert_eq!(lang.lexer_rules.len(), 103);
 
     // Grammar rows: 64 — v0.1 surface syntax (ADR-0074) + `::`/`data`
     // additions; `|` pipe re-added for `data` constructor alternatives;
