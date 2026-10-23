@@ -67,7 +67,10 @@ fn assemble_canonical_has_expected_fragment_counts() {
     // +7 `eval.{cell_comp_h,cell_comp_v,whisker_left,whisker_right,
     // cell_id,witness,refine}` — Option B frontier cells as derived
     // `Seq{axis}` schemes (ADR-0120 Phase 5).
-    assert_eq!(lang.eval.len(), 87);
+    // +1 `eval.j` — the J eliminator's runtime iota (`J p, motive, base`
+    // → `base`), the `transport`-style runtime backstop for the
+    // `type.j` checker rule.
+    assert_eq!(lang.eval.len(), 88);
 
     // AST shapes: 68 — v0.1 surface syntax (ADR-0074) + `data`/`entry`/
     // `flow` (arrow-parser refinement roles) additions + arrow-combinator
