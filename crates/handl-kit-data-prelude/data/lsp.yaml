@@ -133,6 +133,14 @@
       match: !Match
         node_kind: ast.block
 
+    # Goto-definition for name references: resolve the `var` at the cursor
+    # to the site that binds it (module `target` bindings + `pattern`/`params`
+    # binders, resolved from `AstShapeDef` roles).
+    lsp.def.var:
+      kind: binding
+      reference:
+        node_kind: ast.var
+
   lsp:
     textDocument/documentSymbol:
       - lsp.symbol.law
@@ -146,6 +154,11 @@
       - lsp.hover.import
 
     textDocument/definition:
+      # Name-reference goto first: a `var` under the cursor resolves to its
+      # binder. The export rules stay as fallback for positions inside a
+      # binding/export shape that aren't on a `var` (they answer the
+      # enclosing declaration's own name).
+      - lsp.def.var
       - lsp.export.law
       - lsp.export.assign
       - lsp.export.data
