@@ -121,6 +121,18 @@
         - lsp.export.assign
         - lsp.export.data
 
+    # Completion: every binding visible at the cursor — the scope index
+    # read in reverse (module bindings, imports, `data` ctors,
+    # pattern/lambda binders, sequential `do`-block binds).
+    lsp.completion.scope_name:
+      kind: scope_name
+      reference:
+        node_kind: ast.var
+      scope:
+        import: stmt.import
+        export: stmt.export
+        data: ast.data
+
     # Signature help for ordinary parenthesized calls.
     lsp.signature.call:
       kind: signature
@@ -140,6 +152,13 @@
       kind: binding
       reference:
         node_kind: ast.var
+      # Scope vocabulary: the node kinds that bind names beyond
+      # target/pattern shapes — `stmt.import`/`stmt.export` have no
+      # `AstShapeDef` roles, so the rule declares them here.
+      scope:
+        import: stmt.import
+        export: stmt.export
+        data: ast.data
 
   lsp:
     textDocument/documentSymbol:
@@ -167,6 +186,13 @@
       - lsp.completion.import_path
       - lsp.completion.import_name
       - lsp.completion.exported_name
+      - lsp.completion.scope_name
+
+    textDocument/references:
+      - lsp.def.var
+
+    textDocument/rename:
+      - lsp.def.var
 
     textDocument/signatureHelp:
       - lsp.signature.call
