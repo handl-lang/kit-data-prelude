@@ -202,9 +202,9 @@ dependencies = [
 
 [[package]]
 name = "crc32fast"
-version = "1.5.2"
+version = "1.5.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "01a7799fd6b852db0e61728dde9a204c423b44d689dbd432522543614b490e78"
+checksum = "0ba106e844045ddc02c20768ac4b0b7cb45f2cc2ecbd833ac9f5dacb183c2055"
 dependencies = [
  "cfg-if",
 ]
@@ -328,7 +328,7 @@ dependencies = [
 [[package]]
 name = "handl-plugin-ffi"
 version = "0.1.0"
-source = "git+https://github.com/handl-lang/kit-ffi?branch=main#9a0dc53776ad150cc28ddda84127e5d74e82e272"
+source = "git+https://github.com/handl-lang/kit-ffi?branch=main#606db662020eee5bbcb1c0bbfad38ed7c686df1d"
 dependencies = [
  "cranelift",
  "cranelift-jit",
@@ -460,7 +460,7 @@ dependencies = [
 [[package]]
 name = "hnl-engine-lex"
 version = "0.1.0"
-source = "git+https://github.com/handl-lang/engine-lex?branch=main#3af64c9e139d841679b302132ef421b3a8503518"
+source = "git+https://github.com/handl-lang/engine-lex?branch=main#487a5441ebf76696c51e0fdeac3607d515f0e7ca"
 dependencies = [
  "handl-language",
  "serde_json",
@@ -477,7 +477,7 @@ dependencies = [
 [[package]]
 name = "hnl-engine-parse"
 version = "0.1.0"
-source = "git+https://github.com/handl-lang/engine-parse?branch=main#c03f14ef2a9d5151b5117e1141260377270e70f8"
+source = "git+https://github.com/handl-lang/engine-parse?branch=main#5014e8a4dac8fdf5254c4e0bd520349b4cd773f3"
 dependencies = [
  "handl-language",
  "serde_json",
@@ -514,7 +514,7 @@ dependencies = [
 [[package]]
 name = "hnl-engine-typecheck"
 version = "0.1.0"
-source = "git+https://github.com/handl-lang/engine-typecheck?branch=main#eb1f5dd00e08e5693dbf3df5e72f1bac41cea9e2"
+source = "git+https://github.com/handl-lang/engine-typecheck?branch=main#4b3f57978c0fd2e2a77f6ee536bcf534a4e81073"
 dependencies = [
  "handl-language",
  "handl-platform",
@@ -719,9 +719,9 @@ dependencies = [
 
 [[package]]
 name = "smallvec"
-version = "1.16.3"
+version = "1.16.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "5b3dc8af474f516a851ff4bd12db780f948b9250ad37211e4eec0bccea54e01b"
+checksum = "d0d5d4b1981b8bbbb7aed204cae5726d683d5d6ac7e74ec54122ea28f315e7c8"
 
 [[package]]
 name = "stable_deref_trait"
@@ -935,119 +935,47 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "29666d0abbfad1e3dc4dcf6144730dd3a3ab225bbbdac83319345b1b44ccfc1b"
 
 [[patch.unused]]
-name = "handl-lib-test"
+name = "handl-lib-perlin"
 version = "0.1.0"
 
 [[patch.unused]]
-name = "handl-lib-comb"
+name = "handl-lib-bytes"
 version = "0.1.0"
 
 [[patch.unused]]
-name = "handl-lib-unicode"
+name = "handl-lib-cmp"
 version = "0.1.0"
 
 [[patch.unused]]
-name = "handl-lib-option"
+name = "handl-lib-combinators"
 version = "0.1.0"
 
 [[patch.unused]]
-name = "handl-lib-tag"
+name = "handl-lib-error"
 version = "0.1.0"
 
 [[patch.unused]]
-name = "handl-lib-char"
+name = "handl-lib-mood"
 version = "0.1.0"
 
 [[patch.unused]]
-name = "handl-lib-hello"
+name = "handl-lib-obj"
 version = "0.1.0"
 
 [[patch.unused]]
-name = "handl-plugin-lib-lang-run-compiled"
+name = "handl-lib-ops"
 version = "0.1.0"
 
 [[patch.unused]]
-name = "handl-plugin-lib-char-native"
+name = "handl-lib-prim"
 version = "0.1.0"
 
 [[patch.unused]]
-name = "handl-lib-type-handl"
+name = "handl-lib-prim-handl"
 version = "0.1.0"
 
 [[patch.unused]]
-name = "handl-lib-str-handl"
-version = "0.1.0"
-
-[[patch.unused]]
-name = "handl-lib-rand-c"
-version = "0.1.0"
-
-[[patch.unused]]
-name = "handl-lib-tar"
-version = "0.1.0"
-
-[[patch.unused]]
-name = "handl-lib-simplex"
-version = "0.1.0"
-
-[[patch.unused]]
-name = "handl-lib-otlp"
-version = "0.1.0"
-
-[[patch.unused]]
-name = "handl-lib-loader"
-version = "0.1.0"
-
-[[patch.unused]]
-name = "handl-lib-time-c"
-version = "0.1.0"
-
-[[patch.unused]]
-name = "handl-plugin-lib-otlp-std"
-version = "0.1.0"
-
-[[patch.unused]]
-name = "handl-plugin-lib-lang-typecheck"
-version = "0.1.0"
-
-[[patch.unused]]
-name = "handl-lib-transform"
-version = "0.1.0"
-
-[[patch.unused]]
-name = "handl-plugin-lib-lang-eval"
-version = "0.1.0"
-
-[[patch.unused]]
-name = "handl-lib-collections"
-version = "0.1.0"
-
-[[patch.unused]]
-name = "handl-lib-intl-c"
-version = "0.1.0"
-
-[[patch.unused]]
-name = "handl-lib-url-whatwg"
-version = "0.1.0"
-
-[[patch.unused]]
-name = "handl-lib-utils"
-version = "0.1.0"
-
-[[patch.unused]]
-name = "handl-lib-stats"
-version = "0.1.0"
-
-[[patch.unused]]
-name = "handl-plugin-lib-serialize-toml-c"
-version = "0.1.0"
-
-[[patch.unused]]
-name = "handl-lib-intl"
-version = "0.1.0"
-
-[[patch.unused]]
-name = "handl-lib-archive"
+name = "handl-lib-type"
 version = "0.1.0"
 
 [[patch.unused]]
@@ -1055,31 +983,7 @@ name = "handl-plugin-lib-crypto"
 version = "0.1.0"
 
 [[patch.unused]]
-name = "handl-lib-serialize"
-version = "0.1.0"
-
-[[patch.unused]]
-name = "handl-lib-datetime"
-version = "0.1.0"
-
-[[patch.unused]]
-name = "handl-plugin-lib-serialize-yaml-c"
-version = "0.1.0"
-
-[[patch.unused]]
-name = "handl-lib-ip"
-version = "0.1.0"
-
-[[patch.unused]]
-name = "handl-lib-ffi"
-version = "0.1.0"
-
-[[patch.unused]]
-name = "handl-lib-unicode-c"
-version = "0.1.0"
-
-[[patch.unused]]
-name = "handl-lib-kv-map"
+name = "handl-plugin-lib-lang-run-compiled"
 version = "0.1.0"
 
 [[patch.unused]]
@@ -1087,11 +991,31 @@ name = "handl-lib-base64"
 version = "0.1.0"
 
 [[patch.unused]]
-name = "handl-lib-json"
+name = "handl-lib-stats"
 version = "0.1.0"
 
 [[patch.unused]]
-name = "handl-lib-desugar"
+name = "handl-lib-kv-map"
+version = "0.1.0"
+
+[[patch.unused]]
+name = "handl-lib-time-c"
+version = "0.1.0"
+
+[[patch.unused]]
+name = "handl-plugin-lib-lang-lex"
+version = "0.1.0"
+
+[[patch.unused]]
+name = "handl-lib-loader"
+version = "0.1.0"
+
+[[patch.unused]]
+name = "handl-lib-option"
+version = "0.1.0"
+
+[[patch.unused]]
+name = "handl-lib-utils"
 version = "0.1.0"
 
 [[patch.unused]]
@@ -1139,99 +1063,7 @@ name = "sepia-testkit"
 version = "0.0.0"
 
 [[patch.unused]]
-name = "handl-lib-result"
-version = "0.1.0"
-
-[[patch.unused]]
-name = "handl-lib-parse"
-version = "0.1.0"
-
-[[patch.unused]]
-name = "handl-lib-perlin"
-version = "0.1.0"
-
-[[patch.unused]]
 name = "handl-plugin-lib-kv-hashmap"
-version = "0.1.0"
-
-[[patch.unused]]
-name = "handl-lib-dedent"
-version = "0.1.0"
-
-[[patch.unused]]
-name = "handl-lib-rand-stub"
-version = "0.1.0"
-
-[[patch.unused]]
-name = "handl-plugin-lib-otlp-c"
-version = "0.1.0"
-
-[[patch.unused]]
-name = "handl-plugin-lib-kv"
-version = "0.1.0"
-
-[[patch.unused]]
-name = "handl-lib-arrow-iter"
-version = "0.1.0"
-
-[[patch.unused]]
-name = "handl-plugin-lib-lang-lex"
-version = "0.1.0"
-
-[[patch.unused]]
-name = "handl-plugin-ffi"
-version = "0.1.0"
-
-[[patch.unused]]
-name = "handl-plugin-lib-lang-parse"
-version = "0.1.0"
-
-[[patch.unused]]
-name = "handl-plugin-lib-lang-compile"
-version = "0.1.0"
-
-[[patch.unused]]
-name = "handl-lib-bytes"
-version = "0.1.0"
-
-[[patch.unused]]
-name = "handl-lib-cmp"
-version = "0.1.0"
-
-[[patch.unused]]
-name = "handl-lib-combinators"
-version = "0.1.0"
-
-[[patch.unused]]
-name = "handl-lib-error"
-version = "0.1.0"
-
-[[patch.unused]]
-name = "handl-lib-mood"
-version = "0.1.0"
-
-[[patch.unused]]
-name = "handl-lib-obj"
-version = "0.1.0"
-
-[[patch.unused]]
-name = "handl-lib-ops"
-version = "0.1.0"
-
-[[patch.unused]]
-name = "handl-lib-prim"
-version = "0.1.0"
-
-[[patch.unused]]
-name = "handl-lib-prim-handl"
-version = "0.1.0"
-
-[[patch.unused]]
-name = "handl-lib-type"
-version = "0.1.0"
-
-[[patch.unused]]
-name = "handl-lib-encoding"
 version = "0.1.0"
 
 [[patch.unused]]
@@ -1239,5 +1071,173 @@ name = "handl-lib-hex"
 version = "0.1.0"
 
 [[patch.unused]]
+name = "handl-lib-simplex"
+version = "0.1.0"
+
+[[patch.unused]]
+name = "handl-plugin-lib-lang-compile"
+version = "0.1.0"
+
+[[patch.unused]]
+name = "handl-lib-str-handl"
+version = "0.1.0"
+
+[[patch.unused]]
+name = "handl-lib-tag"
+version = "0.1.0"
+
+[[patch.unused]]
+name = "handl-plugin-lib-otlp-c"
+version = "0.1.0"
+
+[[patch.unused]]
+name = "handl-lib-intl-c"
+version = "0.1.0"
+
+[[patch.unused]]
+name = "handl-lib-collections"
+version = "0.1.0"
+
+[[patch.unused]]
+name = "handl-lib-intl"
+version = "0.1.0"
+
+[[patch.unused]]
+name = "handl-plugin-lib-lang-eval"
+version = "0.1.0"
+
+[[patch.unused]]
+name = "handl-lib-hello"
+version = "0.1.0"
+
+[[patch.unused]]
+name = "handl-lib-comb"
+version = "0.1.0"
+
+[[patch.unused]]
+name = "handl-lib-desugar"
+version = "0.1.0"
+
+[[patch.unused]]
+name = "handl-lib-tar"
+version = "0.1.0"
+
+[[patch.unused]]
+name = "handl-lib-arrow-iter"
+version = "0.1.0"
+
+[[patch.unused]]
+name = "handl-plugin-lib-char-native"
+version = "0.1.0"
+
+[[patch.unused]]
+name = "handl-lib-test"
+version = "0.1.0"
+
+[[patch.unused]]
+name = "handl-lib-otlp"
+version = "0.1.0"
+
+[[patch.unused]]
+name = "handl-lib-ip"
+version = "0.1.0"
+
+[[patch.unused]]
+name = "handl-lib-rand-stub"
+version = "0.1.0"
+
+[[patch.unused]]
+name = "handl-lib-result"
+version = "0.1.0"
+
+[[patch.unused]]
+name = "handl-lib-archive"
+version = "0.1.0"
+
+[[patch.unused]]
+name = "handl-lib-unicode-c"
+version = "0.1.0"
+
+[[patch.unused]]
 name = "handl-lib-url-rfc"
+version = "0.1.0"
+
+[[patch.unused]]
+name = "handl-lib-datetime"
+version = "0.1.0"
+
+[[patch.unused]]
+name = "handl-lib-dedent"
+version = "0.1.0"
+
+[[patch.unused]]
+name = "handl-lib-ffi"
+version = "0.1.0"
+
+[[patch.unused]]
+name = "handl-lib-serialize"
+version = "0.1.0"
+
+[[patch.unused]]
+name = "handl-plugin-lib-lang-typecheck"
+version = "0.1.0"
+
+[[patch.unused]]
+name = "handl-lib-json"
+version = "0.1.0"
+
+[[patch.unused]]
+name = "handl-lib-url-whatwg"
+version = "0.1.0"
+
+[[patch.unused]]
+name = "handl-lib-encoding"
+version = "0.1.0"
+
+[[patch.unused]]
+name = "handl-lib-transform"
+version = "0.1.0"
+
+[[patch.unused]]
+name = "handl-plugin-lib-otlp-std"
+version = "0.1.0"
+
+[[patch.unused]]
+name = "handl-plugin-lib-serialize-yaml-c"
+version = "0.1.0"
+
+[[patch.unused]]
+name = "handl-lib-parse"
+version = "0.1.0"
+
+[[patch.unused]]
+name = "handl-lib-rand-c"
+version = "0.1.0"
+
+[[patch.unused]]
+name = "handl-plugin-lib-serialize-toml-c"
+version = "0.1.0"
+
+[[patch.unused]]
+name = "handl-plugin-lib-kv"
+version = "0.1.0"
+
+[[patch.unused]]
+name = "handl-plugin-lib-lang-parse"
+version = "0.1.0"
+
+[[patch.unused]]
+name = "handl-lib-type-handl"
+version = "0.1.0"
+
+[[patch.unused]]
+name = "handl-lib-unicode"
+version = "0.1.0"
+
+[[patch.unused]]
+name = "handl-lib-char"
+version = "0.1.0"
+
+[[patch.unused]]
+name = "handl-plugin-ffi"
 version = "0.1.0"
