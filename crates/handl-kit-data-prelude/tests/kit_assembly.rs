@@ -28,7 +28,7 @@ fn assemble_canonical_has_expected_fragment_counts() {
     // Phase 2).
     // +1 `token.keyword.absurd` for absurd match arms (nonlinear index
     // solving).
-    assert_eq!(lang.tokens.len(), 105);
+    assert_eq!(lang.tokens.len(), 107);
 
     // Lexer rules: 91 v0.1 + 8 Option B frontier operators/keywords;
     // `lex.keyword.handler` removed with the `handler` keyword.
@@ -37,7 +37,7 @@ fn assemble_canonical_has_expected_fragment_counts() {
     // +1 `lex.flow_axis_open` for `>>>[` (ADR-0120 Phase 2).
     // +1 `lex.keyword.absurd` for absurd match arms.
     // +1 `lex.keyword.j` for the J eliminator surface.
-    assert_eq!(lang.lexer_rules.len(), 103);
+    assert_eq!(lang.lexer_rules.len(), 105);
 
     // Grammar rows: 64 — v0.1 surface syntax (ADR-0074) + `::`/`data`
     // additions; `|` pipe re-added for `data` constructor alternatives;
@@ -54,7 +54,7 @@ fn assemble_canonical_has_expected_fragment_counts() {
     // `grammar.value.bool` removed — `true`/`false` parse as `var`.
     // +1 `grammar.axis_flow.infix` for `>>>[k]` (ADR-0120 Phase 2).
     // +1 `grammar.absurd.prefix` for absurd match arms.
-    assert_eq!(lang.grammar.len(), 85);
+    assert_eq!(lang.grammar.len(), 87);
 
     // +13 Term frontier eval rules + 1 transport rule.
     // +1 `eval.dimension` for the dimension specialization `f<...>`
@@ -70,7 +70,7 @@ fn assemble_canonical_has_expected_fragment_counts() {
     // +1 `eval.j` — the J eliminator's runtime iota (`J p, motive, base`
     // → `base`), the `transport`-style runtime backstop for the
     // `type.j` checker rule.
-    assert_eq!(lang.eval.len(), 88);
+    assert_eq!(lang.eval.len(), 91);
 
     // AST shapes: 68 — v0.1 surface syntax (ADR-0074) + `data`/`entry`/
     // `flow` (arrow-parser refinement roles) additions + arrow-combinator
@@ -92,7 +92,7 @@ fn assemble_canonical_has_expected_fragment_counts() {
     // +3 `ast.{pi,sigma,family}` internal type-level shapes (ADR-0120
     // Phase 4 dependent structure).
     // +1 `ast.absurd` for absurd match arms.
-    assert_eq!(lang.ast.len(), 94);
+    assert_eq!(lang.ast.len(), 97);
 
     // Capabilities: lex + parse (from `tokens`) + textmate (from `textmate`).
     assert_eq!(lang.caps.len(), 3);
@@ -129,8 +129,8 @@ fn assemble_canonical_into_runtime_binds_engines() {
     let rt = Runtime::from_registry(kit.lang().clone(), &registry, &config)
         .expect("runtime should build");
     // The runtime's language matches the assembled language.
-    assert_eq!(rt.lang().tokens.len(), 105);
-    assert_eq!(rt.lang().grammar.len(), 85);
+    assert_eq!(rt.lang().tokens.len(), 107);
+    assert_eq!(rt.lang().grammar.len(), 87);
 }
 
 #[test]
