@@ -3,6 +3,7 @@ title: Parameter Naming Convention
 type: adr
 date: 2026-08-24
 status: proposed
+status_note: Proposed
 ---
 
 # Parameter Naming Convention
@@ -61,7 +62,3 @@ params:
 - Error messages are clear when argument binding fails.
 - The convention is enforced by the linter (ADR-0015), not the language
   kernel.
-
-## Status
-
-Proposed

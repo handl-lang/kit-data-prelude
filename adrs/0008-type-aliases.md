@@ -3,6 +3,7 @@ title: Generic Type Aliases for handl Type System
 type: adr
 date: 2026-08-24
 status: proposed
+status_note: Proposed.
 ---
 
 # Generic Type Aliases for handl Type System
@@ -381,7 +382,3 @@ schema-refs ADR (prerequisite)
 
 Phases 1–3 are the core. Phases 4–5 make it usable end-to-end. Phases 6–7 are
 polish.
-
-## Status
-
-Proposed.

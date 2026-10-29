@@ -3,6 +3,7 @@ title: Custom Fields via `*.field.yml`
 type: adr
 date: 2026-08-24
 status: proposed
+status_note: Proposed
 ---
 
 # Custom Fields via `*.field.yml`
@@ -114,7 +115,3 @@ emerge from the field library.
   API surface on the host.
 - Field name collisions become possible; dotted namespacing and load-order
   rules are required.
-
-## Status
-
-Proposed

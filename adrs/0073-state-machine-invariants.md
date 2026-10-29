@@ -3,16 +3,14 @@ title: State Machine Invariants via Fixpoint Discovery
 type: adr
 date: 2026-09-01
 status: accepted
+status_note: |-
+  Accepted
+
+  Builds on [ADR-0070 — Refinement Inference Scope](./0070-refinement-inference-scope.md)
+  and the refinement inference engine in `crates/plugin-ext-refinement/`.
 ---
 
 # ADR-0073: State Machine Invariants via Fixpoint Discovery
-
-## Status
-
-Accepted
-
-Builds on [ADR-0070 — Refinement Inference Scope](./0070-refinement-inference-scope.md)
-and the refinement inference engine in `crates/plugin-ext-refinement/`.
 
 ## Context
 

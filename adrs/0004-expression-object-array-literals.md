@@ -3,6 +3,7 @@ title: Expression Object and Array Literals
 type: adr
 date: 2026-08-24
 status: proposed
+status_note: Proposed
 ---
 
 # Expression Object and Array Literals
@@ -65,7 +66,3 @@ This is a language-level change, not a frontend-only change: it affects `ExprPar
 
 - This ADR does not define the `s.*` vocabulary itself; that will be a separate ADR. It only provides the literal syntax required by it.
 - It does not add object property access syntax (`obj.key` is still a path lookup), nor does it add methods or computed field access.
-
-## Status
-
-Proposed

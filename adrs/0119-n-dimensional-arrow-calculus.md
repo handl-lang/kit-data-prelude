@@ -3,15 +3,13 @@ title: N-Dimensional Arrow Calculus
 type: adr
 date: 2026-09-15
 status: proposed
+status_note: |-
+  Proposed — design finalized during review; ready for implementation.
+
+  Refines [ADR-0052 Arrow Calculus Kernel](./0052-arrow-calculus-kernel.md), [ADR-0100 Canonical Term Arrows](./0100-canonical-term-arrows.md), [ADR-0101 Frontier Calculus](./0101-frontier-calculus.md), [ADR-0102 Session Types / Grades](./0102-session-types-grades.md), and [ADR-0106 Object/Arrow Kernel](./0106-object-arrow-kernel.md).
 ---
 
 # ADR-0119: N-Dimensional Arrow Calculus
-
-## Status
-
-Proposed — design finalized during review; ready for implementation.
-
-Refines [ADR-0052 Arrow Calculus Kernel](./0052-arrow-calculus-kernel.md), [ADR-0100 Canonical Term Arrows](./0100-canonical-term-arrows.md), [ADR-0101 Frontier Calculus](./0101-frontier-calculus.md), [ADR-0102 Session Types / Grades](./0102-session-types-grades.md), and [ADR-0106 Object/Arrow Kernel](./0106-object-arrow-kernel.md).
 
 ## Context
 

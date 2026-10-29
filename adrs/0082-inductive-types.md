@@ -3,19 +3,17 @@ title: Inductive Types as Desugared Predicates
 type: adr
 date: 2026-09-04
 status: accepted
+status_note: |-
+  Accepted.
+
+  Depends on ADR-0032 (types are values, shared `Value` space, universe levels),
+  ADR-0068 (predicates as types, partial-evaluator typechecker, proofs are
+  functions), and ADR-0054 (generic typecheck engine). Supersedes the inductive
+  types bullet in `0032-types-as-values-remaining.md` (item 1) by giving it a
+  dedicated design.
 ---
 
 # ADR-0082: Inductive Types as Desugared Predicates
-
-## Status
-
-Accepted.
-
-Depends on ADR-0032 (types are values, shared `Value` space, universe levels),
-ADR-0068 (predicates as types, partial-evaluator typechecker, proofs are
-functions), and ADR-0054 (generic typecheck engine). Supersedes the inductive
-types bullet in `0032-types-as-values-remaining.md` (item 1) by giving it a
-dedicated design.
 
 ## Context
 

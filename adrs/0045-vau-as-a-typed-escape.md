@@ -3,6 +3,7 @@ title: Vau as a Typed Escape (ADR-0041 Phase 4)
 type: adr
 date: 2026-08-30
 status: proposed
+status_note: Proposed
 ---
 
 # Vau as a Typed Escape (ADR-0041 Phase 4)
@@ -144,10 +145,6 @@ automatically flagged as requiring `eval` capability. A sandboxed
 - **Kernel lineage.** This is the Kernel (Shutt) `vau`/fexpr design, lifted
   into a typed, arrow-structured language. The key difference from Kernel
   is that `vau` is typed and opt-in, not the default evaluation strategy.
-
-## Status
-
-Proposed
 
 ## References
 

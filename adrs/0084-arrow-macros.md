@@ -3,19 +3,17 @@ title: Arrow Macros — Type-Safe Compile-Time Metaprogramming
 type: adr
 date: 2026-09-04
 status: proposed
+status_note: |-
+  Proposed. Depends on [ADR-0052 — Arrow Calculus
+  Kernel](./0052-arrow-calculus-kernel.md), [ADR-0044 — Language as
+  Data](./0044-language-as-data-and-runtime-split.md), [ADR-0078 — Value
+  Types as Data](./0078-value-types-as-data.md), [ADR-0054 — Generic
+  Typecheck Engine](./0054-generic-typecheck-engine.md). Builds on
+  [ADR-0081 — Data-Driven AST Child Roles](./0081-data-driven-ast-child-roles.md)
+  and the `plugin-lib-lang-*` meta-function bridge (ADR-0083 §7).
 ---
 
 # ADR-0084: Arrow Macros — Type-Safe Compile-Time Metaprogramming
-
-## Status
-
-Proposed. Depends on [ADR-0052 — Arrow Calculus
-Kernel](./0052-arrow-calculus-kernel.md), [ADR-0044 — Language as
-Data](./0044-language-as-data-and-runtime-split.md), [ADR-0078 — Value
-Types as Data](./0078-value-types-as-data.md), [ADR-0054 — Generic
-Typecheck Engine](./0054-generic-typecheck-engine.md). Builds on
-[ADR-0081 — Data-Driven AST Child Roles](./0081-data-driven-ast-child-roles.md)
-and the `plugin-lib-lang-*` meta-function bridge (ADR-0083 §7).
 
 ## Context
 

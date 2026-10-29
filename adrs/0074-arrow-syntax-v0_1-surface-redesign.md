@@ -3,21 +3,19 @@ title: Arrow Surface Syntax v0.1 — Redesign
 type: adr
 date: 2026-09-02
 status: proposed
+status_note: |-
+  Proposed
+
+  Establishes the v0.1 surface syntax for the arrow-native language described in
+  [ADR-0052 — Arrow Calculus Kernel](./0052-arrow-calculus-kernel.md) and
+  [ADR-0069 — Files Are Arrows](./0069-arrow-native-modules.md). Refines the
+  combinator surface introduced by ADR-0052 (`arr`/`>>>`/`first`/`choice`/`loop`/`app`)
+  into a human-facing syntax, and corrects two design errors carried over from
+  the earlier draft: the absence of destructuring renaming, and the misuse of
+  `rec` as a recursive-arrow constructor.
 ---
 
 # ADR-0074: Arrow Surface Syntax v0.1 — Redesign
-
-## Status
-
-Proposed
-
-Establishes the v0.1 surface syntax for the arrow-native language described in
-[ADR-0052 — Arrow Calculus Kernel](./0052-arrow-calculus-kernel.md) and
-[ADR-0069 — Files Are Arrows](./0069-arrow-native-modules.md). Refines the
-combinator surface introduced by ADR-0052 (`arr`/`>>>`/`first`/`choice`/`loop`/`app`)
-into a human-facing syntax, and corrects two design errors carried over from
-the earlier draft: the absence of destructuring renaming, and the misuse of
-`rec` as a recursive-arrow constructor.
 
 ## Context
 

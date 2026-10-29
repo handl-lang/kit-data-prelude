@@ -3,19 +3,17 @@ title: Predicates as Types — Unified Dependent Typing Without a Sublanguage
 type: adr
 date: 2026-09-02
 status: proposed
+status_note: |-
+  Proposed.
+
+  Depends on the existing "types as predicates" model documented in the
+  [Language overview](../../docs/explanation/language-overview.md) (refinement
+  types, type families, `x is T` as `T(x)`). Extends it with a unified
+  compile-time/runtime checking strategy and a library of predicates _about_
+  functions, without introducing a separate total/proof sublanguage.
 ---
 
 # ADR-0068: Predicates as Types — Unified Dependent Typing Without a Sublanguage
-
-## Status
-
-Proposed.
-
-Depends on the existing "types as predicates" model documented in the
-[Language overview](../../docs/explanation/language-overview.md) (refinement
-types, type families, `x is T` as `T(x)`). Extends it with a unified
-compile-time/runtime checking strategy and a library of predicates _about_
-functions, without introducing a separate total/proof sublanguage.
 
 ## Context
 
@@ -250,7 +248,3 @@ theorem and lives in the proof layer if needed.
 
 Steps 1–2 are the cheap foundation. Steps 3–5 are the proof layer and are
 built when static universals are required.
-
-## Status
-
-Proposed.

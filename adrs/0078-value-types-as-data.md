@@ -3,22 +3,24 @@ title: Value Types as Data — Composable Capabilities and Target Representation
 type: adr
 date: 2026-09-03
 status: proposed
+status_note: |-
+  Proposed. Extends [ADR-0044 — Language as Data and Runtime
+  Split](./0044-language-as-data-and-runtime-split.md) from the language
+  definition (tokens, grammar, eval schemes) to the **value type system**
+  (types, capabilities, target representations). Complements
+  [ADR-0052 — Arrow Calculus Kernel](./0052-arrow-calculus-kernel.md) and
+  [ADR-0076 — Decoupled Trait Layer](./0076-decoupled-trait-layer.md).
+  §6 introduces a per-`Language` `typecheck_mode` policy flag
+  (`optional` | `gate`) and designates the host language as statically
+  gated, building on the typecheck engine from
+  [ADR-0054 — Generic Typecheck Engine](./0054-generic-typecheck-engine.md).
+
+  Proposed. Phases 1-2 are the immediate work. Phases 3-4 are the
+  near-term goal (closing the perf gap to C/Rust on typed code). Phases
+  5-6 are the long-term vision.
 ---
 
 # ADR-0078: Value Types as Data — Composable Capabilities and Target Representations
-
-## Status
-
-Proposed. Extends [ADR-0044 — Language as Data and Runtime
-Split](./0044-language-as-data-and-runtime-split.md) from the language
-definition (tokens, grammar, eval schemes) to the **value type system**
-(types, capabilities, target representations). Complements
-[ADR-0052 — Arrow Calculus Kernel](./0052-arrow-calculus-kernel.md) and
-[ADR-0076 — Decoupled Trait Layer](./0076-decoupled-trait-layer.md).
-§6 introduces a per-`Language` `typecheck_mode` policy flag
-(`optional` | `gate`) and designates the host language as statically
-gated, building on the typecheck engine from
-[ADR-0054 — Generic Typecheck Engine](./0054-generic-typecheck-engine.md).
 
 ## Context
 
@@ -700,9 +702,3 @@ V8/LuaJIT path and closes the gap on dynamically-typed code.
 Allow handl programs to declare value types in `.hnl` source (desugared
 to `value_types.yaml` fragments). User-defined types participate in the
 same capability/representation system as built-in types.
-
-## Status
-
-Proposed. Phases 1-2 are the immediate work. Phases 3-4 are the
-near-term goal (closing the perf gap to C/Rust on typed code). Phases
-5-6 are the long-term vision.

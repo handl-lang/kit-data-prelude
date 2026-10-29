@@ -3,6 +3,7 @@ title: Document Annotations
 type: adr
 date: 2026-08-24
 status: proposed
+status_note: Proposed
 ---
 
 # Document Annotations
@@ -81,7 +82,3 @@ to avoid collisions with language-level keys.
 - Annotations are a zero-cost abstraction — no runtime impact.
 - Hosts get a standard extension point for metadata without inventing their
   own fields.
-
-## Status
-
-Proposed

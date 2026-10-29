@@ -3,15 +3,13 @@ title: Decoupled Trait Layer — Laws, Bundles, and Handlers
 type: adr
 date: 2026-09-02
 status: proposed
+status_note: |-
+  Proposed. Supersedes the bundled `trait`/`impl` syntax in ADR-0075 §2,
+  §6, §7, §8, §13. Preserves ADR-0075 §3 (catalog), §4 (storage), §11
+  (CutElim), §12 (catalog search as fallback).
 ---
 
 # ADR-0076: Decoupled Trait Layer — Laws, Bundles, and Handlers
-
-## Status
-
-Proposed. Supersedes the bundled `trait`/`impl` syntax in ADR-0075 §2,
-§6, §7, §8, §13. Preserves ADR-0075 §3 (catalog), §4 (storage), §11
-(CutElim), §12 (catalog search as fallback).
 
 ## Context
 

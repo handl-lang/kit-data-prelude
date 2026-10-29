@@ -3,6 +3,7 @@ title: JSON Schema 2020-12 Reference & Composition Support in the Typechecker
 type: adr
 date: 2026-08-24
 status: proposed
+status_note: Proposed.
 ---
 
 # JSON Schema 2020-12 Reference & Composition Support in the Typechecker
@@ -432,7 +433,3 @@ too much work.
 | `not`                       | 4        | Return `Unknown` (safe).                                           |
 | `if/then/else`              | 5        | Return common `Type` of branches if determinable, else `Unknown`.  |
 | `type`                      | existing | Continue to match as before.                                       |
-
-## Status
-
-Proposed.

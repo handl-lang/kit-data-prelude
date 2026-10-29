@@ -3,6 +3,7 @@ title: Language data assembly in the `lang` repo
 type: adr
 date: 2026-10-15
 status: proposed
+status_note: Proposed — extracted in ADR-0128 Phase 11.
 ---
 
 # ADR-0130: Language data assembly in the `lang` repo
@@ -35,7 +36,3 @@ dependencies; no engine, runtime, or host code lives here.
   seam) — otherwise the dependency cycles.
 - The parent ADR-0044 stays in `host`: it also decides the runtime split,
   which is platform's.
-
-## Status
-
-Proposed — extracted in ADR-0128 Phase 11.

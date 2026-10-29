@@ -3,44 +3,42 @@ title: Traits as Arrow Signatures — Graph-Based Interfaces and Contracts
 type: adr
 date: 2026-09-02
 status: proposed
+status_note: |-
+  Proposed. **Partially superseded by [ADR-0076 — Decoupled Trait Layer](./0076-decoupled-trait-layer.md):**
+  the bundled `trait`/`impl`/`law` syntax (§2, §6, §7, §8, §13) is
+  superseded by three independent composable features (laws, bundles,
+  handlers). The research foundation (§3 catalog, §4 storage, §11 CutElim,
+  §12 catalog search as fallback) is preserved and remains the substrate
+  for ADR-0076. Prototype implemented in the arrow-calculus PoC.
+  Awaiting:
+
+  - Lean4 mechanization of trait inference for law patterns (in progress;
+    functor laws proven, non-functor laws require semantic axioms — see
+    `EquationalLawInference.lean`).
+  - CutElim law checking mechanization (part of this ADR, §11;
+    congruence + strong normalization for the 6-rewrite fragment proven
+    — see `CutElimCongruence.lean`).
+  - Handler-based resolution implementation (§13) — design complete,
+    implementation pending.
+  - Catalog storage interface + SQLite implementation (done — see
+    `trait_catalog_sqlite.rs`).
+  - Built-in catalog population (done — functor, coproduct functor,
+    sorting, mapping, filtering).
+  - Prototype implementation in the arrow-calculus PoC (done — see
+    `RESULTS_TRAITS.md`).
+
+  Builds on [ADR-0052 — Arrow Calculus Kernel](./0052-arrow-calculus-kernel.md)
+  (`arr`/`>>>`/`first`/`choice`/`loop`/`app` as the kernel),
+  [ADR-0068 — Predicates as Types](./0068-predicates-as-types.md) (types as
+  predicates, dependent typing without a sublanguage),
+  [ADR-0069 — Files Are Arrows](./0069-arrow-native-modules.md) (modules are
+  arrows), and [ADR-0074 — Arrow Surface Syntax v0.1](./0074-arrow-syntax-v0_1-surface-redesign.md)
+  (human-facing syntax over the kernel). Extends the kernel with a
+  **trait/impl** layer grounded in arrow signatures and graph assignments,
+  without introducing a separate interface sublanguage.
 ---
 
 # ADR-0075: Traits as Arrow Signatures — Graph-Based Interfaces and Contracts
-
-## Status
-
-Proposed. **Partially superseded by [ADR-0076 — Decoupled Trait Layer](./0076-decoupled-trait-layer.md):**
-the bundled `trait`/`impl`/`law` syntax (§2, §6, §7, §8, §13) is
-superseded by three independent composable features (laws, bundles,
-handlers). The research foundation (§3 catalog, §4 storage, §11 CutElim,
-§12 catalog search as fallback) is preserved and remains the substrate
-for ADR-0076. Prototype implemented in the arrow-calculus PoC.
-Awaiting:
-
-- Lean4 mechanization of trait inference for law patterns (in progress;
-  functor laws proven, non-functor laws require semantic axioms — see
-  `EquationalLawInference.lean`).
-- CutElim law checking mechanization (part of this ADR, §11;
-  congruence + strong normalization for the 6-rewrite fragment proven
-  — see `CutElimCongruence.lean`).
-- Handler-based resolution implementation (§13) — design complete,
-  implementation pending.
-- Catalog storage interface + SQLite implementation (done — see
-  `trait_catalog_sqlite.rs`).
-- Built-in catalog population (done — functor, coproduct functor,
-  sorting, mapping, filtering).
-- Prototype implementation in the arrow-calculus PoC (done — see
-  `RESULTS_TRAITS.md`).
-
-Builds on [ADR-0052 — Arrow Calculus Kernel](./0052-arrow-calculus-kernel.md)
-(`arr`/`>>>`/`first`/`choice`/`loop`/`app` as the kernel),
-[ADR-0068 — Predicates as Types](./0068-predicates-as-types.md) (types as
-predicates, dependent typing without a sublanguage),
-[ADR-0069 — Files Are Arrows](./0069-arrow-native-modules.md) (modules are
-arrows), and [ADR-0074 — Arrow Surface Syntax v0.1](./0074-arrow-syntax-v0_1-surface-redesign.md)
-(human-facing syntax over the kernel). Extends the kernel with a
-**trait/impl** layer grounded in arrow signatures and graph assignments,
-without introducing a separate interface sublanguage.
 
 ## Context
 

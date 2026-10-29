@@ -3,6 +3,7 @@ title: Modality as Set-Theoretic Projection
 type: adr
 date: 2026-08-24
 status: proposed
+status_note: '`proposed`'
 ---
 
 # Modality as Set-Theoretic Projection
@@ -186,7 +187,3 @@ For `Result`, the runtime should represent a result value as a tagged value with
 - The `mood` module becomes the canonical desugaring target for all six moods.
 - `not` acquires two distinct but contextually disambiguated roles: infix complement projection and prefix logical negation.
 - Fields do not have a natural set-theoretic complement, so `x not field` either requires a separate definition (e.g., "object without the field") or is not supported by the negative mood.
-
-## Status
-
-`proposed`

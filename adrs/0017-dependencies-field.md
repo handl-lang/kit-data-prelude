@@ -3,6 +3,7 @@ title: Dependencies Field for Custom Fields
 type: adr
 date: 2026-08-24
 status: proposed
+status_note: Proposed
 ---
 
 # Dependencies Field for Custom Fields
@@ -82,7 +83,3 @@ dependencies:
 - Tooling can warn when a `dependencies` declaration is missing or stale.
 - Library authors have another required convention to follow; `handl lint` can
   help enforce it.
-
-## Status
-
-Proposed

@@ -3,15 +3,17 @@ title: Failure-Tracking Arrows for Backtracking Parsers
 type: adr
 date: 2026-09-01
 status: accepted
+status_note: |-
+  Accepted
+
+  Builds on [ADR-0070 — Refinement Inference Scope](./0070-refinement-inference-scope.md).
+
+  Accepted. The approach is to model failure as a value using sum types
+  and existing Choice/left machinery. No calculus extension is required.
+  Backtracking parsers are expressible within the current architecture.
 ---
 
 # ADR-0071: Failure-Tracking Arrows for Backtracking Parsers
-
-## Status
-
-Accepted
-
-Builds on [ADR-0070 — Refinement Inference Scope](./0070-refinement-inference-scope.md).
 
 ## Context
 
@@ -120,12 +122,6 @@ feedback channel, same as any other Loop.
 - Sum types in the refinement type system must be well-supported
   (ADR-0068 covers predicates as types; sum types with contracts are
   the natural extension)
-
-## Status
-
-Accepted. The approach is to model failure as a value using sum types
-and existing Choice/left machinery. No calculus extension is required.
-Backtracking parsers are expressible within the current architecture.
 
 ## Related ADRs
 

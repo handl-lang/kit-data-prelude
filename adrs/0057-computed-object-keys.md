@@ -3,18 +3,16 @@ title: Computed Object Keys via Bracket Syntax
 type: adr
 date: 2026-09-02
 status: proposed
+status_note: |-
+  Proposed
+
+  Refines the object-literal evaluation rule introduced by
+  [ADR-0053 — Generic Pratt Parser](./0053-generic-pratt-parser.md) (which
+  defines the `{ entry: ... }` delimited form) and the arrow-calculus `object`
+  prim from [ADR-0052 — Arrow Calculus Kernel](./0052-arrow-calculus-kernel.md).
 ---
 
 # ADR-0057: Computed Object Keys via Bracket Syntax
-
-## Status
-
-Proposed
-
-Refines the object-literal evaluation rule introduced by
-[ADR-0053 — Generic Pratt Parser](./0053-generic-pratt-parser.md) (which
-defines the `{ entry: ... }` delimited form) and the arrow-calculus `object`
-prim from [ADR-0052 — Arrow Calculus Kernel](./0052-arrow-calculus-kernel.md).
 
 ## Context
 

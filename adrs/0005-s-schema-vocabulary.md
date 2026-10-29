@@ -3,6 +3,7 @@ title: handl-native `s.*` Schema Vocabulary
 type: adr
 date: 2026-08-24
 status: proposed
+status_note: Proposed
 ---
 
 # handl-native `s.*` Schema Vocabulary
@@ -183,7 +184,3 @@ The canonical `TypegenBackend` outputs `s` schemas. The JSON Schema backend rema
 - This ADR does not add arbitrary schema-as-predicate support. Full handl boolean predicates as schemas are intentionally out of scope because the typechecker cannot derive a static `Type` from an arbitrary validator.
 - It does not remove the `Schema`/`SchemaVocabulary` abstraction. Custom schema languages remain possible.
 - It does not define a runtime `Host` namespace for `s`. `s` is a compile-time namespace.
-
-## Status
-
-Proposed

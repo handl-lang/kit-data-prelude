@@ -3,6 +3,7 @@ title: Options Object Over Named Arguments
 type: adr
 date: 2026-08-24
 status: proposed
+status_note: Proposed
 ---
 
 # Options Object Over Named Arguments
@@ -105,7 +106,3 @@ Conventions for options objects:
   the future if a compelling need arises beyond module functions.
 - This decision applies to the canonical handl dialect. Custom dialects are
   free to experiment with named args at their own level.
-
-## Status
-
-Proposed
