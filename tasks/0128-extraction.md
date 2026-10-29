@@ -1,3 +1,9 @@
+---
+title: Task 0128 — `lang/` extraction (ADR-0128 Phase 11)
+type: task
+date: 2026-10-15
+---
+
 # Task 0128 — `lang/` extraction (ADR-0128 Phase 11)
 
 Expand ADR-0128 Phase 11 for this repo. The docs are already on

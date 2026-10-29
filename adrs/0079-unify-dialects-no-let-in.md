@@ -1,3 +1,10 @@
+---
+title: Unify Arrow Dialects — Graph Blocks, No `let`, No `in`
+type: adr
+date: 2026-09-03
+status: accepted
+---
+
 # ADR-0079: Unify Arrow Dialects — Graph Blocks, No `let`, No `in`
 
 ## Context

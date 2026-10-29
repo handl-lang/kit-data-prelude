@@ -1,3 +1,10 @@
+---
+title: 'ADR: Generic Arrow Calculus for Any Dimension'
+type: adr
+date: 2026-10-16
+status: proposed
+---
+
 # ADR: Generic Arrow Calculus for Any Dimension
 
 ## Status

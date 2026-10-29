@@ -1,3 +1,10 @@
+---
+title: Value Types as Data — Composable Capabilities and Target Representations
+type: adr
+date: 2026-09-03
+status: proposed
+---
+
 # ADR-0078: Value Types as Data — Composable Capabilities and Target Representations
 
 ## Status

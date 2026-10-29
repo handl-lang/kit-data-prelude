@@ -1,3 +1,10 @@
+---
+title: handl-native `s.*` Schema Vocabulary
+type: adr
+date: 2026-08-24
+status: proposed
+---
+
 # handl-native `s.*` Schema Vocabulary
 
 ## Context

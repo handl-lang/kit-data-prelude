@@ -1,3 +1,10 @@
+---
+title: Session Types as Grade Morphisms
+type: adr
+date: 2026-09-09
+status: proposed
+---
+
 # ADR-0102: Session Types as Grade Morphisms
 
 ## Status

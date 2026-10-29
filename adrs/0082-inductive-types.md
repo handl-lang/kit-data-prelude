@@ -1,3 +1,10 @@
+---
+title: Inductive Types as Desugared Predicates
+type: adr
+date: 2026-09-04
+status: accepted
+---
+
 # ADR-0082: Inductive Types as Desugared Predicates
 
 ## Status

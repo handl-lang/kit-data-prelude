@@ -1,3 +1,10 @@
+---
+title: Modality as Set-Theoretic Projection
+type: adr
+date: 2026-08-24
+status: proposed
+---
+
 # Modality as Set-Theoretic Projection
 
 ## Context

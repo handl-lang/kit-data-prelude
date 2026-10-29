@@ -1,3 +1,10 @@
+---
+title: Predicates as Types — Unified Dependent Typing Without a Sublanguage
+type: adr
+date: 2026-09-02
+status: proposed
+---
+
 # ADR-0068: Predicates as Types — Unified Dependent Typing Without a Sublanguage
 
 ## Status

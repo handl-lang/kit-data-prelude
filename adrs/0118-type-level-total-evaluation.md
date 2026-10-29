@@ -1,3 +1,10 @@
+---
+title: Type-Level Total Evaluation of handl Expressions
+type: adr
+date: 2026-09-14
+status: proposed
+---
+
 # ADR-0118: Type-Level Total Evaluation of handl Expressions
 
 ## Status

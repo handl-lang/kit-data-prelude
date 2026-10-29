@@ -1,3 +1,10 @@
+---
+title: Computed Object Keys via Bracket Syntax
+type: adr
+date: 2026-09-02
+status: proposed
+---
+
 # ADR-0057: Computed Object Keys via Bracket Syntax
 
 ## Status

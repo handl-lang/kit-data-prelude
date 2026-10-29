@@ -1,3 +1,10 @@
+---
+title: Dependencies Field for Custom Fields
+type: adr
+date: 2026-08-24
+status: proposed
+---
+
 # Dependencies Field for Custom Fields
 
 ## Context

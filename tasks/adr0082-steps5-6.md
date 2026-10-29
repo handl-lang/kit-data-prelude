@@ -1,3 +1,9 @@
+---
+title: 'ADR-0082 Steps 5–6: Inductive Families and Dependent Pattern Matching'
+type: task
+date: 2026-09-05
+---
+
 # ADR-0082 Steps 5–6: Inductive Families and Dependent Pattern Matching
 
 Status: completed.

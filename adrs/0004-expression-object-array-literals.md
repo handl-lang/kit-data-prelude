@@ -1,3 +1,10 @@
+---
+title: Expression Object and Array Literals
+type: adr
+date: 2026-08-24
+status: proposed
+---
+
 # Expression Object and Array Literals
 
 ## Context

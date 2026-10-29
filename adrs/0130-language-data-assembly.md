@@ -1,3 +1,10 @@
+---
+title: Language data assembly in the `lang` repo
+type: adr
+date: 2026-10-15
+status: proposed
+---
+
 # ADR-0130: Language data assembly in the `lang` repo
 
 ## Context

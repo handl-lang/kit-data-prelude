@@ -1,3 +1,10 @@
+---
+title: Decoupled Trait Layer — Laws, Bundles, and Handlers
+type: adr
+date: 2026-09-02
+status: proposed
+---
+
 # ADR-0076: Decoupled Trait Layer — Laws, Bundles, and Handlers
 
 ## Status

@@ -1,3 +1,10 @@
+---
+title: Arrow Surface Syntax v0.1 — Redesign
+type: adr
+date: 2026-09-02
+status: proposed
+---
+
 # ADR-0074: Arrow Surface Syntax v0.1 — Redesign
 
 ## Status

@@ -1,3 +1,10 @@
+---
+title: Vau as a Typed Escape (ADR-0041 Phase 4)
+type: adr
+date: 2026-08-30
+status: proposed
+---
+
 # Vau as a Typed Escape (ADR-0041 Phase 4)
 
 ## Context

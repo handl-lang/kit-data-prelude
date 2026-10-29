@@ -1,3 +1,10 @@
+---
+title: JSON Schema 2020-12 Reference & Composition Support in the Typechecker
+type: adr
+date: 2026-08-24
+status: proposed
+---
+
 # JSON Schema 2020-12 Reference & Composition Support in the Typechecker
 
 ## Context

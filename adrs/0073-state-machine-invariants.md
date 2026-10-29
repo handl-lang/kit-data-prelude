@@ -1,3 +1,10 @@
+---
+title: State Machine Invariants via Fixpoint Discovery
+type: adr
+date: 2026-09-01
+status: accepted
+---
+
 # ADR-0073: State Machine Invariants via Fixpoint Discovery
 
 ## Status

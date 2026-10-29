@@ -1,3 +1,10 @@
+---
+title: Arrow Macros — Type-Safe Compile-Time Metaprogramming
+type: adr
+date: 2026-09-04
+status: proposed
+---
+
 # ADR-0084: Arrow Macros — Type-Safe Compile-Time Metaprogramming
 
 ## Status

@@ -1,3 +1,10 @@
+---
+title: Document Annotations
+type: adr
+date: 2026-08-24
+status: proposed
+---
+
 # Document Annotations
 
 ## Context

@@ -1,3 +1,10 @@
+---
+title: Options Object Over Named Arguments
+type: adr
+date: 2026-08-24
+status: proposed
+---
+
 # Options Object Over Named Arguments
 
 ## Context

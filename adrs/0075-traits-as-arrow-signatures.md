@@ -1,3 +1,10 @@
+---
+title: Traits as Arrow Signatures — Graph-Based Interfaces and Contracts
+type: adr
+date: 2026-09-02
+status: proposed
+---
+
 # ADR-0075: Traits as Arrow Signatures — Graph-Based Interfaces and Contracts
 
 ## Status

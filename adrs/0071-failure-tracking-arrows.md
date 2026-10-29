@@ -1,3 +1,10 @@
+---
+title: Failure-Tracking Arrows for Backtracking Parsers
+type: adr
+date: 2026-09-01
+status: accepted
+---
+
 # ADR-0071: Failure-Tracking Arrows for Backtracking Parsers
 
 ## Status

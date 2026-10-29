@@ -1,3 +1,10 @@
+---
+title: 'ADR-0032 (Remaining): Types are Values — Advanced Type System Roadmap'
+type: adr
+date: 2026-08-29
+status: proposed
+---
+
 # ADR-0032 (Remaining): Types are Values — Advanced Type System Roadmap
 
 ## Status

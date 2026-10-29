@@ -1,3 +1,10 @@
+---
+title: Custom Fields via `*.field.yml`
+type: adr
+date: 2026-08-24
+status: proposed
+---
+
 # Custom Fields via `*.field.yml`
 
 ## Context

@@ -1,3 +1,10 @@
+---
+title: N-Dimensional Arrow Calculus
+type: adr
+date: 2026-09-15
+status: proposed
+---
+
 # ADR-0119: N-Dimensional Arrow Calculus
 
 ## Status

@@ -1,3 +1,10 @@
+---
+title: Frontier Calculus `Term` Variants
+type: adr
+date: 2026-09-09
+status: accepted
+---
+
 # ADR-0101: Frontier Calculus `Term` Variants
 
 ## Status
