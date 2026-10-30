@@ -1,86 +1,46 @@
 ---
-title: Document Annotations
+title: Annotations
 type: adr
 date: 2026-08-24
 status: proposed
-status_note: Proposed
+status_note: Accepted — annotations are pass-through metadata.
 ---
 
-
-# Document Annotations
+# ADR-0011: Annotations
 
 ## Decision
 
-
-handl supports an optional `annotations` field on any document. The value
-is a plain object that the VM passes through without interpretation. A small
-set of conventional keys is recognised by language tooling (docs generator,
-library browser, linter).
-
-### Example
-
-```yaml
-annotations:
-  title: Deploy configuration
-  description: Configuration schema for the deploy pipeline.
-  author: team-platform
-  tags: [deploy, release]
-  since: "1.2.0"
-  deprecated: false
-  see: https://docs.example.com/schemas/deploy
-```
-
-### Conventional keys
-
-These keys are reserved for language tooling; other keys are allowed but
-ignored by the VM and default tools:
-
-- `title` — short display name.
-- `description` — one-sentence explanation.
-- `author` — person or team responsible.
-- `tags` — list of labels for grouping and search.
-- `since` — version when the document was introduced.
-- `deprecated` — boolean or deprecation message.
-- `example` — short example value or invocation.
-- `see` — URL to longer documentation.
-
-### Semantics
-
-- Annotations are optional. Documents without them are unaffected.
-- The VM ignores annotations — they have zero runtime cost.
-- The typechecker ignores annotations — they do not affect type inference.
-- The linter (ADR-0015) may validate conventional keys and warn on missing
-  recommended annotations.
-- The formatter (ADR-0014) preserves annotations in their canonical position.
-
-### Host extensions
-
-Hosts may define additional annotation keys. For example, a Peregrin host
-might define `annotations.kind` to classify documents as workflows, nodes,
-or events. Host-specific keys should be namespaced (e.g. `peregrin.kind`)
-to avoid collisions with language-level keys.
-
+1. **An optional `annotations` object is allowed on any document**; the VM
+   passes it through without interpretation.
+2. **Conventional keys** are `title`, `description`, `author`, `tags`, `since`,
+   `deprecated`, `example` and `see`; other keys are allowed but ignored by the
+   VM and default tools.
+3. **Annotations cost nothing at runtime or typecheck**; the linter may validate
+   the conventional keys and the formatter preserves them.
+4. **Hosts may define additional conventional keys**, namespaced to avoid
+   collisions with language tooling.
 
 ## Why
 
-handl documents carry runtime-relevant fields (field declarations, expressions, schemas) but have no standard place for human-readable metadata: descriptions, examples, deprecation notices, authors, tags, or documentation links. This forces documentation generators, library browsers, and tooling to infer meaning from identifiers or duplicate metadata in external files.
+Documents needed human metadata (title, author, deprecation) but the language
+had no place for it, so tools parsed ad-hoc comments. A pass-through object
+gives tooling one surface and keeps the VM and typechecker untouched.
 
 ## Not doing
-
-- none recorded — legacy record; the design doc lists what was deferred.
+- **Typed annotation fields** — they are documentation, not data.
+- **VM interpretation** — zero runtime cost is the point.
+- **A closed key set** — hosts extend it.
 
 ## Consequences
-
-- Documentation generators can produce rich output from `title`,
-- Library browsers can filter and search by `tags`.
-- The linter can warn on missing `title` or `description` for library
-- Annotations are a zero-cost abstraction — no runtime impact.
-- Hosts get a standard extension point for metadata without inventing their
+- Tooling reads one known object; the VM ignores it.
+- Lint/formatter own validation and placement.
+- Host keys stay namespaced.
 
 ## Enforcement
-
-- Code and tests are named in the design doc.
+- `crates/handl-kit-data-prelude/` — document parsing (pass-through).
+- Linter rules for conventional keys (ADR-0015).
+- Formatter placement tests (ADR-0014).
 
 ## Design
-
-The full record (context, tables, phases, trade-offs): [`design/0011-annotations.md`](../design/0011-annotations.md).
++Example, conventional keys, semantics and host extensions:
++[`design/0011-annotations.md`](../design/0011-annotations.md).

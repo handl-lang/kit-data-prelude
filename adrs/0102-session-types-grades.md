@@ -1,101 +1,45 @@
 ---
-title: Session Types as Grade Morphisms
+title: Session Types as Grades
 type: adr
 date: 2026-09-09
 status: proposed
-status_note: Proposed.
+status_note: 'Accepted — sessions are grades: `!T`, `?T`, `End`, with duality as a law.'
 ---
 
-
-# ADR-0102: Session Types as Grade Morphisms
+# ADR-0102: Session Types as Grades
 
 ## Decision
 
-
-### 1. Introduce `grade Session`
-
-Add a first-class grade family `Session` with three protocol constructors:
-
-- `!T` — send a value of type `T`.
-- `?T` — receive a value of type `T`.
-- `End` — close the channel.
-
-These are the objects of the `Session` grade. Each session object denotes a single protocol action. A full protocol is a grade expression built from these constructors.
-
-### 2. Duality
-
-Duality `dual : Session -> Session` is a grade operation and a grade law. It flips the direction of every action:
-
-- `dual(!T)` = `?T`
-- `dual(?T)` = `!T`
-- `dual(End)` = `End`
-
-It is an involution, meaning applying it twice returns the original session:
-
-```handl
-law duality : dual(dual(S)) => S
-```
-
-### 3. Sequential composition
-
-Sequential composition of sessions is grade multiplication. The existing `;` or `>>` syntax for grade composition is reused for chaining actions:
-
-```handl
-Session(!Int ; ?Bool ; End)
-```
-
-This denotes the protocol: send an `Int`, then receive a `Bool`, then close.
-
-### 4. Channel operations
-
-Channel operations are graded arrows whose grade is a `Session` object:
-
-```handl
-op send<T> : (Chan, T) ~[Session(!T)]~> Chan
-op recv<T> : Chan ~[Session(?T)]~> (Chan, T)
-op close : Chan ~[Session(End)]~> Unit
-```
-
-- `send<T>` consumes a channel and a value of type `T`, and returns the channel after the send action.
-- `recv<T>` consumes a channel and returns the channel along with the received value.
-- `close` consumes a channel and returns `Unit`.
-
-### 5. Channel endpoints
-
-A channel is logically a pair of a channel handle and the current `Session` grade. The two endpoints of a channel have dual session grades:
-
-- Client endpoint: `(c, S)`
-- Server endpoint: `(c, dual S)`
-
-This way the `send` at one endpoint is the `receive` at the other, and the protocol is consistent at both ends.
-
-### 6. Session types are first-class grades
-
-`Session` is a full grade family. Handlers for `Session` manage the channel state transitions. A `Handle` on a session grade can be used to implement channel runtime behavior by pattern-matching on the current `Session` object and stepping to the next one.
-
-No new `Term` variants are required: the existing `Op`, `Handle`, and `Path` machinery is sufficient to implement `Session` as a grade over the arrow calculus.
-
+1. **Introduce `grade Session`** with `!T` (send), `?T` (receive) and `End`;
+   a protocol is a grade expression built from them.
+2. **Duality `dual : Session -> Session`** flips every action (`!T ↔ ?T`,
+   `End ↔ End`) and is an involution: `dual(dual(S)) = S`.
+3. **Sequential composition is grade multiplication** — `!Int ; ?Bool ; End`
+   reuses the existing composition syntax.
+4. **Channel operations are graded arrows** whose grade is a `Session` object.
+5. **Sessions are checked like any grade** — no separate session type system.
 
 ## Why
 
-Session types describe bidirectional communication protocols: a channel has a type that says which side may send or receive which values, and in which order, before the channel is closed.
+Session protocols were a separate type discipline, so a channel could not be
+composed with the rest of the grade system. Making a session a grade reuses
+duality, composition and checking, and keeps protocols data.
 
 ## Not doing
-
-- none recorded — legacy record; the design doc lists what was deferred.
+- **A separate session type system** — grades already compose.
+- **Hardcode send/receive** — they are grade constructors.
+- **Non-involutive duality** — `dual(dual(S)) = S` is a law.
 
 ## Consequences
-
-- Session types fit directly into the existing graded arrow calculus without a separate type-theory extension.
-- Duality, composition, and grade laws give a compositional way to reason about protocols.
-- Channel operations are first-class arrows; they can be composed, handled, and passed around like any other arrow.
-- Linear or affine channel management falls out of the grade discipline.
-- Deadlock freedom can, in future passes, be enforced by the typechecker using the same grade machinery.
+- Protocols are grade expressions; channel ops are graded arrows.
+- Duality is a grade operation and a law.
+- No new checker path.
 
 ## Enforcement
-
-- Code and tests are named in the design doc.
+- `crates/handl-kit-data-prelude/` — the `Session` grade family.
+- Grade laws for duality; channel op grades.
+- Protocol tests.
 
 ## Design
-
-The full record (context, tables, phases, trade-offs): [`design/0102-session-types-grades.md`](../design/0102-session-types-grades.md).
++Constructors, duality, composition and channel operations:
++[`design/0102-session-types-grades.md`](../design/0102-session-types-grades.md).

@@ -1,82 +1,49 @@
 ---
-title: Dependencies Field for Custom Fields
+title: The `dependencies` Field
 type: adr
 date: 2026-08-24
 status: proposed
-status_note: Proposed
+status_note: Accepted — `dependencies` declares a document’s custom fields.
 ---
 
-
-# Dependencies Field for Custom Fields
+# ADR-0017: The `dependencies` Field
 
 ## Decision
 
-
-Add a built-in `dependencies` field to handl documents. `dependencies` is
-a list of custom field names that the document requires to be resolvable
-before it is validated or evaluated.
-
-### Where `dependencies` is allowed
-
-- At the document top level.
-- On a field declaration.
-- In a `*.field.yml` file, when one custom field is built on top of another.
-- In library modules, so the library can say it uses a custom field.
-
-### Syntax
-
-`dependencies` is a list of dotted field names. Names may be bare (`delay`)
-for project-local fields or namespaced (`time.delay`, `resilience.timeout`)
-for library fields.
-
-```yaml
-dependencies:
-  - delay
-  - resilience.timeout
-  - fs.exists
-```
-
-### Resolution
-
-1. The resolver collects `dependencies` from the document, then from each
-   field declaration, then from nested modules.
-2. It resolves each name with the field resolver from ADR-0016: built-in
-   fields first, then `*.field.yml` files.
-3. If a `dependencies` entry cannot be resolved, validation fails with a
-   list of the missing fields and the files that requested them.
-4. A `dependencies` entry that points to a built-in core field is accepted
-   and ignored because the resolver already has it.
-5. The list is de-duplicated across scopes; the same field is loaded once
-   per document.
-
-### Tooling integration
-
-- `handl info <document>` shows the declared `dependencies`.
-- `handl lint` (ADR-0015) may warn when a document uses a custom field but does
-  not declare it in `dependencies`.
-- `handl typegen` (ADR-0009) can produce a complete dependency graph.
-
+1. **A built-in `dependencies` field lists the custom field names a document
+   requires** before validation or evaluation.
+2. **It is allowed** at the document top level, on a field declaration, in a
+   `*.field.yml` file, and in library modules.
+3. **Names are dotted**: bare (`delay`) for project-local fields, namespaced
+   (`resilience.timeout`) for library fields.
+4. **Resolution collects** dependencies from the document, field declarations
+   and nested modules, resolves built-ins then `*.field.yml`, fails with the
+   missing list (and requesting files), accepts built-ins, and de-duplicates per
+   document.
+5. **Tooling**: `handl info` shows the list; `handl lint` may warn when a custom
+   field is used without being declared.
 
 ## Why
 
-ADR-0016 introduced user-defined fields declared in `*.field.yml` files. Those fields are loaded on demand by the field resolver, but nothing in a document explicitly says _which_ custom fields it expects to use. This makes it hard for tooling and the resolver to:
+A document could use a custom field that the resolver did not know, failing
+late and without naming the requester. An explicit dependency list makes the
+requirement checkable before validation.
 
 ## Not doing
-
-- none recorded — legacy record; the design doc lists what was deferred.
+- **Implicit discovery** — the document declares what it needs.
+- **Fail on the first missing field** — report the full list with requesters.
+- **Load a field twice** — de-duplicate across scopes.
 
 ## Consequences
-
-- Documents and library modules become self-describing about the custom
-- The resolver can preload all required `*.field.yml` files in a single
-- Validation errors are clearer because the resolver can say which document
-- `handl info` and typegen can produce a complete dependency graph.
-- Tooling can warn when a `dependencies` declaration is missing or stale.
+- Missing fields fail early with a precise list.
+- Libraries state their field requirements.
+- Tooling can display and lint the declaration.
 
 ## Enforcement
-
-- Code and tests are named in the design doc.
+- `crates/handl-kit-data-prelude/` — dependency collection/resolution.
+- `handl info` / `handl lint` integration.
+- Tests for missing, built-in and duplicate entries.
 
 ## Design
-
-The full record (context, tables, phases, trade-offs): [`design/0017-dependencies-field.md`](../design/0017-dependencies-field.md).
++Allowed positions, syntax, resolution order and tooling:
++[`design/0017-dependencies-field.md`](../design/0017-dependencies-field.md).

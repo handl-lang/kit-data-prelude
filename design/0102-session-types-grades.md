@@ -6,18 +6,10 @@ updated: 2026-10-29
 refs: [ADR-0102]
 ---
 
-# Session Types as Grade Morphisms — design detail
+# ADR-0102: Session Types as Grade Morphisms — design detail
 
 Moved verbatim from ADR-0102 (ADR-0161 size budget). The ADR carries the rules;
-this page carries the context, tables, phases and trade-offs.
-
-## Context
-
-Session types describe bidirectional communication protocols: a channel has a type that says which side may send or receive which values, and in which order, before the channel is closed.
-
-Grades in Handl already classify arrows and propositions. A grade is a resource annotation that can be composed and reasoned about; the arrow calculus in ADR-0101 provides the 2-cell/grade machinery over which these annotations are built.
-
-This ADR proposes representing session types as a `Session` grade whose objects are protocol actions and whose morphisms are dualities and sequential compositions. The idea is to reuse the existing graded arrow calculus rather than inventing a separate type system for channels.
+this page carries the mechanism, tables and rationale.
 
 ## Decision
 
@@ -84,9 +76,15 @@ This way the `send` at one endpoint is the `receive` at the other, and the proto
 
 No new `Term` variants are required: the existing `Op`, `Handle`, and `Path` machinery is sufficient to implement `Session` as a grade over the arrow calculus.
 
-## Consequences
+## Why
 
-### Positive
+Session types describe bidirectional communication protocols: a channel has a type that says which side may send or receive which values, and in which order, before the channel is closed.
+
+## Not doing
+
+- none recorded — legacy record; the design doc lists what was deferred.
+
+## Consequences
 
 - Session types fit directly into the existing graded arrow calculus without a separate type-theory extension.
 - Duality, composition, and grade laws give a compositional way to reason about protocols.
@@ -94,25 +92,10 @@ No new `Term` variants are required: the existing `Op`, `Handle`, and `Path` mac
 - Linear or affine channel management falls out of the grade discipline.
 - Deadlock freedom can, in future passes, be enforced by the typechecker using the same grade machinery.
 
-### Negative
+## Enforcement
 
-- Requires the grade system to support duality and the `Session` family natively.
-- Protocols are fixed at the object level; more advanced session features (branching, recursion, delegation) need follow-up ADRs.
-- Runtime channels must track the current session grade, which adds state to the value model.
+- Code and tests are named in the design doc.
 
-## Surface syntax examples
+## Design
 
-```handl
-op send<T> : (Chan, T) ~[Session(!T)]~> Chan
-op recv<T> : Chan ~[Session(?T)]~> (Chan, T)
-op close : Chan ~[Session(End)]~> Unit
-
-law duality : dual(dual(S)) => S
-```
-
-A full client/server protocol can be written as a pair of dual graded arrows, e.g. a client with grade `Session(!Int ; ?Bool ; End)` and a server with grade `Session(?Int ; !Bool ; End)`, where the server's session is the dual of the client's.
-
-## References
-
-- ADR-0101 defines the frontier calculus `Term` variants and the 2-cell/grade machinery on which this design is built.
-- ADR-0052 defines the arrow-calculus kernel.
+The full record (context, tables, phases, trade-offs): [`design/0102-session-types-grades.md`](../design/0102-session-types-grades.md).
