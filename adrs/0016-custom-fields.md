@@ -6,26 +6,11 @@ status: proposed
 status_note: Proposed
 ---
 
+
 # Custom Fields via `*.field.yml`
 
-## Context
-
-handl documents declare fields with schemas, expressions, and modifiers.
-The core language provides a fixed set of field-level keys: `type`, `expr`,
-`arg`, `schema`, `inheritable`, `mutable`, `merge`. These are the language
-primitives.
-
-However, users often want higher-level convenience fields — `timeout`,
-`delay`, `cache`, `notify` — that are sugar over the core primitives. Today,
-each new convenience requires a change to the language kernel. This couples
-high-level conveniences to the core, slows iteration, and makes the kernel
-larger than it needs to be.
-
-A field extension mechanism lets the community add new field-level keys
-without touching the kernel. This is a language extensibility feature, not
-a host-specific concern.
-
 ## Decision
+
 
 Support user-defined fields declared in `*.field.yml` files. The core
 language keeps a minimal set of built-in field keys; all higher-level or
@@ -101,17 +86,27 @@ field key when it is:
 This mirrors the promotion path for custom functions (ADR-0019): built-ins
 emerge from the field library.
 
+
+## Why
+
+handl documents declare fields with schemas, expressions, and modifiers. The core language provides a fixed set of field-level keys: `type`, `expr`, `arg`, `schema`, `inheritable`, `mutable`, `merge`. These are the language primitives.
+
+## Not doing
+
+- none recorded — legacy record; the design doc lists what was deferred.
+
 ## Consequences
 
 - The language kernel stays small. New conveniences do not require kernel
-  changes.
 - Users can create domain-specific fields without publishing a package or
-  merging code.
 - The same mechanism supports first-party library fields, so `timeout`,
-  `delay`, `cache`, etc. can ship as `libraries/fields/` files.
 - Tooling (linter, formatter, typegen) must discover and account for
-  `*.field.yml` files.
 - Stateful fields require a handler interface, which adds a small runtime
-  API surface on the host.
-- Field name collisions become possible; dotted namespacing and load-order
-  rules are required.
+
+## Enforcement
+
+- Code and tests are named in the design doc.
+
+## Design
+
+The full record (context, tables, phases, trade-offs): [`design/0016-custom-fields.md`](../design/0016-custom-fields.md).

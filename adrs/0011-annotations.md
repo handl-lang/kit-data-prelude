@@ -6,23 +6,11 @@ status: proposed
 status_note: Proposed
 ---
 
+
 # Document Annotations
 
-## Context
-
-handl documents carry runtime-relevant fields (field declarations,
-expressions, schemas) but have no standard place for human-readable
-metadata: descriptions, examples, deprecation notices, authors, tags, or
-documentation links. This forces documentation generators, library browsers,
-and tooling to infer meaning from identifiers or duplicate metadata in
-external files.
-
-Annotations are a language-level feature: any handl document can carry
-metadata that the VM ignores but tooling can read. Hosts and applications
-(e.g. Peregrin) may define additional annotation keys for their own use, but
-the core set is language-level.
-
 ## Decision
+
 
 handl supports an optional `annotations` field on any document. The value
 is a plain object that the VM passes through without interpretation. A small
@@ -72,13 +60,27 @@ might define `annotations.kind` to classify documents as workflows, nodes,
 or events. Host-specific keys should be namespaced (e.g. `peregrin.kind`)
 to avoid collisions with language-level keys.
 
+
+## Why
+
+handl documents carry runtime-relevant fields (field declarations, expressions, schemas) but have no standard place for human-readable metadata: descriptions, examples, deprecation notices, authors, tags, or documentation links. This forces documentation generators, library browsers, and tooling to infer meaning from identifiers or duplicate metadata in external files.
+
+## Not doing
+
+- none recorded — legacy record; the design doc lists what was deferred.
+
 ## Consequences
 
 - Documentation generators can produce rich output from `title`,
-  `description`, and `example`.
 - Library browsers can filter and search by `tags`.
 - The linter can warn on missing `title` or `description` for library
-  modules.
 - Annotations are a zero-cost abstraction — no runtime impact.
 - Hosts get a standard extension point for metadata without inventing their
-  own fields.
+
+## Enforcement
+
+- Code and tests are named in the design doc.
+
+## Design
+
+The full record (context, tables, phases, trade-offs): [`design/0011-annotations.md`](../design/0011-annotations.md).

@@ -6,26 +6,11 @@ status: proposed
 status_note: Proposed
 ---
 
+
 # Dependencies Field for Custom Fields
 
-## Context
-
-ADR-0016 introduced user-defined fields declared in `*.field.yml` files.
-Those fields are loaded on demand by the field resolver, but nothing in a
-document explicitly says _which_ custom fields it expects to use. This
-makes it hard for tooling and the resolver to:
-
-- Pre-load the right `*.field.yml` files before validation.
-- Report a clear error when a document uses a custom field that is not
-  installed or not in the search path.
-- Understand which library modules rely on which custom fields for
-  documentation, `handl info`, and the typegen.
-
-A built-in `dependencies` field lets authors and libraries declare the
-custom fields they need. The resolver can then load all of those fields up
-front instead of discovering them one by one as it walks the document.
-
 ## Decision
+
 
 Add a built-in `dependencies` field to handl documents. `dependencies` is
 a list of custom field names that the document requires to be resolvable
@@ -71,15 +56,27 @@ dependencies:
   not declare it in `dependencies`.
 - `handl typegen` (ADR-0009) can produce a complete dependency graph.
 
+
+## Why
+
+ADR-0016 introduced user-defined fields declared in `*.field.yml` files. Those fields are loaded on demand by the field resolver, but nothing in a document explicitly says _which_ custom fields it expects to use. This makes it hard for tooling and the resolver to:
+
+## Not doing
+
+- none recorded — legacy record; the design doc lists what was deferred.
+
 ## Consequences
 
 - Documents and library modules become self-describing about the custom
-  fields they need.
 - The resolver can preload all required `*.field.yml` files in a single
-  discovery pass instead of failing mid-resolution.
 - Validation errors are clearer because the resolver can say which document
-  requested a missing field.
 - `handl info` and typegen can produce a complete dependency graph.
 - Tooling can warn when a `dependencies` declaration is missing or stale.
-- Library authors have another required convention to follow; `handl lint` can
-  help enforce it.
+
+## Enforcement
+
+- Code and tests are named in the design doc.
+
+## Design
+
+The full record (context, tables, phases, trade-offs): [`design/0017-dependencies-field.md`](../design/0017-dependencies-field.md).

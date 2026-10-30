@@ -6,17 +6,11 @@ status: proposed
 status_note: Proposed
 ---
 
+
 # handl-native `s.*` Schema Vocabulary
 
-## Context
-
-handl's canonical schema vocabulary is currently JSON Schema draft 2020-12. It is a separate, external language embedded in handl documents. Runtime validation, type inference, and type generation are all coupled to JSON Schema keywords (`type`, `properties`, `items`, `allOf`, etc.). This creates the friction that motivated this redesign: the language already has a flexible expression syntax and a generic `Schema`/`SchemaVocabulary` trait, yet the canonical path forces authors to learn and write JSON Schema.
-
-The `Schema`/`SchemaVocabulary` traits and `SchemaInterpreter` trait already provide the seams for a different schema language. Object and array literals are being added to the handl expression grammar (ADR-0003). With that in place, handl can express rich schemas in its own syntax.
-
-This ADR is heavily inspired by [Valibot](https://valibot.dev/): a small, tree-shakeable, pipe-based schema library. Valibot's core insight is to separate **base types** (`string()`, `number()`, `object()`), **collection combinators** (`array()`, `object()`, `union()`, `optional()`), and **actions/constraints** (`minLength()`, `range()`, `email()`). Schemas are composed by piping a base type through one or more actions.
-
 ## Decision
+
 
 Replace JSON Schema with an handl-native `s.*` vocabulary as the canonical schema language. The `s` namespace is a set of compiler-known schema constructors and actions, not a runtime `Host` namespace. Schemas are source-code descriptions that the compiler turns into `Schema` validators, `Type` objects, and typegen output.
 
@@ -153,9 +147,16 @@ This is intentionally conservative. The `Type` enum is not being expanded in thi
 
 The canonical `TypegenBackend` outputs `s` schemas. The JSON Schema backend remains available as a translator. This keeps the canonical language self-contained while preserving the ability to produce JSON Schema for external consumers.
 
-## Consequences
 
-**Positive:**
+## Why
+
+handl's canonical schema vocabulary is currently JSON Schema draft 2020-12. It is a separate, external language embedded in handl documents. Runtime validation, type inference, and type generation are all coupled to JSON Schema keywords (`type`, `properties`, `items`, `allOf`, etc.). This creates the friction that motivated this redesign: the language already has a flexible expression syntax and a generic `Schema`/`SchemaVocabulary` trait, yet the canonical path forces authors to learn and write JSON Schema.
+
+## Not doing
+
+- none recorded — legacy record; the design doc lists what was deferred.
+
+## Consequences
 
 - The canonical schema language is now handl-native. Authors write one syntax for values and types.
 - The `pipe` model from Valibot is small, composable, and easy to extend with new actions without touching the core language.
@@ -163,24 +164,10 @@ The canonical `TypegenBackend` outputs `s` schemas. The JSON Schema backend rema
 - The `TypegenBackend` becomes a translator, which is cleaner than emitting JSON Schema directly from field data.
 - JSON Schema compatibility is retained as an optional backend rather than the default.
 
-**Negative:**
+## Enforcement
 
-- This is a breaking change. Existing documents using `type:`, `properties:`, `items:`, and other JSON Schema keywords will need to migrate to `s.*` forms.
-- `s` forms are not first-class runtime values. They are special forms recognized by the schema compiler. This creates a "shadow language" inside handl expressions, even though it reuses the same syntax.
-- `s.optional()` and `s.union()` lose type precision until the `Type` enum supports unions/option types.
-- The `ExprParser` and `eval_arg` changes from ADR-0003 must be complete and stable before this work can land.
-- More crates to maintain: `handl-typecheck-schema-s`, `handl-typegen-backend-s`, and the JSON Schema translator backend.
+- Code and tests are named in the design doc.
 
-**Open questions:**
+## Design
 
-- Should `s.integer()` produce a distinct `Type::Integer` or remain `Type::Number`? The existing `check_arg_type` special-cases "integer"; a proper `Type::Integer` may be cleaner.
-- Should `s.object` support `additionalProperties` / `record` semantics, or only closed records?
-- Should `s.pick_list` be typed as the literal union of its values, or as the underlying primitive (`Type::String`)?
-- How are recursive/self-referential schemas expressed (`s.ref("name")` or `s.lazy(...)`)?
-- Should the `.handl` frontend support inline schema shorthands (e.g. `name: s.string` without `schema:`)?
-
-**Non-goals:**
-
-- This ADR does not add arbitrary schema-as-predicate support. Full handl boolean predicates as schemas are intentionally out of scope because the typechecker cannot derive a static `Type` from an arbitrary validator.
-- It does not remove the `Schema`/`SchemaVocabulary` abstraction. Custom schema languages remain possible.
-- It does not define a runtime `Host` namespace for `s`. `s` is a compile-time namespace.
+The full record (context, tables, phases, trade-offs): [`design/0005-s-schema-vocabulary.md`](../design/0005-s-schema-vocabulary.md).

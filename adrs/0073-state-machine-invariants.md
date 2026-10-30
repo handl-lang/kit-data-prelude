@@ -10,32 +10,11 @@ status_note: |-
   and the refinement inference engine in `crates/plugin-ext-refinement/`.
 ---
 
+
 # ADR-0073: State Machine Invariants via Fixpoint Discovery
 
-## Context
-
-A state machine is `State × Event ⇝ State` — it processes events and
-updates state. The key verification question: **what invariants hold
-on the state across all transitions?**
-
-Examples:
-
-- A counter: `Count ≥ 0` (decrement fails on zero)
-- A bounded buffer: `0 ≤ |buffer| ≤ max_size`
-- A protocol: `state ∈ {idle, active, done}` (valid states only)
-- A resource pool: `allocated ≤ total`
-
-State machines map naturally to arrow graphs:
-
-```
-state_machine = loop(comp(handle_event, first(id)))
-```
-
-where `handle_event : (State × Event) ⇝ (State × Event)` updates the
-state based on the event, and `first(id)` passes the event stream
-through as a side channel.
-
 ## Decision
+
 
 State machine invariants are discovered by the **fixpoint iteration**
 in the refinement inference engine. No user annotations are required.
@@ -82,38 +61,27 @@ in the refinement inference engine. No user annotations are required.
 - **Global invariants**: properties spanning multiple state machines —
   the inference is per-graph, not cross-graph.
 
+
+## Why
+
+A state machine is `State × Event ⇝ State` — it processes events and updates state. The key verification question: **what invariants hold on the state across all transitions?**
+
+## Not doing
+
+- none recorded — legacy record; the design doc lists what was deferred.
+
 ## Consequences
 
-### Positive
-
 - State machine invariants discovered automatically from transition
-  contracts
 - No user annotations — just write the state machine as an arrow graph
 - Works for counters, buffers, protocol states, resource pools
 - Conditional contracts (preconditions) enable invariant discovery via
-  WP propagation
-
-### Negative
-
 - Only data invariants (safety), not liveness or concurrency
-- The invariant is only as strong as the atom contracts — if
-  `state.dec` doesn't have `requires: Le(0, input)`, the fixpoint
-  won't discover `Count ≥ 0`
-- Complex state machines (many transitions, deep nesting) may produce
-  large fixpoint iterations
 
-## Implementation
+## Enforcement
 
-State machine atoms and arrow files are in:
+- Code and tests are named in the design doc.
 
-- `contracts/state.hnl` — atoms: state.inc, state.dec, state.push,
-  state.pop, state.is_empty, state.idle_to_active, state.active_to_done
-- `handl-packages/state/` — arrow files: counter.hnl,
-  buffer.hnl, protocol.hnl
-- `src/state_tests.rs` — tests verifying invariant discovery
+## Design
 
-## Related ADRs
-
-- [ADR-0070 — Refinement Inference Scope](./0070-refinement-inference-scope.md)
-- [ADR-0068 — Predicates as Types](./0068-predicates-as-types.md)
-- [ADR-0072 — Concurrent Arrow Calculus](./0072-concurrent-arrow-calculus.md)
+The full record (context, tables, phases, trade-offs): [`design/0073-state-machine-invariants.md`](../design/0073-state-machine-invariants.md).

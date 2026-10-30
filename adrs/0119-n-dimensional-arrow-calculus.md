@@ -9,31 +9,11 @@ status_note: |-
   Refines [ADR-0052 Arrow Calculus Kernel](./0052-arrow-calculus-kernel.md), [ADR-0100 Canonical Term Arrows](./0100-canonical-term-arrows.md), [ADR-0101 Frontier Calculus](./0101-frontier-calculus.md), [ADR-0102 Session Types / Grades](./0102-session-types-grades.md), and [ADR-0106 Object/Arrow Kernel](./0106-object-arrow-kernel.md).
 ---
 
+
 # ADR-0119: N-Dimensional Arrow Calculus
 
-## Context
-
-The canonical arrow calculus already treats programs, rewrites, proofs, and
-transformations as arrows. The pieces are in place but disconnected:
-
-- Dimension-1 arrows: `function` / `graded_arrow` in `data/ast.yaml`, `Arr`,
-  `Op`, `Seq`, `First`, `Choice`, `Loop`, `App` in `Term`.
-- Dimension-2 arrows: a 2-cell is an arrow `f ~[2]~> g`. Rewrite rules live in
-  `data/transforms.yaml` and are just `dim=2` arrows; no new surface keywords are
-  added.
-- Proof and path forms (`Equiv`, `Path`, `Witness`, `Refine`, `Univalence`, `Glue`, `Fibrant`, `JElim`) are represented as `Arr`/`Op` terms at the appropriate dimension.
-- Sanada-style effects: `op`, `handler`, `with`, `handle` and `Term::Handle`.
-- Dimensions: `f<X>` / `f<X, Y>` surface is application, not a native
-  dimension-polymorphic layer (ADR-0106 §Phase 4 conformance note).
-- Frontier cell combinators (`CellCompV`, `CellCompH`, `Whisker`, `CellId`) are
-  redundant once every `Arr`/`Op` carries a dimension index.
-
-This ADR unifies those pieces into one **N-dimensional arrow calculus**. The
-goal is the principle stated in the design brief: _everything is an arrow, all
-the way up_. No separate rule, proof, or metaprogramming language is needed;
-each level uses the same arrow syntax and the same composition combinators.
-
 ## Decision
+
 
 ### 1. Remove the graded effect arrow
 
@@ -169,107 +149,27 @@ first(r)            -- carry context
 The `~[N]~>` token replaces `~[R]~>` everywhere. `A ~> B` remains shorthand for
 `A ~[1]~> B`.
 
-## Consequences
 
-### Positive
+## Why
+
+The canonical arrow calculus already treats programs, rewrites, proofs, and transformations as arrows. The pieces are in place but disconnected:
+
+## Not doing
+
+- none recorded — legacy record; the design doc lists what was deferred.
+
+## Consequences
 
 - A single calculus for programs, rules, proofs, and meta-transformations.
 - The bracketed arrow now has one meaning (dimension) instead of two (effects
-  vs dimensions).
 - Dimension polymorphism is ordinary parameterization by object values.
 - Existing `RewriteEngine` and `data/transforms.yaml` become a dimension-2
-  interpreter without engine changes.
 - The generic, data-driven engine policy (ADR-0044, ADR-0081) is preserved:
-  the only Rust changes are a `dim` field on two `Term` variants and the removal
-  of `CellCompV` / `CellCompH` / `Whisker` / `CellId` and all proof/path
-  `Term` variants.
-- Meta-optimization becomes a library: an `Optimizer -> Optimizer` 3-cell is a
-  regular arrow.
 
-### Negative
+## Enforcement
 
-- Removing `~[R]~>` and `EffectRow` is a breaking change for existing canonical
-  packages that use graded effect rows; they must migrate to `op` / `handle`.
-- `Term::Arr` and `Term::Op` get a new field, and frontier / proof `Term`
-  variants are removed — all are breaking serial-format changes for stored arrow
-  data.
-- `Handle` and the typechecker must cover the capability discipline previously
-  enforced by `EffectRow`.
-- Termination and decidability for dimension-polymorphic rewrites remain open
-  research questions.
+- Code and tests are named in the design doc.
 
-## Research Questions
+## Design
 
-1. What are the precise typing and boundary rules for `N`-cells when `N` is a
-   variable?
-2. Which dimension expressions are statically normalizable?
-3. How are equality and rewriting represented and checked at each dimension?
-4. How does Sanada's operational semantics lift through `N`-cell handlers?
-5. Under what conditions can a higher-dimensional transformation safely rewrite
-   a lower-dimensional program?
-6. How can generic `N`-dimensional rewriting remain terminating and decidable?
-7. What is the minimal set of `op`/`arr` names needed for proof and path forms
-   once `CellComp`/`Whisker`/`CellId` and all proof `Term` variants are folded
-   into generic combinators?
-
-## Implementation plan
-
-### Phase 0 — remove `~[R]~>` and add `~[N]~>` data
-
-1. Remove `graded_arrow` from `crates/handl-kit-data-canonical/data/ast.yaml`,
-   `data/grammar.yaml`, `data/lexer_rules.yaml`, `data/eval.yaml`,
-   `data/types.yaml`, and `data/transforms.yaml`.
-2. Remove `EffectRow` from `crates/handl-language/src/effects.rs` and from all
-   typechecker / eval references.
-3. Add `dim_arrow` to `data/ast.yaml` with roles `source`, `dim`, `target`.
-4. Add `~[N]~>` grammar/lexer entries; reuse the existing `~[` and `]~>` token
-   boundaries if possible.
-5. Add `eval.dim_arrow` producing `Term::Arr { dim, ... }` or `Term::Op`.
-6. Add `type.dim_arrow`; initial return can be `type.unknown`.
-7. Update `transform.desugar.*` to lower `dim_arrow` to `Term`.
-
-### Phase 1 — add `dim` field and fold frontier cells
-
-1. Add `dim: Box<Term>` to `crates/plugin-engine/src/term.rs` for `Arr` and
-   `Op`.
-2. Remove `CellCompV`, `CellCompH`, `Whisker`, `CellId`, `Equiv`, `Path`,
-   `Witness`, `Refine`, `Univalence`, `Glue`, `Fibrant`, and `JElim` from `Term`.
-   Their surface forms become `Arr`/`Op` terms with the appropriate `dim`.
-3. Update `ValueModel` and `TypeModel` to read `dim` and to map 2-cell
-   composition to `Seq` / `First` / `Choice`.
-4. Update serialization in `crates/handl-language/src/fragments/eval_scheme.rs`
-   and `type_scheme.rs`.
-5. Default `dim` to `Const(1)` for backward compatibility until a migration
-   pass is written.
-
-### Phase 2 — dimension-polymorphic composition
-
-1. Surface `id<N>`, `r >>> s`, `r &&& s`, `r ||| s`, `first(r)` for `dim`
-   terms.
-2. Add `law` / `rewrite` at arbitrary dimension in `data/ast.yaml` and
-   `data/eval.yaml`.
-
-### Phase 3 — transforms and tests
-
-1. Add a `meta-transform` pass in `data/transforms.yaml` that matches and
-   rewrites `dim_arrow` / `rule` nodes.
-2. Add test cases to `crates/handl-kit-data-canonical/tests/`.
-3. Run `cargo check`, `cargo test --workspace`, `hnl fmt --check`, `hnl lint`,
-   `hnl typecheck`, and the dogfood gate script.
-
-### Phase 4 — type system integration
-
-1. Replace `type.unknown` for `dim_arrow` with a real `~[N]~>` former.
-2. Implement `Equal<N>` and dimension-indexed subtyping in `data/types.yaml` /
-   the Handl type model.
-3. Remove any residual `EffectRow` assumptions in the typechecker.
-
-## Conclusion
-
-The N-dimensional arrow calculus is not a new language. It is the existing
-arrow calculus, exposed at every dimension. The changes are: a `dim` field on
-`Term::Arr` and `Term::Op`, the removal of the `~[R]~>` grade surface and
-`EffectRow`, the promotion of `~[N]~>` as the single dimension bracket, and the
-folding of frontier cell combinators into the generic arrow combinators. The
-rest is a data change — new `ast`, `grammar`, `lexer`, `eval`, `types`, and
-`transforms` fragments — consistent with the data-driven language policy.
+The full record (context, tables, phases, trade-offs): [`design/0119-n-dimensional-arrow-calculus.md`](../design/0119-n-dimensional-arrow-calculus.md).

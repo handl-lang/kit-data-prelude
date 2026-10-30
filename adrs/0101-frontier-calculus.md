@@ -6,40 +6,11 @@ status: accepted
 status_note: Accepted / implemented.
 ---
 
+
 # ADR-0101: Frontier Calculus `Term` Variants
 
-## Implementation status
-
-The frontier-calculus primitives are wired into the `Term` arrow-calculus
-kernel and the `Side` helper enum. The variants and the enum are derived
-`Serialize`/`Deserialize` and first-order serializable data.
-
-Implemented:
-
-- `Term::CellId`, `Term::CellCompV`, `Term::CellCompH`, `Term::Whisker`,
-  `Term::Univalence`, `Term::Glue`, `Term::Fibrant`, `Term::JElim`,
-  `Term::Witness`, `Term::Refine`, `Term::Cobind`, `Term::Cobox`.
-- `Side` enum (`Left`, `Right`) for `Whisker` attachments.
-
-Partial:
-
-- `CellId`, `CellCompV`, `Whisker`, `Witness`, `Refine`, `Cobind`,
-  `Cobox`, and `Univalence` have `ValueModel` and `TypeModel` semantics.
-- `CellCompH`, `Glue`, `Fibrant`, and `JElim` are present in the `Term`
-  data but currently return `NotImplemented` in the value engine and
-  pass through in the type engine.
-
-## Context
-
-ADR-0100 establishes directed homotopy type theory as the long-term
-theoretical limit for the platform. Its higher cells, paths, univalence,
-fibrations, and refinement/witness machinery are the _concepts_.
-
-This ADR records the concrete, accepted `Term` data constructors that
-carry those concepts in the arrow-calculus kernel. It does not restate the
-directed-HoTT theory; see ADR-0100 for the 2-categorical and model framing.
-
 ## Decision
+
 
 ### 1. New `Term` variants
 
@@ -197,25 +168,27 @@ JSON and the language data assembly unchanged.
   cells are additional 2-cells and fibrancy/witness gadgets in that same
   data model.
 
+
+## Why
+
+ADR-0100 establishes directed homotopy type theory as the long-term theoretical limit for the platform. Its higher cells, paths, univalence, fibrations, and refinement/witness machinery are the _concepts_.
+
+## Not doing
+
+- none recorded — legacy record; the design doc lists what was deferred.
+
 ## Consequences
 
-### Positive
-
 - Gives the directed-HoTT concepts from ADR-0100 a concrete,
-  serializable `Term` representation.
 - Keeps the frontier layer data-driven: no new Rust closures or
-  engine-specific value types are required.
 - Adds refinement, witness, and cobind support for grades/refinement types
-  without changing the existing 1-cell kernel.
 - Provides a staging ground for `CellCompH`, `Glue`, `Fibrant`, and `JElim`
-  implementations in future passes.
-
-### Negative
-
 - Four variants (`CellCompH`, `Glue`, `Fibrant`, `JElim`) are currently
-  unimplemented in the value engine.
-- The call-style surface syntax is verbose; an operator pass is still
-  required for ergonomic use.
-- `ValueModel` and `TypeModel` semantics for the implemented variants are
-  deliberately shallow in this pass; richer HoTT semantics will increase
-  model complexity later.
+
+## Enforcement
+
+- Code and tests are named in the design doc.
+
+## Design
+
+The full record (context, tables, phases, trade-offs): [`design/0101-frontier-calculus.md`](../design/0101-frontier-calculus.md).
