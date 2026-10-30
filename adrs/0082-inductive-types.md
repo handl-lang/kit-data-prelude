@@ -134,7 +134,9 @@ An inductive type is a user-defined algebraic datatype defined by enumerating it
 
 ## Enforcement
 
-- Code and tests are named in the design doc.
+- `plugin-typecheck-nbe` — where this is true.
+- `plugin-engine-typecheck-nbe` — where this is true.
+- `plugin-lib-type` — where this is true.
 
 ## Design
 

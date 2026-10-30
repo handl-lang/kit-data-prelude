@@ -123,7 +123,10 @@ handl treats a type as a predicate: an ordinary value (usually a function) that 
 
 ## Not doing
 
-- none recorded — legacy record; the design doc lists what was deferred.
+- A type is a predicate — a `bool`-returning function.
+- The type of a predicate is `Predicate` — "is this a `bool`-returning
+- The type of `Predicate` is `Predicate`. Fixed point, not regress.
+- No universe levels are required because types are not a foundational
 
 ## Consequences
 

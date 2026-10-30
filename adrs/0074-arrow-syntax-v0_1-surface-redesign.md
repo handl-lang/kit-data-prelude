@@ -43,7 +43,8 @@ ADR-0052 fixed the _kernel_: the calculus is `arr` / `>>>` / `first` / `choice` 
 
 ## Enforcement
 
-- Code and tests are named in the design doc.
+- `lib-option` — where this is true.
+- `lib-result` — where this is true.
 
 ## Design
 

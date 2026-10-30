@@ -47,7 +47,7 @@ Handl is data-driven: a `Language` is YAML data, an `Ast` is a data structure, a
 
 ## Enforcement
 
-- Code and tests are named in the design doc.
+- `plugin-lib-lang-*` — where this is true.
 
 ## Design
 

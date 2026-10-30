@@ -40,7 +40,8 @@ We have an arrow-calculus kernel (ADR-0052) and a v0.1 surface syntax (ADR-0074,
 
 ## Enforcement
 
-- Code and tests are named in the design doc.
+- `plugin-engine/src/term.rs` — where this is true.
+- `plugin-engine-parse-pratt` — where this is true.
 
 ## Design
 
