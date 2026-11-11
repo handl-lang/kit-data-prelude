@@ -2,7 +2,7 @@
 id = "ADR-0101"
 title = "ADR-0101: The Frontier Calculus"
 status = "open"
-priority = "medium"
+priority = "med"
 +++
 
 ---

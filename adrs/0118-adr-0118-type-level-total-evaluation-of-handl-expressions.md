@@ -2,7 +2,7 @@
 id = "ADR-0118"
 title = "ADR-0118: Type-Level Total Evaluation of handl Expressions"
 status = "open"
-priority = "medium"
+priority = "med"
 +++
 
 ---

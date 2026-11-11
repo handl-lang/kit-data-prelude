@@ -2,7 +2,7 @@
 id = "ADR-0084"
 title = "ADR-0084: Arrow Macros — Type-Safe Compile-Time Metaprogramming"
 status = "open"
-priority = "medium"
+priority = "med"
 +++
 
 ---

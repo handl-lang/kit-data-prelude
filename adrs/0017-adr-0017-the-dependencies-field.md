@@ -2,7 +2,7 @@
 id = "ADR-0017"
 title = "ADR-0017: The `dependencies` Field"
 status = "open"
-priority = "medium"
+priority = "med"
 +++
 
 ---

@@ -2,7 +2,7 @@
 id = "ADR-0073"
 title = "ADR-0073: State Machine Invariants via Fixpoint Discovery"
 status = "open"
-priority = "medium"
+priority = "med"
 +++
 
 ---

@@ -2,7 +2,7 @@
 id = "ADR-0004"
 title = "Expression Object and Array Literals"
 status = "open"
-priority = "medium"
+priority = "med"
 +++
 
 ---

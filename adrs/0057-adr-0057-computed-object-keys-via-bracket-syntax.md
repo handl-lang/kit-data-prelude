@@ -2,7 +2,7 @@
 id = "ADR-0057"
 title = "ADR-0057: Computed Object Keys via Bracket Syntax"
 status = "open"
-priority = "medium"
+priority = "med"
 +++
 
 ---

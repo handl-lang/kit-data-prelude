@@ -2,7 +2,7 @@
 id = "ADR-0071"
 title = "ADR-0071: Failure-Tracking Arrows for Backtracking Parsers"
 status = "open"
-priority = "medium"
+priority = "med"
 +++
 
 ---

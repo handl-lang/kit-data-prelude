@@ -2,7 +2,7 @@
 id = "ADR-0045"
 title = "ADR-0045: `vau` as a Typed Escape"
 status = "open"
-priority = "medium"
+priority = "med"
 +++
 
 ---

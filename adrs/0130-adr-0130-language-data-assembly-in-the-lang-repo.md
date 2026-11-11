@@ -2,7 +2,7 @@
 id = "ADR-0130"
 title = "ADR-0130: Language data assembly in the `lang` repo"
 status = "open"
-priority = "medium"
+priority = "med"
 +++
 
 ---

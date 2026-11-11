@@ -2,7 +2,7 @@
 id = "ADR-0011"
 title = "ADR-0011: Annotations"
 status = "open"
-priority = "medium"
+priority = "med"
 +++
 
 ---

@@ -2,7 +2,7 @@
 id = "ADR-0032"
 title = "ADR-0032 (Remaining): Types are Values — Advanced Type System Roadmap"
 status = "open"
-priority = "medium"
+priority = "med"
 +++
 
 ---

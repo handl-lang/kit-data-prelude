@@ -2,7 +2,7 @@
 id = "ADR-0079"
 title = "ADR-0079: Unify Arrow Dialects — Graph Blocks, No `let`, No `in`"
 status = "open"
-priority = "medium"
+priority = "med"
 +++
 
 ---

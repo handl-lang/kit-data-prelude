@@ -2,7 +2,7 @@
 id = "ADR-0076"
 title = "ADR-0076: Decoupled Trait Layer — Laws, Bundles, and Handlers"
 status = "open"
-priority = "medium"
+priority = "med"
 +++
 
 ---

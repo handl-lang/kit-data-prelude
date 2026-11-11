@@ -2,7 +2,7 @@
 id = "ADR-0016"
 title = "ADR-0016: Custom Fields"
 status = "open"
-priority = "medium"
+priority = "med"
 +++
 
 ---

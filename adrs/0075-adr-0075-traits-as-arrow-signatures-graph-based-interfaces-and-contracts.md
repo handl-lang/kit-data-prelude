@@ -2,7 +2,7 @@
 id = "ADR-0075"
 title = "ADR-0075: Traits as Arrow Signatures — Graph-Based Interfaces and Contracts"
 status = "open"
-priority = "medium"
+priority = "med"
 +++
 
 ---

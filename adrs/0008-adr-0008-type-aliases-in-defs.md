@@ -2,7 +2,7 @@
 id = "ADR-0008"
 title = "ADR-0008: Type Aliases in `$defs`"
 status = "open"
-priority = "medium"
+priority = "med"
 +++
 
 ---

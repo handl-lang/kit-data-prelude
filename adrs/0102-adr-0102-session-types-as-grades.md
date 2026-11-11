@@ -2,7 +2,7 @@
 id = "ADR-0102"
 title = "ADR-0102: Session Types as Grades"
 status = "open"
-priority = "medium"
+priority = "med"
 +++
 
 ---

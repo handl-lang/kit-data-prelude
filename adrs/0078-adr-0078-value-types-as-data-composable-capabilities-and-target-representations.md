@@ -2,7 +2,7 @@
 id = "ADR-0078"
 title = "ADR-0078: Value Types as Data — Composable Capabilities and Target Representations"
 status = "open"
-priority = "medium"
+priority = "med"
 +++
 
 ---

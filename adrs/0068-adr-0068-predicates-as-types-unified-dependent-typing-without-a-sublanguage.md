@@ -2,7 +2,7 @@
 id = "ADR-0068"
 title = "ADR-0068: Predicates as Types — Unified Dependent Typing Without a Sublanguage"
 status = "open"
-priority = "medium"
+priority = "med"
 +++
 
 ---

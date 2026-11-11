@@ -2,7 +2,7 @@
 id = "ADR-0026"
 title = "ADR-0026: Modality as Projection"
 status = "open"
-priority = "medium"
+priority = "med"
 +++
 
 ---

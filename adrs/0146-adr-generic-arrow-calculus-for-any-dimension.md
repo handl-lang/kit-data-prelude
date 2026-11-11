@@ -2,7 +2,7 @@
 id = "ADR-0146"
 title = "ADR: Generic Arrow Calculus for Any Dimension"
 status = "open"
-priority = "medium"
+priority = "med"
 +++
 
 ---

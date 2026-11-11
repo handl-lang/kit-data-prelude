@@ -2,7 +2,7 @@
 id = "ADR-0002"
 title = "Options Object Over Named Arguments"
 status = "open"
-priority = "medium"
+priority = "med"
 +++
 
 ---

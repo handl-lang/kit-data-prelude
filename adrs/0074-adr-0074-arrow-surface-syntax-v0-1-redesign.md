@@ -2,7 +2,7 @@
 id = "ADR-0074"
 title = "ADR-0074: Arrow Surface Syntax v0.1 — Redesign"
 status = "open"
-priority = "medium"
+priority = "med"
 +++
 
 ---

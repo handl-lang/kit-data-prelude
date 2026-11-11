@@ -2,7 +2,7 @@
 id = "ADR-0082"
 title = "ADR-0082: Inductive Types as Desugared Predicates"
 status = "open"
-priority = "medium"
+priority = "med"
 +++
 
 ---

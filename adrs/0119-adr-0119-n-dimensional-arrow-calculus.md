@@ -2,7 +2,7 @@
 id = "ADR-0119"
 title = "ADR-0119: N-Dimensional Arrow Calculus"
 status = "open"
-priority = "medium"
+priority = "med"
 +++
 
 ---

@@ -2,7 +2,7 @@
 id = "ADR-0020"
 title = "Parameter Naming Convention"
 status = "open"
-priority = "medium"
+priority = "med"
 +++
 
 ---

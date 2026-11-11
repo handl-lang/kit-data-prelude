@@ -2,7 +2,7 @@
 id = "ADR-0007"
 title = "JSON Schema 2020-12 Reference & Composition Support in the Typechecker"
 status = "open"
-priority = "medium"
+priority = "med"
 +++
 
 ---

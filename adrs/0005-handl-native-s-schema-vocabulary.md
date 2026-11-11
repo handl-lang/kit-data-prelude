@@ -2,7 +2,7 @@
 id = "ADR-0005"
 title = "handl-native `s.*` Schema Vocabulary"
 status = "open"
-priority = "medium"
+priority = "med"
 +++
 
 ---
