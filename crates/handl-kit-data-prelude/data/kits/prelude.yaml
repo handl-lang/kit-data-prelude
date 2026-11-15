@@ -57,4 +57,5 @@ base_modules:
   - comb
   - ip
   - collections
+  - pipeline
 
