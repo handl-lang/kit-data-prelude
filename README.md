@@ -1,4 +1,4 @@
-# lang
+# kit-data-prelude
 
 Handl-the-language as data (ADR-0044 made literal). This repo holds
 `handl-kit-data-canonical` — the canonical `Language` assembled purely
@@ -14,3 +14,17 @@ Phase 11. Platform crates are git dependencies on
 Before the remote is published, make the git source resolve locally
 with `url.insteadOf` + `CARGO_NET_GIT_FETCH_WITH_CLI=true` (see the
 comment in `Cargo.toml`).
+
+## Development
+
+```bash
+cargo xtask gate        # fmt --check → clippy -D warnings → test → doc
+```
+
+`cargo xtask` wraps the repo's `xtask/` crate; `ci.sh` is the gate entry.
+Sibling deps are git dependencies (`branch = "main"`); the workspace-root
+`[patch]` tables resolve them from sibling checkouts for local development.
+
+## License
+
+MIT.

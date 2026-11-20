@@ -5,6 +5,9 @@ edition.workspace = true
 description = "The **data-driven canonical kit** — the ADR-0044 §6 end state."
 license.workspace = true
 repository.workspace = true
+readme = "../../README.md"
+keywords = ["handl", "kit", "data"]
+categories = ["development-tools"]
 
 # ADR-0128 Phase 11: this crate moved out of the platform workspace; its
 # platform dependencies are git deps (see the workspace root for the
